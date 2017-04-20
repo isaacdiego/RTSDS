@@ -1,0 +1,84 @@
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/CortexM3/ARM_GCC_441/Debug/main.o : C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/CyDmac.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/CyFlash.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/CyLib.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/CySpc.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/ENT_ALFA.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/ENT_ALFA_aliases.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/ENT_TORQUE.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/ENT_TORQUE_aliases.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/LCD.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/LCD_LCDPort.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/LCD_LCDPort_aliases.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/MAD_1.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/MAD_1_Bypass.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/MAD_1_Bypass_aliases.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/MAD_1_IRQ.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/MAD_1_theACLK.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/MAD_2.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/MAD_2_Bypass.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/MAD_2_Bypass_aliases.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/MAD_2_IRQ.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/MAD_2_theACLK.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/MSG_1.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/PINO_PROCESSAMENTO.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/PINO_PROCESSAMENTO_aliases.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/SAIDA_VEL.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/SAIDA_VEL_aliases.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/Timer.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/core_cm3.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/core_cm3_psoc5.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/cyPm.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/cydevice.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/cydevice_trm.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/cyfitter.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/cyfitter_cfg.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/cypins.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/cytypes.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/isr_1.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/project.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/timer_clock.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/device.h C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/main.c 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/CyDmac.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/CyFlash.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/CyLib.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/CySpc.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/ENT_ALFA.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/ENT_ALFA_aliases.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/ENT_TORQUE.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/ENT_TORQUE_aliases.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/LCD.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/LCD_LCDPort.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/LCD_LCDPort_aliases.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/MAD_1.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/MAD_1_Bypass.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/MAD_1_Bypass_aliases.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/MAD_1_IRQ.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/MAD_1_theACLK.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/MAD_2.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/MAD_2_Bypass.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/MAD_2_Bypass_aliases.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/MAD_2_IRQ.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/MAD_2_theACLK.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/MSG_1.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/PINO_PROCESSAMENTO.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/PINO_PROCESSAMENTO_aliases.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/SAIDA_VEL.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/SAIDA_VEL_aliases.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/Timer.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/core_cm3.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/core_cm3_psoc5.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/cyPm.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/cydevice.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/cydevice_trm.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/cyfitter.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/cyfitter_cfg.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/cypins.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/cytypes.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/isr_1.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/project.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/Generated_Source/PSoC5/timer_clock.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/device.h : 
+
+C:/Users/Isaac\ Souza/Dropbox/SharedWorkspace/PSoC\ Creator\ Projects/Testes/STRDS.cydsn/main.c : 
+

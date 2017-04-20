@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CyXmlSerializer>
+<!--This file is machine generated and read. It is not intended to be edited by hand.-->
+<!--Due to this, there is no schema for this file.-->
+<CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21 type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWrkspcCustomData" version="4">
+<CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997 type_name="CyDesigner.Common.Base.CyCustomData" version="2">
+<userData>
+<dataGuid v="1b906a0f-a7b6-4e4d-a428-82f98b53cb35">
+<CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35 type_name="CyDesigner.Common.ProjMgmt.GUI.CyExplorerWindow+CyExplorerWindowState" version="3" SelectedTab="Source">
+<TreeKeys>
+<v>Source</v>
+<v>Components</v>
+<v>Output</v>
+</TreeKeys>
+<TreeStates>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="RTSDS_Workspace\STRDS\Source Files\main.c">
+<ExpandedNodeIds>
+<v>RTSDS_Workspace</v>
+<v>RTSDS_Workspace\STRDS</v>
+<v>RTSDS_Workspace\STRDS\Source Files</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>RTSDS_Workspace</v>
+<v>RTSDS_Workspace\STRDS</v>
+<v>RTSDS_Workspace\STRDS\TopDesign.cysch</v>
+<v>RTSDS_Workspace\STRDS\STRDS.cydwr</v>
+<v>RTSDS_Workspace\STRDS\Header Files</v>
+<v>RTSDS_Workspace\STRDS\Source Files</v>
+<v>RTSDS_Workspace\STRDS\Source Files\main.c</v>
+<v>RTSDS_Workspace\STRDS\Generated_Source</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>RTSDS_Workspace</v>
+<v>RTSDS_Workspace\STRDS</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>RTSDS_Workspace</v>
+<v>RTSDS_Workspace\STRDS</v>
+<v>RTSDS_Workspace\STRDS\TopDesign</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>RTSDS_Workspace</v>
+<v>RTSDS_Workspace\STRDS</v>
+<v>RTSDS_Workspace\STRDS\CortexM3</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\Cm3Start.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\core_cm3.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\CyDmac.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\CyFlash.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\CyLib.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\cyPm.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\CySpc.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\cyutils.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\ENT_ALFA.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\ENT_TORQUE.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\isr_1.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\LCD.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\LCD_LCDPort.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\LCD_PM.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_1.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_1_Bypass.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_1_INT.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_1_IRQ.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_1_PM.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_1_theACLK.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_2.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_2_Bypass.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_2_INT.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_2_IRQ.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_2_PM.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_2_theACLK.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\main.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MSG_1.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MSG_1_PM.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\PINO_PROCESSAMENTO.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\SAIDA_VEL.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\Timer.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\timer_clock.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\Timer_PM.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\STRDS.elf</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\STRDS.hex</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\STRDS.map</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>RTSDS_Workspace</v>
+<v>RTSDS_Workspace\STRDS</v>
+<v>RTSDS_Workspace\STRDS\CortexM3</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\Cm3Start.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\core_cm3.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\CyDmac.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\CyFlash.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\CyLib.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\cyPm.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\CySpc.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\cyutils.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\ENT_ALFA.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\ENT_TORQUE.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\isr_1.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\LCD.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\LCD_LCDPort.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\LCD_PM.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_1.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_1_Bypass.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_1_INT.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_1_IRQ.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_1_PM.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_1_theACLK.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_2.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_2_Bypass.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_2_INT.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_2_IRQ.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_2_PM.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MAD_2_theACLK.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\main.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MSG_1.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\MSG_1_PM.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\PINO_PROCESSAMENTO.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\SAIDA_VEL.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\Timer.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\timer_clock.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\Listing Files\Timer_PM.lst</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\STRDS.elf</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\STRDS.hex</v>
+<v>RTSDS_Workspace\STRDS\CortexM3\ARM_GCC_441\Debug\STRDS.map</v>
+<v>RTSDS_Workspace\STRDS\STRDS.rpt</v>
+<v>RTSDS_Workspace\STRDS\STRDS_timing.html</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStates>
+<TreeKeysV2>
+<v>Datasheet</v>
+</TreeKeysV2>
+<TreeStatesV2>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>RTSDS_Workspace</v>
+<v>RTSDS_Workspace\STRDS\PSoC 5 Architecture TRM</v>
+<v>RTSDS_Workspace\STRDS\CY8C55 Family Datasheet</v>
+<v>RTSDS_Workspace\STRDS\System Reference Guide v3_40</v>
+<v>RTSDS_Workspace\STRDS\ADC_SAR_v2_0</v>
+<v>RTSDS_Workspace\STRDS\CharLCD_v1_90</v>
+<v>RTSDS_Workspace\STRDS\cy_clock_v2_0</v>
+<v>RTSDS_Workspace\STRDS\cy_isr_v1_70</v>
+<v>RTSDS_Workspace\STRDS\cy_pins_v1_90</v>
+<v>RTSDS_Workspace\STRDS\Timer_v2_50</v>
+<v>RTSDS_Workspace\STRDS\VDAC8_v1_90</v>
+<v>RTSDS_Workspace\STRDS\ZeroTerminal</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>RTSDS_Workspace</v>
+<v>RTSDS_Workspace\STRDS</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStatesV2>
+</CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35>
+</dataGuid>
+<dataGuid v="5f2be1a5-0687-4501-bb8c-cf21cb8211bf">
+<CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf type_name="CyDesigner.Common.ProjMgmt.GUI.CyBookmarkData" version="1">
+<indicators />
+</CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf>
+</dataGuid>
+</userData>
+</CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
+<Unloaded />
+<OpenDocs>
+<name v=".\STRDS.cydsn\TopDesign\TopDesign.cysch" />
+<name v=".\STRDS.cydsn\main.c" />
+</OpenDocs>
+<config v="" />
+</CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
+</CyXmlSerializer>

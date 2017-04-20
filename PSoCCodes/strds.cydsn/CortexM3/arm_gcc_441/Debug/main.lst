@@ -1,0 +1,2171 @@
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 18, 4
+  12              		.thumb
+  13              		.file	"main.c"
+  14              		.section	.debug_abbrev,"",%progbits
+  15              	.Ldebug_abbrev0:
+  16              		.section	.debug_info,"",%progbits
+  17              	.Ldebug_info0:
+  18              		.section	.debug_line,"",%progbits
+  19              	.Ldebug_line0:
+  20 0000 EE000000 		.text
+  20      02005300 
+  20      00000201 
+  20      FB0E0D00 
+  20      01010101 
+  21              	.Ltext0:
+  22              		.cfi_sections	.debug_frame
+  23              		.comm	adc_value,2,2
+  24              		.global	time
+  25              		.bss
+  26              		.align	2
+  27              		.type	time, %object
+  28              		.size	time, 4
+  29              	time:
+  30 0000 00000000 		.space	4
+  31              		.comm	tstr,16,4
+  32              		.global	M
+  33              		.data
+  34              		.align	2
+  35              		.type	M, %object
+  36              		.size	M, 4
+  37              	M:
+  38 0000 0000E143 		.word	1138819072
+  39              		.global	K
+  40              		.align	2
+  41              		.type	K, %object
+  42              		.size	K, 4
+  43              	K:
+  44 0004 0000803F 		.word	1065353216
+  45              		.global	RO
+  46              		.align	2
+  47              		.type	RO, %object
+  48              		.size	RO, 4
+  49              	RO:
+  50 0008 3D0A973F 		.word	1066863165
+  51              		.global	CD
+  52              		.align	2
+  53              		.type	CD, %object
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 2
+
+
+  54              		.size	CD, 4
+  55              	CD:
+  56 000c 5C8F023F 		.word	1057132380
+  57              		.global	Afr
+  58              		.align	2
+  59              		.type	Afr, %object
+  60              		.size	Afr, 4
+  61              	Afr:
+  62 0010 9A991940 		.word	1075419546
+  63              		.global	C0
+  64              		.align	2
+  65              		.type	C0, %object
+  66              		.size	C0, 4
+  67              	C0:
+  68 0014 8FC2753C 		.word	1014350479
+  69              		.global	C1
+  70              		.bss
+  71              		.align	2
+  72              		.type	C1, %object
+  73              		.size	C1, 4
+  74              	C1:
+  75 0004 00000000 		.space	4
+  76              		.global	G
+  77              		.data
+  78              		.align	2
+  79              		.type	G, %object
+  80              		.size	G, 4
+  81              	G:
+  82 0018 C3F51C41 		.word	1092416963
+  83              		.global	R
+  84              		.align	2
+  85              		.type	R, %object
+  86              		.size	R, 4
+  87              	R:
+  88 001c B81E853E 		.word	1048911544
+  89              		.global	v_max
+  90              		.align	2
+  91              		.type	v_max, %object
+  92              		.size	v_max, 4
+  93              	v_max:
+  94 0020 00001643 		.word	1125515264
+  95              		.global	tm
+  96              		.align	2
+  97              		.type	tm, %object
+  98              		.size	tm, 4
+  99              	tm:
+ 100 0024 00007A44 		.word	1148846080
+ 101              		.global	v
+ 102              		.bss
+ 103              		.align	2
+ 104              		.type	v, %object
+ 105              		.size	v, 4
+ 106              	v:
+ 107 0008 00000000 		.space	4
+ 108              		.global	displayedData
+ 109              		.align	2
+ 110              		.type	displayedData, %object
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 3
+
+
+ 111              		.size	displayedData, 4
+ 112              	displayedData:
+ 113 000c 00000000 		.space	4
+ 114              		.global	output_voltage
+ 115              		.align	2
+ 116              		.type	output_voltage, %object
+ 117              		.size	output_voltage, 4
+ 118              	output_voltage:
+ 119 0010 00000000 		.space	4
+ 120              		.global	T_INCR
+ 121              		.data
+ 122              		.align	2
+ 123              		.type	T_INCR, %object
+ 124              		.size	T_INCR, 4
+ 125              	T_INCR:
+ 126 0028 CDCCCC3D 		.word	1036831949
+ 127              		.global	it
+ 128              		.bss
+ 129              		.align	2
+ 130              		.type	it, %object
+ 131              		.size	it, 4
+ 132              	it:
+ 133 0014 00000000 		.space	4
+ 134              		.global	alpha
+ 135              		.align	2
+ 136              		.type	alpha, %object
+ 137              		.size	alpha, 4
+ 138              	alpha:
+ 139 0018 00000000 		.space	4
+ 140              		.global	__aeabi_fcmpge
+ 141              		.global	__aeabi_f2uiz
+ 142              		.global	__aeabi_ui2d
+ 143              		.global	__aeabi_dmul
+ 144              		.global	__aeabi_f2d
+ 145              		.global	__aeabi_ddiv
+ 146              		.global	__aeabi_d2uiz
+ 147              		.global	__aeabi_fadd
+ 148              		.section	.text.sleep,"ax",%progbits
+ 149              		.align	2
+ 150              		.global	sleep
+ 151              		.thumb
+ 152              		.thumb_func
+ 153              		.type	sleep, %function
+ 154              	sleep:
+ 155              	.LFB29:
+ 156              		.file 1 ".\\main.c"
+   1:.\main.c      **** /* ========================================
+   2:.\main.c      ****  *
+   3:.\main.c      ****  * Copyright YOUR COMPANY, THE YEAR
+   4:.\main.c      ****  * All Rights Reserved
+   5:.\main.c      ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:.\main.c      ****  *
+   7:.\main.c      ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:.\main.c      ****  * WHICH IS THE PROPERTY OF your company.
+   9:.\main.c      ****  *
+  10:.\main.c      ****  * ========================================
+  11:.\main.c      **** */
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 4
+
+
+  12:.\main.c      **** #include <device.h>
+  13:.\main.c      **** #include <stdio.h>
+  14:.\main.c      **** #include <stdlib.h>
+  15:.\main.c      **** #include <math.h>
+  16:.\main.c      **** 
+  17:.\main.c      **** #define PI 3.14159265358979323846
+  18:.\main.c      **** 
+  19:.\main.c      **** uint16 adc_value;
+  20:.\main.c      **** float time = 0.0;
+  21:.\main.c      **** char tstr[16];
+  22:.\main.c      **** 
+  23:.\main.c      **** float M = 450.0; // Vehicle mass in Kg
+  24:.\main.c      **** float K = 1.0; // Seeming mass increase 
+  25:.\main.c      **** float RO = 1.18; // Air density
+  26:.\main.c      **** float CD = 0.51; // Aerodynamic friction coefficient
+  27:.\main.c      **** float Afr = 2.4; // Frontal Area in m^2
+  28:.\main.c      **** float C0 = 0.015; // Constant
+  29:.\main.c      **** float C1 = 0.0; // Constant
+  30:.\main.c      **** float G = 9.81; // Gravity acceleration
+  31:.\main.c      **** float R = 0.26; // Wheel radius
+  32:.\main.c      **** float v_max = 150.0; // Maximum car speed
+  33:.\main.c      **** 
+  34:.\main.c      **** volatile float tm = 1000.0; // Motor traction
+  35:.\main.c      **** volatile float v = 0.0; // Car velocity
+  36:.\main.c      **** 
+  37:.\main.c      **** volatile float displayedData = 0;
+  38:.\main.c      **** volatile unsigned int output_voltage = 0;
+  39:.\main.c      **** 
+  40:.\main.c      **** float T_INCR = 0.1; // Time increment: 100ms
+  41:.\main.c      **** 
+  42:.\main.c      **** volatile float it = 0.0;
+  43:.\main.c      **** volatile float alpha = 0.0;
+  44:.\main.c      **** 	
+  45:.\main.c      **** /*Defining created functions*/
+  46:.\main.c      **** int sgn(float x);
+  47:.\main.c      **** float vehicle_mod(float tm, float theta, float xAnt);
+  48:.\main.c      **** void init(void);
+  49:.\main.c      **** 
+  50:.\main.c      **** CY_ISR(sleep){
+ 157              		.loc 1 50 0
+ 158              		.cfi_startproc
+ 159              		@ args = 0, pretend = 0, frame = 0
+ 160              		@ frame_needed = 1, uses_anonymous_args = 0
+ 161 0000 B0B5     		push	{r4, r5, r7, lr}
+ 162              	.LCFI0:
+ 163              		.cfi_def_cfa_offset 16
+ 164 0002 00AF     		add	r7, sp, #0
+ 165              		.cfi_offset 14, -4
+ 166              		.cfi_offset 7, -8
+ 167              		.cfi_offset 5, -12
+ 168              		.cfi_offset 4, -16
+ 169              	.LCFI1:
+ 170              		.cfi_def_cfa_register 7
+  51:.\main.c      **** 	//INICIA O PROCESSAMENTO
+  52:.\main.c      **** 	PINO_PROCESSAMENTO_Write( 1 );
+ 171              		.loc 1 52 0
+ 172 0004 4FF00100 		mov	r0, #1
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 5
+
+
+ 173 0008 FFF7FEFF 		bl	PINO_PROCESSAMENTO_Write
+  53:.\main.c      **** 	
+  54:.\main.c      **** 	// ESCREVE NO DA
+  55:.\main.c      **** 	MSG_1_SetValue( (unsigned int) output_voltage);
+ 174              		.loc 1 55 0
+ 175 000c 40F20003 		movw	r3, #:lower16:output_voltage
+ 176 0010 C0F20003 		movt	r3, #:upper16:output_voltage
+ 177 0014 1B68     		ldr	r3, [r3, #0]
+ 178 0016 DBB2     		uxtb	r3, r3
+ 179 0018 1846     		mov	r0, r3
+ 180 001a FFF7FEFF 		bl	MSG_1_SetValue
+  56:.\main.c      **** 	
+  57:.\main.c      **** 	// ESPERA PELA LEITURA DOS ADs
+  58:.\main.c      **** 	/*MAD_1_StartConvert();
+  59:.\main.c      **** 	MAD_1_IsEndConversion(MAD_1_WAIT_FOR_RESULT);
+  60:.\main.c      **** 	MAD_2_StartConvert();
+  61:.\main.c      **** 	MAD_2_IsEndConversion(MAD_2_WAIT_FOR_RESULT);*/
+  62:.\main.c      **** 	
+  63:.\main.c      **** 	// CONVERTE O VALOR INTEIRO LIDO EM VALOR COM UNIDADE
+  64:.\main.c      **** 	/*tm = ((float) MAD_1_GetResult16())*2000.0/4096.0; //TM MAX: 2000.0 N*M
+  65:.\main.c      **** 	alpha = ((float) MAD_2_GetResult16())*(PI/4.0)/4096.0; // ALFA MAX: PI/4 RAD*/
+  66:.\main.c      **** 	if (it >= 30.0){
+ 181              		.loc 1 66 0
+ 182 001e 40F20003 		movw	r3, #:lower16:it
+ 183 0022 C0F20003 		movt	r3, #:upper16:it
+ 184 0026 1B68     		ldr	r3, [r3, #0]	@ float
+ 185 0028 4FF00002 		mov	r2, #0
+ 186 002c 1446     		mov	r4, r2
+ 187 002e 1846     		mov	r0, r3
+ 188 0030 4B49     		ldr	r1, .L7+8	@ float
+ 189 0032 FFF7FEFF 		bl	__aeabi_fcmpge
+ 190 0036 0346     		mov	r3, r0
+ 191 0038 002B     		cmp	r3, #0
+ 192 003a 02D0     		beq	.L2
+ 193              	.L3:
+ 194 003c 4FF00103 		mov	r3, #1
+ 195 0040 1C46     		mov	r4, r3
+ 196              	.L2:
+ 197 0042 E3B2     		uxtb	r3, r4
+ 198 0044 002B     		cmp	r3, #0
+ 199 0046 05D0     		beq	.L4
+  67:.\main.c      **** 		tm = 2000.0;
+ 200              		.loc 1 67 0
+ 201 0048 40F20003 		movw	r3, #:lower16:tm
+ 202 004c C0F20003 		movt	r3, #:upper16:tm
+ 203 0050 444A     		ldr	r2, .L7+12	@ float
+ 204 0052 1A60     		str	r2, [r3, #0]	@ float
+ 205              	.L4:
+  68:.\main.c      **** 	}
+  69:.\main.c      **** 	
+  70:.\main.c      **** 	// CALCULA O VALOR DA ALTURA
+  71:.\main.c      **** 	v = vehicle_mod(tm, alpha, v);
+ 206              		.loc 1 71 0
+ 207 0054 40F20003 		movw	r3, #:lower16:tm
+ 208 0058 C0F20003 		movt	r3, #:upper16:tm
+ 209 005c 1968     		ldr	r1, [r3, #0]	@ float
+ 210 005e 40F20003 		movw	r3, #:lower16:alpha
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 6
+
+
+ 211 0062 C0F20003 		movt	r3, #:upper16:alpha
+ 212 0066 1A68     		ldr	r2, [r3, #0]	@ float
+ 213 0068 40F20003 		movw	r3, #:lower16:v
+ 214 006c C0F20003 		movt	r3, #:upper16:v
+ 215 0070 1B68     		ldr	r3, [r3, #0]	@ float
+ 216 0072 0846     		mov	r0, r1
+ 217 0074 1146     		mov	r1, r2
+ 218 0076 1A46     		mov	r2, r3
+ 219 0078 FFF7FEFF 		bl	vehicle_mod
+ 220 007c 0246     		mov	r2, r0
+ 221 007e 40F20003 		movw	r3, #:lower16:v
+ 222 0082 C0F20003 		movt	r3, #:upper16:v
+ 223 0086 1A60     		str	r2, [r3, #0]	@ float
+  72:.\main.c      **** 	displayedData = v;
+ 224              		.loc 1 72 0
+ 225 0088 40F20003 		movw	r3, #:lower16:v
+ 226 008c C0F20003 		movt	r3, #:upper16:v
+ 227 0090 1A68     		ldr	r2, [r3, #0]	@ float
+ 228 0092 40F20003 		movw	r3, #:lower16:displayedData
+ 229 0096 C0F20003 		movt	r3, #:upper16:displayedData
+ 230 009a 1A60     		str	r2, [r3, #0]	@ float
+  73:.\main.c      **** 	output_voltage = (unsigned int) displayedData*254.0/v_max;
+ 231              		.loc 1 73 0
+ 232 009c 40F20003 		movw	r3, #:lower16:displayedData
+ 233 00a0 C0F20003 		movt	r3, #:upper16:displayedData
+ 234 00a4 1B68     		ldr	r3, [r3, #0]	@ float
+ 235 00a6 1846     		mov	r0, r3
+ 236 00a8 FFF7FEFF 		bl	__aeabi_f2uiz
+ 237 00ac 0346     		mov	r3, r0
+ 238 00ae 1846     		mov	r0, r3
+ 239 00b0 FFF7FEFF 		bl	__aeabi_ui2d
+ 240 00b4 0246     		mov	r2, r0
+ 241 00b6 0B46     		mov	r3, r1
+ 242 00b8 1046     		mov	r0, r2
+ 243 00ba 1946     		mov	r1, r3
+ 244 00bc 26A3     		adr	r3, .L7
+ 245 00be D3E90023 		ldrd	r2, [r3]
+ 246 00c2 FFF7FEFF 		bl	__aeabi_dmul
+ 247 00c6 0246     		mov	r2, r0
+ 248 00c8 0B46     		mov	r3, r1
+ 249 00ca 1446     		mov	r4, r2
+ 250 00cc 1D46     		mov	r5, r3
+ 251 00ce 40F20003 		movw	r3, #:lower16:v_max
+ 252 00d2 C0F20003 		movt	r3, #:upper16:v_max
+ 253 00d6 1B68     		ldr	r3, [r3, #0]	@ float
+ 254 00d8 1846     		mov	r0, r3
+ 255 00da FFF7FEFF 		bl	__aeabi_f2d
+ 256 00de 0246     		mov	r2, r0
+ 257 00e0 0B46     		mov	r3, r1
+ 258 00e2 2046     		mov	r0, r4
+ 259 00e4 2946     		mov	r1, r5
+ 260 00e6 FFF7FEFF 		bl	__aeabi_ddiv
+ 261 00ea 0246     		mov	r2, r0
+ 262 00ec 0B46     		mov	r3, r1
+ 263 00ee 1046     		mov	r0, r2
+ 264 00f0 1946     		mov	r1, r3
+ 265 00f2 FFF7FEFF 		bl	__aeabi_d2uiz
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 7
+
+
+ 266 00f6 0246     		mov	r2, r0
+ 267 00f8 40F20003 		movw	r3, #:lower16:output_voltage
+ 268 00fc C0F20003 		movt	r3, #:upper16:output_voltage
+ 269 0100 1A60     		str	r2, [r3, #0]
+  74:.\main.c      **** 	if (output_voltage>254){
+ 270              		.loc 1 74 0
+ 271 0102 40F20003 		movw	r3, #:lower16:output_voltage
+ 272 0106 C0F20003 		movt	r3, #:upper16:output_voltage
+ 273 010a 1B68     		ldr	r3, [r3, #0]
+ 274 010c FE2B     		cmp	r3, #254
+ 275 010e 06D9     		bls	.L5
+  75:.\main.c      **** 		output_voltage = 254;
+ 276              		.loc 1 75 0
+ 277 0110 40F20003 		movw	r3, #:lower16:output_voltage
+ 278 0114 C0F20003 		movt	r3, #:upper16:output_voltage
+ 279 0118 4FF0FE02 		mov	r2, #254
+ 280 011c 1A60     		str	r2, [r3, #0]
+ 281              	.L5:
+  76:.\main.c      **** 	}
+  77:.\main.c      **** 		
+  78:.\main.c      **** 	it += T_INCR;
+ 282              		.loc 1 78 0
+ 283 011e 40F20003 		movw	r3, #:lower16:it
+ 284 0122 C0F20003 		movt	r3, #:upper16:it
+ 285 0126 1A68     		ldr	r2, [r3, #0]	@ float
+ 286 0128 40F20003 		movw	r3, #:lower16:T_INCR
+ 287 012c C0F20003 		movt	r3, #:upper16:T_INCR
+ 288 0130 1B68     		ldr	r3, [r3, #0]	@ float
+ 289 0132 1046     		mov	r0, r2
+ 290 0134 1946     		mov	r1, r3
+ 291 0136 FFF7FEFF 		bl	__aeabi_fadd
+ 292 013a 0346     		mov	r3, r0
+ 293 013c 1A46     		mov	r2, r3
+ 294 013e 40F20003 		movw	r3, #:lower16:it
+ 295 0142 C0F20003 		movt	r3, #:upper16:it
+ 296 0146 1A60     		str	r2, [r3, #0]	@ float
+  79:.\main.c      **** 	
+  80:.\main.c      **** 	// FIM DO PROCESSAMENTO
+  81:.\main.c      **** 	PINO_PROCESSAMENTO_Write( 0 );
+ 297              		.loc 1 81 0
+ 298 0148 4FF00000 		mov	r0, #0
+ 299 014c FFF7FEFF 		bl	PINO_PROCESSAMENTO_Write
+  82:.\main.c      **** }
+ 300              		.loc 1 82 0
+ 301 0150 B0BD     		pop	{r4, r5, r7, pc}
+ 302              	.L8:
+ 303 0152 00BFAFF3 		.align	3
+ 303      0080
+ 304              	.L7:
+ 305 0158 00000000 		.word	0
+ 306 015c 00C06F40 		.word	1081065472
+ 307 0160 0000F041 		.word	1106247680
+ 308 0164 0000FA44 		.word	1157234688
+ 309              		.cfi_endproc
+ 310              	.LFE29:
+ 311              		.size	sleep, .-sleep
+ 312              		.section	.text.init,"ax",%progbits
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 8
+
+
+ 313              		.align	2
+ 314              		.global	init
+ 315              		.thumb
+ 316              		.thumb_func
+ 317              		.type	init, %function
+ 318              	init:
+ 319              	.LFB30:
+  83:.\main.c      **** 
+  84:.\main.c      **** void init(){
+ 320              		.loc 1 84 0
+ 321              		.cfi_startproc
+ 322              		@ args = 0, pretend = 0, frame = 0
+ 323              		@ frame_needed = 1, uses_anonymous_args = 0
+ 324 0000 80B5     		push	{r7, lr}
+ 325              	.LCFI2:
+ 326              		.cfi_def_cfa_offset 8
+ 327 0002 00AF     		add	r7, sp, #0
+ 328              		.cfi_offset 14, -4
+ 329              		.cfi_offset 7, -8
+ 330              	.LCFI3:
+ 331              		.cfi_def_cfa_register 7
+  85:.\main.c      **** 	LCD_Start();
+ 332              		.loc 1 85 0
+ 333 0004 FFF7FEFF 		bl	LCD_Start
+  86:.\main.c      **** 	MSG_1_Start();
+ 334              		.loc 1 86 0
+ 335 0008 FFF7FEFF 		bl	MSG_1_Start
+  87:.\main.c      **** 	MAD_1_Start();
+ 336              		.loc 1 87 0
+ 337 000c FFF7FEFF 		bl	MAD_1_Start
+  88:.\main.c      **** 	MAD_2_Start();
+ 338              		.loc 1 88 0
+ 339 0010 FFF7FEFF 		bl	MAD_2_Start
+  89:.\main.c      **** 	isr_1_Start();
+ 340              		.loc 1 89 0
+ 341 0014 FFF7FEFF 		bl	isr_1_Start
+  90:.\main.c      **** 	isr_1_SetVector(sleep);
+ 342              		.loc 1 90 0
+ 343 0018 40F20000 		movw	r0, #:lower16:sleep
+ 344 001c C0F20000 		movt	r0, #:upper16:sleep
+ 345 0020 FFF7FEFF 		bl	isr_1_SetVector
+  91:.\main.c      **** 	Timer_Start();
+ 346              		.loc 1 91 0
+ 347 0024 FFF7FEFF 		bl	Timer_Start
+  92:.\main.c      **** }
+ 348              		.loc 1 92 0
+ 349 0028 80BD     		pop	{r7, pc}
+ 350              		.cfi_endproc
+ 351              	.LFE30:
+ 352              		.size	init, .-init
+ 353 002a 00BF     		.section	.rodata
+ 354              		.align	2
+ 355              	.LC0:
+ 356 0000 544D3A00 		.ascii	"TM:\000"
+ 357              		.align	2
+ 358              	.LC1:
+ 359 0004 252E3266 		.ascii	"%.2f\000"
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 9
+
+
+ 359      00
+ 360 0009 000000   		.align	2
+ 361              	.LC2:
+ 362 000c 563A00   		.ascii	"V:\000"
+ 363 000f 00       		.align	2
+ 364              	.LC3:
+ 365 0010 413A00   		.ascii	"A:\000"
+ 366 0013 00       		.section	.text.main,"ax",%progbits
+ 367              		.align	2
+ 368              		.global	main
+ 369              		.thumb
+ 370              		.thumb_func
+ 371              		.type	main, %function
+ 372              	main:
+ 373              	.LFB31:
+  93:.\main.c      **** 
+  94:.\main.c      **** void main()
+  95:.\main.c      **** {
+ 374              		.loc 1 95 0
+ 375              		.cfi_startproc
+ 376              		@ args = 0, pretend = 0, frame = 0
+ 377              		@ frame_needed = 1, uses_anonymous_args = 0
+ 378 0000 80B5     		push	{r7, lr}
+ 379              	.LCFI4:
+ 380              		.cfi_def_cfa_offset 8
+ 381 0002 00AF     		add	r7, sp, #0
+ 382              		.cfi_offset 14, -4
+ 383              		.cfi_offset 7, -8
+ 384              	.LCFI5:
+ 385              		.cfi_def_cfa_register 7
+  96:.\main.c      **** 	/* Place your initialization/startup code here (e.g. MyInst_Start()) */
+  97:.\main.c      **** 	init();
+ 386              		.loc 1 97 0
+ 387 0004 FFF7FEFF 		bl	init
+  98:.\main.c      **** 	CyGlobalIntEnable; /* Uncomment this line to enable global interrupts. */
+ 388              		.loc 1 98 0
+ 389              	@ 98 ".\main.c" 1
+ 390 0008 62B6     		CPSIE   i
+ 391              	@ 0 "" 2
+ 392              		.thumb
+ 393              	.L12:
+  99:.\main.c      ****     for(;;)
+ 100:.\main.c      ****     {
+ 101:.\main.c      ****         /* Place your application code here. */
+ 102:.\main.c      **** 		// IMPRIMINDO O TEMPO
+ 103:.\main.c      **** 		//LCD_ClearDisplay();
+ 104:.\main.c      **** 		//LCD_Position(0u, 0u);
+ 105:.\main.c      **** 	    //LCD_PrintString("TIME:");
+ 106:.\main.c      **** 		//sprintf(tstr, "%.2f", it );
+ 107:.\main.c      **** 		//LCD_Position(0u, 5u);
+ 108:.\main.c      **** 		//LCD_PrintString(tstr);
+ 109:.\main.c      **** 		
+ 110:.\main.c      **** 		// IMPRIMINDO O TORQUE
+ 111:.\main.c      **** 		LCD_Position(0u, 0u);
+ 394              		.loc 1 111 0
+ 395 000a 4FF00000 		mov	r0, #0
+ 396 000e 4FF00001 		mov	r1, #0
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 10
+
+
+ 397 0012 FFF7FEFF 		bl	LCD_Position
+ 112:.\main.c      **** 	    LCD_PrintString("TM:");
+ 398              		.loc 1 112 0
+ 399 0016 40F20000 		movw	r0, #:lower16:.LC0
+ 400 001a C0F20000 		movt	r0, #:upper16:.LC0
+ 401 001e FFF7FEFF 		bl	LCD_PrintString
+ 113:.\main.c      **** 		sprintf(tstr, "%.2f", tm );
+ 402              		.loc 1 113 0
+ 403 0022 40F20003 		movw	r3, #:lower16:tm
+ 404 0026 C0F20003 		movt	r3, #:upper16:tm
+ 405 002a 1B68     		ldr	r3, [r3, #0]	@ float
+ 406 002c 1846     		mov	r0, r3
+ 407 002e FFF7FEFF 		bl	__aeabi_f2d
+ 408 0032 0246     		mov	r2, r0
+ 409 0034 0B46     		mov	r3, r1
+ 410 0036 40F20000 		movw	r0, #:lower16:tstr
+ 411 003a C0F20000 		movt	r0, #:upper16:tstr
+ 412 003e 40F20001 		movw	r1, #:lower16:.LC1
+ 413 0042 C0F20001 		movt	r1, #:upper16:.LC1
+ 414 0046 FFF7FEFF 		bl	sprintf
+ 114:.\main.c      **** 		LCD_Position(0u, 3u);
+ 415              		.loc 1 114 0
+ 416 004a 4FF00000 		mov	r0, #0
+ 417 004e 4FF00301 		mov	r1, #3
+ 418 0052 FFF7FEFF 		bl	LCD_Position
+ 115:.\main.c      **** 		LCD_PrintString(tstr);
+ 419              		.loc 1 115 0
+ 420 0056 40F20000 		movw	r0, #:lower16:tstr
+ 421 005a C0F20000 		movt	r0, #:upper16:tstr
+ 422 005e FFF7FEFF 		bl	LCD_PrintString
+ 116:.\main.c      **** 		
+ 117:.\main.c      **** 		// IMPRIMINDO A VELOCIDADE
+ 118:.\main.c      **** 		LCD_Position(1u, 0u);
+ 423              		.loc 1 118 0
+ 424 0062 4FF00100 		mov	r0, #1
+ 425 0066 4FF00001 		mov	r1, #0
+ 426 006a FFF7FEFF 		bl	LCD_Position
+ 119:.\main.c      **** 	    LCD_PrintString("V:");
+ 427              		.loc 1 119 0
+ 428 006e 40F20000 		movw	r0, #:lower16:.LC2
+ 429 0072 C0F20000 		movt	r0, #:upper16:.LC2
+ 430 0076 FFF7FEFF 		bl	LCD_PrintString
+ 120:.\main.c      **** 		LCD_Position(1u, 2u);
+ 431              		.loc 1 120 0
+ 432 007a 4FF00100 		mov	r0, #1
+ 433 007e 4FF00201 		mov	r1, #2
+ 434 0082 FFF7FEFF 		bl	LCD_Position
+ 121:.\main.c      **** 		sprintf(tstr, "%.2f", displayedData );
+ 435              		.loc 1 121 0
+ 436 0086 40F20003 		movw	r3, #:lower16:displayedData
+ 437 008a C0F20003 		movt	r3, #:upper16:displayedData
+ 438 008e 1B68     		ldr	r3, [r3, #0]	@ float
+ 439 0090 1846     		mov	r0, r3
+ 440 0092 FFF7FEFF 		bl	__aeabi_f2d
+ 441 0096 0246     		mov	r2, r0
+ 442 0098 0B46     		mov	r3, r1
+ 443 009a 40F20000 		movw	r0, #:lower16:tstr
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 11
+
+
+ 444 009e C0F20000 		movt	r0, #:upper16:tstr
+ 445 00a2 40F20001 		movw	r1, #:lower16:.LC1
+ 446 00a6 C0F20001 		movt	r1, #:upper16:.LC1
+ 447 00aa FFF7FEFF 		bl	sprintf
+ 122:.\main.c      **** 		LCD_PrintString(tstr);
+ 448              		.loc 1 122 0
+ 449 00ae 40F20000 		movw	r0, #:lower16:tstr
+ 450 00b2 C0F20000 		movt	r0, #:upper16:tstr
+ 451 00b6 FFF7FEFF 		bl	LCD_PrintString
+ 123:.\main.c      **** 		
+ 124:.\main.c      **** 		// IMPRIMINDO O ALFA
+ 125:.\main.c      **** 		LCD_Position(0u, 9u);
+ 452              		.loc 1 125 0
+ 453 00ba 4FF00000 		mov	r0, #0
+ 454 00be 4FF00901 		mov	r1, #9
+ 455 00c2 FFF7FEFF 		bl	LCD_Position
+ 126:.\main.c      **** 	    LCD_PrintString("A:");
+ 456              		.loc 1 126 0
+ 457 00c6 40F20000 		movw	r0, #:lower16:.LC3
+ 458 00ca C0F20000 		movt	r0, #:upper16:.LC3
+ 459 00ce FFF7FEFF 		bl	LCD_PrintString
+ 127:.\main.c      **** 		sprintf(tstr, "%.2f", alpha );
+ 460              		.loc 1 127 0
+ 461 00d2 40F20003 		movw	r3, #:lower16:alpha
+ 462 00d6 C0F20003 		movt	r3, #:upper16:alpha
+ 463 00da 1B68     		ldr	r3, [r3, #0]	@ float
+ 464 00dc 1846     		mov	r0, r3
+ 465 00de FFF7FEFF 		bl	__aeabi_f2d
+ 466 00e2 0246     		mov	r2, r0
+ 467 00e4 0B46     		mov	r3, r1
+ 468 00e6 40F20000 		movw	r0, #:lower16:tstr
+ 469 00ea C0F20000 		movt	r0, #:upper16:tstr
+ 470 00ee 40F20001 		movw	r1, #:lower16:.LC1
+ 471 00f2 C0F20001 		movt	r1, #:upper16:.LC1
+ 472 00f6 FFF7FEFF 		bl	sprintf
+ 128:.\main.c      **** 		LCD_Position(0u, 11u);
+ 473              		.loc 1 128 0
+ 474 00fa 4FF00000 		mov	r0, #0
+ 475 00fe 4FF00B01 		mov	r1, #11
+ 476 0102 FFF7FEFF 		bl	LCD_Position
+ 129:.\main.c      **** 		LCD_PrintString(tstr);
+ 477              		.loc 1 129 0
+ 478 0106 40F20000 		movw	r0, #:lower16:tstr
+ 479 010a C0F20000 		movt	r0, #:upper16:tstr
+ 480 010e FFF7FEFF 		bl	LCD_PrintString
+ 130:.\main.c      **** 		
+ 131:.\main.c      **** 	}
+ 481              		.loc 1 131 0
+ 482 0112 7AE7     		b	.L12
+ 483              		.cfi_endproc
+ 484              	.LFE31:
+ 485              		.size	main, .-main
+ 486              		.global	__aeabi_i2d
+ 487              		.global	__aeabi_d2f
+ 488              		.global	__aeabi_fmul
+ 489              		.global	__aeabi_dadd
+ 490              		.global	__aeabi_fdiv
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 12
+
+
+ 491              		.global	__aeabi_fsub
+ 492              		.section	.text.vehicle_mod,"ax",%progbits
+ 493              		.align	2
+ 494              		.global	vehicle_mod
+ 495              		.thumb
+ 496              		.thumb_func
+ 497              		.type	vehicle_mod, %function
+ 498              	vehicle_mod:
+ 499              	.LFB32:
+ 132:.\main.c      **** }
+ 133:.\main.c      **** 
+ 134:.\main.c      **** float vehicle_mod(float tm, float theta, float xAnt){
+ 500              		.loc 1 134 0
+ 501              		.cfi_startproc
+ 502              		@ args = 0, pretend = 0, frame = 56
+ 503              		@ frame_needed = 1, uses_anonymous_args = 0
+ 504 0000 2DE9B04F 		push	{r4, r5, r7, r8, r9, sl, fp, lr}
+ 505              	.LCFI6:
+ 506              		.cfi_def_cfa_offset 32
+ 507 0004 8EB0     		sub	sp, sp, #56
+ 508              	.LCFI7:
+ 509              		.cfi_def_cfa_offset 88
+ 510 0006 00AF     		add	r7, sp, #0
+ 511              		.cfi_offset 14, -4
+ 512              		.cfi_offset 11, -8
+ 513              		.cfi_offset 10, -12
+ 514              		.cfi_offset 9, -16
+ 515              		.cfi_offset 8, -20
+ 516              		.cfi_offset 7, -24
+ 517              		.cfi_offset 5, -28
+ 518              		.cfi_offset 4, -32
+ 519              	.LCFI8:
+ 520              		.cfi_def_cfa_register 7
+ 521 0008 7861     		str	r0, [r7, #20]	@ float
+ 522 000a 3961     		str	r1, [r7, #16]	@ float
+ 523 000c FA60     		str	r2, [r7, #12]	@ float
+ 135:.\main.c      **** 	
+ 136:.\main.c      **** 	float fd = sgn(xAnt)*(0.5*RO*CD*Afr*pow(xAnt,2)); // Aerodynamic drag
+ 524              		.loc 1 136 0
+ 525 000e F868     		ldr	r0, [r7, #12]	@ float
+ 526 0010 FFF7FEFF 		bl	sgn
+ 527 0014 0346     		mov	r3, r0
+ 528 0016 1846     		mov	r0, r3
+ 529 0018 FFF7FEFF 		bl	__aeabi_i2d
+ 530 001c 0446     		mov	r4, r0
+ 531 001e 0D46     		mov	r5, r1
+ 532 0020 40F20003 		movw	r3, #:lower16:RO
+ 533 0024 C0F20003 		movt	r3, #:upper16:RO
+ 534 0028 1B68     		ldr	r3, [r3, #0]	@ float
+ 535 002a 1846     		mov	r0, r3
+ 536 002c FFF7FEFF 		bl	__aeabi_f2d
+ 537 0030 0246     		mov	r2, r0
+ 538 0032 0B46     		mov	r3, r1
+ 539 0034 1046     		mov	r0, r2
+ 540 0036 1946     		mov	r1, r3
+ 541 0038 4FF00002 		mov	r2, #0
+ 542 003c 4FF07E53 		mov	r3, #1065353216
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 13
+
+
+ 543 0040 03F5C003 		add	r3, r3, #6291456
+ 544 0044 FFF7FEFF 		bl	__aeabi_dmul
+ 545 0048 0246     		mov	r2, r0
+ 546 004a 0B46     		mov	r3, r1
+ 547 004c 9046     		mov	r8, r2
+ 548 004e 9946     		mov	r9, r3
+ 549 0050 40F20003 		movw	r3, #:lower16:CD
+ 550 0054 C0F20003 		movt	r3, #:upper16:CD
+ 551 0058 1B68     		ldr	r3, [r3, #0]	@ float
+ 552 005a 1846     		mov	r0, r3
+ 553 005c FFF7FEFF 		bl	__aeabi_f2d
+ 554 0060 0246     		mov	r2, r0
+ 555 0062 0B46     		mov	r3, r1
+ 556 0064 4046     		mov	r0, r8
+ 557 0066 4946     		mov	r1, r9
+ 558 0068 FFF7FEFF 		bl	__aeabi_dmul
+ 559 006c 0246     		mov	r2, r0
+ 560 006e 0B46     		mov	r3, r1
+ 561 0070 9046     		mov	r8, r2
+ 562 0072 9946     		mov	r9, r3
+ 563 0074 40F20003 		movw	r3, #:lower16:Afr
+ 564 0078 C0F20003 		movt	r3, #:upper16:Afr
+ 565 007c 1B68     		ldr	r3, [r3, #0]	@ float
+ 566 007e 1846     		mov	r0, r3
+ 567 0080 FFF7FEFF 		bl	__aeabi_f2d
+ 568 0084 0246     		mov	r2, r0
+ 569 0086 0B46     		mov	r3, r1
+ 570 0088 4046     		mov	r0, r8
+ 571 008a 4946     		mov	r1, r9
+ 572 008c FFF7FEFF 		bl	__aeabi_dmul
+ 573 0090 0246     		mov	r2, r0
+ 574 0092 0B46     		mov	r3, r1
+ 575 0094 9046     		mov	r8, r2
+ 576 0096 9946     		mov	r9, r3
+ 577 0098 F868     		ldr	r0, [r7, #12]	@ float
+ 578 009a FFF7FEFF 		bl	__aeabi_f2d
+ 579 009e 0246     		mov	r2, r0
+ 580 00a0 0B46     		mov	r3, r1
+ 581 00a2 1046     		mov	r0, r2
+ 582 00a4 1946     		mov	r1, r3
+ 583 00a6 FFF7FEFF 		bl	__aeabi_dmul
+ 584 00aa 0246     		mov	r2, r0
+ 585 00ac 0B46     		mov	r3, r1
+ 586 00ae 4046     		mov	r0, r8
+ 587 00b0 4946     		mov	r1, r9
+ 588 00b2 FFF7FEFF 		bl	__aeabi_dmul
+ 589 00b6 0246     		mov	r2, r0
+ 590 00b8 0B46     		mov	r3, r1
+ 591 00ba 2046     		mov	r0, r4
+ 592 00bc 2946     		mov	r1, r5
+ 593 00be FFF7FEFF 		bl	__aeabi_dmul
+ 594 00c2 0246     		mov	r2, r0
+ 595 00c4 0B46     		mov	r3, r1
+ 596 00c6 1046     		mov	r0, r2
+ 597 00c8 1946     		mov	r1, r3
+ 598 00ca FFF7FEFF 		bl	__aeabi_d2f
+ 599 00ce 0346     		mov	r3, r0
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 14
+
+
+ 600 00d0 FB61     		str	r3, [r7, #28]	@ float
+ 137:.\main.c      **** 	float fr = sgn(xAnt)*(M*G*(C0 + C1*pow(xAnt,2))); // Rolling resistance
+ 601              		.loc 1 137 0
+ 602 00d2 F868     		ldr	r0, [r7, #12]	@ float
+ 603 00d4 FFF7FEFF 		bl	sgn
+ 604 00d8 0346     		mov	r3, r0
+ 605 00da 1846     		mov	r0, r3
+ 606 00dc FFF7FEFF 		bl	__aeabi_i2d
+ 607 00e0 0446     		mov	r4, r0
+ 608 00e2 0D46     		mov	r5, r1
+ 609 00e4 40F20003 		movw	r3, #:lower16:M
+ 610 00e8 C0F20003 		movt	r3, #:upper16:M
+ 611 00ec 1A68     		ldr	r2, [r3, #0]	@ float
+ 612 00ee 40F20003 		movw	r3, #:lower16:G
+ 613 00f2 C0F20003 		movt	r3, #:upper16:G
+ 614 00f6 1B68     		ldr	r3, [r3, #0]	@ float
+ 615 00f8 1046     		mov	r0, r2
+ 616 00fa 1946     		mov	r1, r3
+ 617 00fc FFF7FEFF 		bl	__aeabi_fmul
+ 618 0100 0346     		mov	r3, r0
+ 619 0102 1846     		mov	r0, r3
+ 620 0104 FFF7FEFF 		bl	__aeabi_f2d
+ 621 0108 8046     		mov	r8, r0
+ 622 010a 8946     		mov	r9, r1
+ 623 010c 40F20003 		movw	r3, #:lower16:C0
+ 624 0110 C0F20003 		movt	r3, #:upper16:C0
+ 625 0114 1B68     		ldr	r3, [r3, #0]	@ float
+ 626 0116 1846     		mov	r0, r3
+ 627 0118 FFF7FEFF 		bl	__aeabi_f2d
+ 628 011c 8246     		mov	sl, r0
+ 629 011e 8B46     		mov	fp, r1
+ 630 0120 40F20003 		movw	r3, #:lower16:C1
+ 631 0124 C0F20003 		movt	r3, #:upper16:C1
+ 632 0128 1B68     		ldr	r3, [r3, #0]	@ float
+ 633 012a 1846     		mov	r0, r3
+ 634 012c FFF7FEFF 		bl	__aeabi_f2d
+ 635 0130 C7E90001 		strd	r0, [r7]
+ 636 0134 F868     		ldr	r0, [r7, #12]	@ float
+ 637 0136 FFF7FEFF 		bl	__aeabi_f2d
+ 638 013a 0246     		mov	r2, r0
+ 639 013c 0B46     		mov	r3, r1
+ 640 013e 1046     		mov	r0, r2
+ 641 0140 1946     		mov	r1, r3
+ 642 0142 FFF7FEFF 		bl	__aeabi_dmul
+ 643 0146 0246     		mov	r2, r0
+ 644 0148 0B46     		mov	r3, r1
+ 645 014a D7E90001 		ldrd	r0, [r7]
+ 646 014e FFF7FEFF 		bl	__aeabi_dmul
+ 647 0152 0246     		mov	r2, r0
+ 648 0154 0B46     		mov	r3, r1
+ 649 0156 5046     		mov	r0, sl
+ 650 0158 5946     		mov	r1, fp
+ 651 015a FFF7FEFF 		bl	__aeabi_dadd
+ 652 015e 0246     		mov	r2, r0
+ 653 0160 0B46     		mov	r3, r1
+ 654 0162 4046     		mov	r0, r8
+ 655 0164 4946     		mov	r1, r9
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 15
+
+
+ 656 0166 FFF7FEFF 		bl	__aeabi_dmul
+ 657 016a 0246     		mov	r2, r0
+ 658 016c 0B46     		mov	r3, r1
+ 659 016e 2046     		mov	r0, r4
+ 660 0170 2946     		mov	r1, r5
+ 661 0172 FFF7FEFF 		bl	__aeabi_dmul
+ 662 0176 0246     		mov	r2, r0
+ 663 0178 0B46     		mov	r3, r1
+ 664 017a 1046     		mov	r0, r2
+ 665 017c 1946     		mov	r1, r3
+ 666 017e FFF7FEFF 		bl	__aeabi_d2f
+ 667 0182 0346     		mov	r3, r0
+ 668 0184 3B62     		str	r3, [r7, #32]	@ float
+ 138:.\main.c      **** 	float fg = M*G*sin(theta); // Gravitational friction
+ 669              		.loc 1 138 0
+ 670 0186 40F20003 		movw	r3, #:lower16:M
+ 671 018a C0F20003 		movt	r3, #:upper16:M
+ 672 018e 1A68     		ldr	r2, [r3, #0]	@ float
+ 673 0190 40F20003 		movw	r3, #:lower16:G
+ 674 0194 C0F20003 		movt	r3, #:upper16:G
+ 675 0198 1B68     		ldr	r3, [r3, #0]	@ float
+ 676 019a 1046     		mov	r0, r2
+ 677 019c 1946     		mov	r1, r3
+ 678 019e FFF7FEFF 		bl	__aeabi_fmul
+ 679 01a2 0346     		mov	r3, r0
+ 680 01a4 1846     		mov	r0, r3
+ 681 01a6 FFF7FEFF 		bl	__aeabi_f2d
+ 682 01aa 0446     		mov	r4, r0
+ 683 01ac 0D46     		mov	r5, r1
+ 684 01ae 3869     		ldr	r0, [r7, #16]	@ float
+ 685 01b0 FFF7FEFF 		bl	__aeabi_f2d
+ 686 01b4 0246     		mov	r2, r0
+ 687 01b6 0B46     		mov	r3, r1
+ 688 01b8 1046     		mov	r0, r2
+ 689 01ba 1946     		mov	r1, r3
+ 690 01bc FFF7FEFF 		bl	sin
+ 691 01c0 0246     		mov	r2, r0
+ 692 01c2 0B46     		mov	r3, r1
+ 693 01c4 2046     		mov	r0, r4
+ 694 01c6 2946     		mov	r1, r5
+ 695 01c8 FFF7FEFF 		bl	__aeabi_dmul
+ 696 01cc 0246     		mov	r2, r0
+ 697 01ce 0B46     		mov	r3, r1
+ 698 01d0 1046     		mov	r0, r2
+ 699 01d2 1946     		mov	r1, r3
+ 700 01d4 FFF7FEFF 		bl	__aeabi_d2f
+ 701 01d8 0346     		mov	r3, r0
+ 702 01da 7B62     		str	r3, [r7, #36]	@ float
+ 139:.\main.c      **** 	float fa = fd + fr + fg;
+ 703              		.loc 1 139 0
+ 704 01dc F869     		ldr	r0, [r7, #28]	@ float
+ 705 01de 396A     		ldr	r1, [r7, #32]	@ float
+ 706 01e0 FFF7FEFF 		bl	__aeabi_fadd
+ 707 01e4 0346     		mov	r3, r0
+ 708 01e6 1846     		mov	r0, r3
+ 709 01e8 796A     		ldr	r1, [r7, #36]	@ float
+ 710 01ea FFF7FEFF 		bl	__aeabi_fadd
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 16
+
+
+ 711 01ee 0346     		mov	r3, r0
+ 712 01f0 BB62     		str	r3, [r7, #40]	@ float
+ 140:.\main.c      **** 	float ft = tm/R;
+ 713              		.loc 1 140 0
+ 714 01f2 40F20003 		movw	r3, #:lower16:R
+ 715 01f6 C0F20003 		movt	r3, #:upper16:R
+ 716 01fa 1B68     		ldr	r3, [r3, #0]	@ float
+ 717 01fc 7869     		ldr	r0, [r7, #20]	@ float
+ 718 01fe 1946     		mov	r1, r3
+ 719 0200 FFF7FEFF 		bl	__aeabi_fdiv
+ 720 0204 0346     		mov	r3, r0
+ 721 0206 FB62     		str	r3, [r7, #44]	@ float
+ 141:.\main.c      **** 	
+ 142:.\main.c      **** 	float x_dot = (ft - fa)/(M*K);
+ 722              		.loc 1 142 0
+ 723 0208 F86A     		ldr	r0, [r7, #44]	@ float
+ 724 020a B96A     		ldr	r1, [r7, #40]	@ float
+ 725 020c FFF7FEFF 		bl	__aeabi_fsub
+ 726 0210 0346     		mov	r3, r0
+ 727 0212 1C46     		mov	r4, r3
+ 728 0214 40F20003 		movw	r3, #:lower16:M
+ 729 0218 C0F20003 		movt	r3, #:upper16:M
+ 730 021c 1A68     		ldr	r2, [r3, #0]	@ float
+ 731 021e 40F20003 		movw	r3, #:lower16:K
+ 732 0222 C0F20003 		movt	r3, #:upper16:K
+ 733 0226 1B68     		ldr	r3, [r3, #0]	@ float
+ 734 0228 1046     		mov	r0, r2
+ 735 022a 1946     		mov	r1, r3
+ 736 022c FFF7FEFF 		bl	__aeabi_fmul
+ 737 0230 0346     		mov	r3, r0
+ 738 0232 2046     		mov	r0, r4
+ 739 0234 1946     		mov	r1, r3
+ 740 0236 FFF7FEFF 		bl	__aeabi_fdiv
+ 741 023a 0346     		mov	r3, r0
+ 742 023c 3B63     		str	r3, [r7, #48]	@ float
+ 143:.\main.c      **** 	float x = xAnt + x_dot*T_INCR;
+ 743              		.loc 1 143 0
+ 744 023e 40F20003 		movw	r3, #:lower16:T_INCR
+ 745 0242 C0F20003 		movt	r3, #:upper16:T_INCR
+ 746 0246 1B68     		ldr	r3, [r3, #0]	@ float
+ 747 0248 1846     		mov	r0, r3
+ 748 024a 396B     		ldr	r1, [r7, #48]	@ float
+ 749 024c FFF7FEFF 		bl	__aeabi_fmul
+ 750 0250 0346     		mov	r3, r0
+ 751 0252 1846     		mov	r0, r3
+ 752 0254 F968     		ldr	r1, [r7, #12]	@ float
+ 753 0256 FFF7FEFF 		bl	__aeabi_fadd
+ 754 025a 0346     		mov	r3, r0
+ 755 025c 7B63     		str	r3, [r7, #52]	@ float
+ 144:.\main.c      **** 	
+ 145:.\main.c      **** 	return x;
+ 756              		.loc 1 145 0
+ 757 025e 7B6B     		ldr	r3, [r7, #52]	@ float
+ 146:.\main.c      **** }
+ 758              		.loc 1 146 0
+ 759 0260 1846     		mov	r0, r3
+ 760 0262 07F13807 		add	r7, r7, #56
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 17
+
+
+ 761 0266 BD46     		mov	sp, r7
+ 762 0268 BDE8B08F 		pop	{r4, r5, r7, r8, r9, sl, fp, pc}
+ 763              		.cfi_endproc
+ 764              	.LFE32:
+ 765              		.size	vehicle_mod, .-vehicle_mod
+ 766              		.global	__aeabi_fcmpgt
+ 767              		.global	__aeabi_fcmplt
+ 768              		.section	.text.sgn,"ax",%progbits
+ 769              		.align	2
+ 770              		.global	sgn
+ 771              		.thumb
+ 772              		.thumb_func
+ 773              		.type	sgn, %function
+ 774              	sgn:
+ 775              	.LFB33:
+ 147:.\main.c      **** 
+ 148:.\main.c      **** /*Sign function*/
+ 149:.\main.c      **** int sgn(float x) {
+ 776              		.loc 1 149 0
+ 777              		.cfi_startproc
+ 778              		@ args = 0, pretend = 0, frame = 8
+ 779              		@ frame_needed = 1, uses_anonymous_args = 0
+ 780 0000 90B5     		push	{r4, r7, lr}
+ 781              	.LCFI9:
+ 782              		.cfi_def_cfa_offset 12
+ 783 0002 83B0     		sub	sp, sp, #12
+ 784              	.LCFI10:
+ 785              		.cfi_def_cfa_offset 24
+ 786 0004 00AF     		add	r7, sp, #0
+ 787              		.cfi_offset 14, -4
+ 788              		.cfi_offset 7, -8
+ 789              		.cfi_offset 4, -12
+ 790              	.LCFI11:
+ 791              		.cfi_def_cfa_register 7
+ 792 0006 7860     		str	r0, [r7, #4]	@ float
+ 150:.\main.c      ****     return (x > 0) ? 1 : ((x < 0) ? -1 : 0);
+ 793              		.loc 1 150 0
+ 794 0008 4FF00003 		mov	r3, #0
+ 795 000c 1C46     		mov	r4, r3
+ 796 000e 7868     		ldr	r0, [r7, #4]	@ float
+ 797 0010 1449     		ldr	r1, .L26	@ float
+ 798 0012 FFF7FEFF 		bl	__aeabi_fcmpgt
+ 799 0016 0346     		mov	r3, r0
+ 800 0018 002B     		cmp	r3, #0
+ 801 001a 02D0     		beq	.L17
+ 802              	.L18:
+ 803 001c 4FF00103 		mov	r3, #1
+ 804 0020 1C46     		mov	r4, r3
+ 805              	.L17:
+ 806 0022 E3B2     		uxtb	r3, r4
+ 807 0024 002B     		cmp	r3, #0
+ 808 0026 02D0     		beq	.L19
+ 809 0028 4FF00103 		mov	r3, #1
+ 810 002c 14E0     		b	.L20
+ 811              	.L19:
+ 812 002e 4FF00003 		mov	r3, #0
+ 813 0032 1C46     		mov	r4, r3
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 18
+
+
+ 814 0034 7868     		ldr	r0, [r7, #4]	@ float
+ 815 0036 0B49     		ldr	r1, .L26	@ float
+ 816 0038 FFF7FEFF 		bl	__aeabi_fcmplt
+ 817 003c 0346     		mov	r3, r0
+ 818 003e 002B     		cmp	r3, #0
+ 819 0040 02D0     		beq	.L21
+ 820              	.L22:
+ 821 0042 4FF00103 		mov	r3, #1
+ 822 0046 1C46     		mov	r4, r3
+ 823              	.L21:
+ 824 0048 E3B2     		uxtb	r3, r4
+ 825 004a 002B     		cmp	r3, #0
+ 826 004c 02D0     		beq	.L23
+ 827 004e 4FF0FF33 		mov	r3, #-1
+ 828 0052 01E0     		b	.L24
+ 829              	.L23:
+ 830 0054 4FF00003 		mov	r3, #0
+ 831              	.L24:
+ 832              	.L20:
+ 151:.\main.c      **** }
+ 833              		.loc 1 151 0
+ 834 0058 1846     		mov	r0, r3
+ 835 005a 07F10C07 		add	r7, r7, #12
+ 836 005e BD46     		mov	sp, r7
+ 837 0060 90BD     		pop	{r4, r7, pc}
+ 838              	.L27:
+ 839 0062 00BF     		.align	2
+ 840              	.L26:
+ 841 0064 00000000 		.word	0
+ 842              		.cfi_endproc
+ 843              	.LFE33:
+ 844              		.size	sgn, .-sgn
+ 845              		.text
+ 846              	.Letext0:
+ 847              		.section	.debug_loc,"",%progbits
+ 848              	.Ldebug_loc0:
+ 849              	.LLST0:
+ 850 0000 00000000 		.4byte	.LFB29
+ 851 0004 02000000 		.4byte	.LCFI0
+ 852 0008 0100     		.2byte	0x1
+ 853 000a 5D       		.byte	0x5d
+ 854 000b 02000000 		.4byte	.LCFI0
+ 855 000f 04000000 		.4byte	.LCFI1
+ 856 0013 0200     		.2byte	0x2
+ 857 0015 7D       		.byte	0x7d
+ 858 0016 10       		.sleb128 16
+ 859 0017 04000000 		.4byte	.LCFI1
+ 860 001b 68010000 		.4byte	.LFE29
+ 861 001f 0200     		.2byte	0x2
+ 862 0021 77       		.byte	0x77
+ 863 0022 10       		.sleb128 16
+ 864 0023 00000000 		.4byte	0x0
+ 865 0027 00000000 		.4byte	0x0
+ 866              	.LLST1:
+ 867 002b 00000000 		.4byte	.LFB30
+ 868 002f 02000000 		.4byte	.LCFI2
+ 869 0033 0100     		.2byte	0x1
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 19
+
+
+ 870 0035 5D       		.byte	0x5d
+ 871 0036 02000000 		.4byte	.LCFI2
+ 872 003a 04000000 		.4byte	.LCFI3
+ 873 003e 0200     		.2byte	0x2
+ 874 0040 7D       		.byte	0x7d
+ 875 0041 08       		.sleb128 8
+ 876 0042 04000000 		.4byte	.LCFI3
+ 877 0046 2A000000 		.4byte	.LFE30
+ 878 004a 0200     		.2byte	0x2
+ 879 004c 77       		.byte	0x77
+ 880 004d 08       		.sleb128 8
+ 881 004e 00000000 		.4byte	0x0
+ 882 0052 00000000 		.4byte	0x0
+ 883              	.LLST2:
+ 884 0056 00000000 		.4byte	.LFB31
+ 885 005a 02000000 		.4byte	.LCFI4
+ 886 005e 0100     		.2byte	0x1
+ 887 0060 5D       		.byte	0x5d
+ 888 0061 02000000 		.4byte	.LCFI4
+ 889 0065 04000000 		.4byte	.LCFI5
+ 890 0069 0200     		.2byte	0x2
+ 891 006b 7D       		.byte	0x7d
+ 892 006c 08       		.sleb128 8
+ 893 006d 04000000 		.4byte	.LCFI5
+ 894 0071 14010000 		.4byte	.LFE31
+ 895 0075 0200     		.2byte	0x2
+ 896 0077 77       		.byte	0x77
+ 897 0078 08       		.sleb128 8
+ 898 0079 00000000 		.4byte	0x0
+ 899 007d 00000000 		.4byte	0x0
+ 900              	.LLST3:
+ 901 0081 00000000 		.4byte	.LFB32
+ 902 0085 04000000 		.4byte	.LCFI6
+ 903 0089 0100     		.2byte	0x1
+ 904 008b 5D       		.byte	0x5d
+ 905 008c 04000000 		.4byte	.LCFI6
+ 906 0090 06000000 		.4byte	.LCFI7
+ 907 0094 0200     		.2byte	0x2
+ 908 0096 7D       		.byte	0x7d
+ 909 0097 20       		.sleb128 32
+ 910 0098 06000000 		.4byte	.LCFI7
+ 911 009c 08000000 		.4byte	.LCFI8
+ 912 00a0 0300     		.2byte	0x3
+ 913 00a2 7D       		.byte	0x7d
+ 914 00a3 D800     		.sleb128 88
+ 915 00a5 08000000 		.4byte	.LCFI8
+ 916 00a9 6C020000 		.4byte	.LFE32
+ 917 00ad 0300     		.2byte	0x3
+ 918 00af 77       		.byte	0x77
+ 919 00b0 D800     		.sleb128 88
+ 920 00b2 00000000 		.4byte	0x0
+ 921 00b6 00000000 		.4byte	0x0
+ 922              	.LLST4:
+ 923 00ba 00000000 		.4byte	.LFB33
+ 924 00be 02000000 		.4byte	.LCFI9
+ 925 00c2 0100     		.2byte	0x1
+ 926 00c4 5D       		.byte	0x5d
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 20
+
+
+ 927 00c5 02000000 		.4byte	.LCFI9
+ 928 00c9 04000000 		.4byte	.LCFI10
+ 929 00cd 0200     		.2byte	0x2
+ 930 00cf 7D       		.byte	0x7d
+ 931 00d0 0C       		.sleb128 12
+ 932 00d1 04000000 		.4byte	.LCFI10
+ 933 00d5 06000000 		.4byte	.LCFI11
+ 934 00d9 0200     		.2byte	0x2
+ 935 00db 7D       		.byte	0x7d
+ 936 00dc 18       		.sleb128 24
+ 937 00dd 06000000 		.4byte	.LCFI11
+ 938 00e1 68000000 		.4byte	.LFE33
+ 939 00e5 0200     		.2byte	0x2
+ 940 00e7 77       		.byte	0x77
+ 941 00e8 18       		.sleb128 24
+ 942 00e9 00000000 		.4byte	0x0
+ 943 00ed 00000000 		.4byte	0x0
+ 944              		.file 2 "./Generated_Source/PSoC5/core_cm3.h"
+ 945              		.file 3 "./Generated_Source/PSoC5/cytypes.h"
+ 946              		.section	.debug_info
+ 947 0000 28030000 		.4byte	0x328
+ 948 0004 0200     		.2byte	0x2
+ 949 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 950 000a 04       		.byte	0x4
+ 951 000b 01       		.uleb128 0x1
+ 952 000c EF000000 		.4byte	.LASF28
+ 953 0010 01       		.byte	0x1
+ 954 0011 25000000 		.4byte	.LASF29
+ 955 0015 36010000 		.4byte	.LASF30
+ 956 0019 00000000 		.4byte	0x0
+ 957 001d 00000000 		.4byte	0x0
+ 958 0021 00000000 		.4byte	.Ldebug_ranges0+0x0
+ 959 0025 00000000 		.4byte	.Ldebug_line0
+ 960 0029 02       		.uleb128 0x2
+ 961 002a 01       		.byte	0x1
+ 962 002b 06       		.byte	0x6
+ 963 002c 1F010000 		.4byte	.LASF0
+ 964 0030 02       		.uleb128 0x2
+ 965 0031 01       		.byte	0x1
+ 966 0032 08       		.byte	0x8
+ 967 0033 39000000 		.4byte	.LASF1
+ 968 0037 02       		.uleb128 0x2
+ 969 0038 02       		.byte	0x2
+ 970 0039 05       		.byte	0x5
+ 971 003a 00010000 		.4byte	.LASF2
+ 972 003e 02       		.uleb128 0x2
+ 973 003f 02       		.byte	0x2
+ 974 0040 07       		.byte	0x7
+ 975 0041 4D000000 		.4byte	.LASF3
+ 976 0045 02       		.uleb128 0x2
+ 977 0046 04       		.byte	0x4
+ 978 0047 05       		.byte	0x5
+ 979 0048 0A010000 		.4byte	.LASF4
+ 980 004c 02       		.uleb128 0x2
+ 981 004d 04       		.byte	0x4
+ 982 004e 07       		.byte	0x7
+ 983 004f 82000000 		.4byte	.LASF5
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 21
+
+
+ 984 0053 02       		.uleb128 0x2
+ 985 0054 08       		.byte	0x8
+ 986 0055 05       		.byte	0x5
+ 987 0056 00000000 		.4byte	.LASF6
+ 988 005a 02       		.uleb128 0x2
+ 989 005b 08       		.byte	0x8
+ 990 005c 07       		.byte	0x7
+ 991 005d BC000000 		.4byte	.LASF7
+ 992 0061 03       		.uleb128 0x3
+ 993 0062 04       		.byte	0x4
+ 994 0063 05       		.byte	0x5
+ 995 0064 696E7400 		.ascii	"int\000"
+ 996 0068 02       		.uleb128 0x2
+ 997 0069 04       		.byte	0x4
+ 998 006a 07       		.byte	0x7
+ 999 006b A0000000 		.4byte	.LASF8
+ 1000 006f 04       		.uleb128 0x4
+ 1001 0070 99000000 		.4byte	.LASF31
+ 1002 0074 03       		.byte	0x3
+ 1003 0075 4D       		.byte	0x4d
+ 1004 0076 3E000000 		.4byte	0x3e
+ 1005 007a 02       		.uleb128 0x2
+ 1006 007b 04       		.byte	0x4
+ 1007 007c 04       		.byte	0x4
+ 1008 007d 2E000000 		.4byte	.LASF9
+ 1009 0081 02       		.uleb128 0x2
+ 1010 0082 08       		.byte	0x8
+ 1011 0083 04       		.byte	0x4
+ 1012 0084 E3000000 		.4byte	.LASF10
+ 1013 0088 02       		.uleb128 0x2
+ 1014 0089 01       		.byte	0x1
+ 1015 008a 08       		.byte	0x8
+ 1016 008b FB000000 		.4byte	.LASF11
+ 1017 008f 05       		.uleb128 0x5
+ 1018 0090 04       		.byte	0x4
+ 1019 0091 07       		.byte	0x7
+ 1020 0092 02       		.uleb128 0x2
+ 1021 0093 08       		.byte	0x8
+ 1022 0094 04       		.byte	0x4
+ 1023 0095 13010000 		.4byte	.LASF12
+ 1024 0099 06       		.uleb128 0x6
+ 1025 009a 01       		.byte	0x1
+ 1026 009b 8C010000 		.4byte	.LASF13
+ 1027 009f 01       		.byte	0x1
+ 1028 00a0 32       		.byte	0x32
+ 1029 00a1 01       		.byte	0x1
+ 1030 00a2 00000000 		.4byte	.LFB29
+ 1031 00a6 68010000 		.4byte	.LFE29
+ 1032 00aa 00000000 		.4byte	.LLST0
+ 1033 00ae 06       		.uleb128 0x6
+ 1034 00af 01       		.byte	0x1
+ 1035 00b0 20000000 		.4byte	.LASF14
+ 1036 00b4 01       		.byte	0x1
+ 1037 00b5 54       		.byte	0x54
+ 1038 00b6 01       		.byte	0x1
+ 1039 00b7 00000000 		.4byte	.LFB30
+ 1040 00bb 2A000000 		.4byte	.LFE30
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 22
+
+
+ 1041 00bf 2B000000 		.4byte	.LLST1
+ 1042 00c3 07       		.uleb128 0x7
+ 1043 00c4 01       		.byte	0x1
+ 1044 00c5 94000000 		.4byte	.LASF32
+ 1045 00c9 01       		.byte	0x1
+ 1046 00ca 5E       		.byte	0x5e
+ 1047 00cb 00000000 		.4byte	.LFB31
+ 1048 00cf 14010000 		.4byte	.LFE31
+ 1049 00d3 56000000 		.4byte	.LLST2
+ 1050 00d7 08       		.uleb128 0x8
+ 1051 00d8 01       		.byte	0x1
+ 1052 00d9 0E000000 		.4byte	.LASF18
+ 1053 00dd 01       		.byte	0x1
+ 1054 00de 86       		.byte	0x86
+ 1055 00df 01       		.byte	0x1
+ 1056 00e0 7A000000 		.4byte	0x7a
+ 1057 00e4 00000000 		.4byte	.LFB32
+ 1058 00e8 6C020000 		.4byte	.LFE32
+ 1059 00ec 81000000 		.4byte	.LLST3
+ 1060 00f0 7C010000 		.4byte	0x17c
+ 1061 00f4 09       		.uleb128 0x9
+ 1062 00f5 746D00   		.ascii	"tm\000"
+ 1063 00f8 01       		.byte	0x1
+ 1064 00f9 86       		.byte	0x86
+ 1065 00fa 7A000000 		.4byte	0x7a
+ 1066 00fe 03       		.byte	0x3
+ 1067 00ff 91       		.byte	0x91
+ 1068 0100 BC7F     		.sleb128 -68
+ 1069 0102 0A       		.uleb128 0xa
+ 1070 0103 1A000000 		.4byte	.LASF15
+ 1071 0107 01       		.byte	0x1
+ 1072 0108 86       		.byte	0x86
+ 1073 0109 7A000000 		.4byte	0x7a
+ 1074 010d 03       		.byte	0x3
+ 1075 010e 91       		.byte	0x91
+ 1076 010f B87F     		.sleb128 -72
+ 1077 0111 0A       		.uleb128 0xa
+ 1078 0112 34000000 		.4byte	.LASF16
+ 1079 0116 01       		.byte	0x1
+ 1080 0117 86       		.byte	0x86
+ 1081 0118 7A000000 		.4byte	0x7a
+ 1082 011c 03       		.byte	0x3
+ 1083 011d 91       		.byte	0x91
+ 1084 011e B47F     		.sleb128 -76
+ 1085 0120 0B       		.uleb128 0xb
+ 1086 0121 666400   		.ascii	"fd\000"
+ 1087 0124 01       		.byte	0x1
+ 1088 0125 88       		.byte	0x88
+ 1089 0126 7A000000 		.4byte	0x7a
+ 1090 012a 02       		.byte	0x2
+ 1091 012b 91       		.byte	0x91
+ 1092 012c 44       		.sleb128 -60
+ 1093 012d 0B       		.uleb128 0xb
+ 1094 012e 667200   		.ascii	"fr\000"
+ 1095 0131 01       		.byte	0x1
+ 1096 0132 89       		.byte	0x89
+ 1097 0133 7A000000 		.4byte	0x7a
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 23
+
+
+ 1098 0137 02       		.byte	0x2
+ 1099 0138 91       		.byte	0x91
+ 1100 0139 48       		.sleb128 -56
+ 1101 013a 0B       		.uleb128 0xb
+ 1102 013b 666700   		.ascii	"fg\000"
+ 1103 013e 01       		.byte	0x1
+ 1104 013f 8A       		.byte	0x8a
+ 1105 0140 7A000000 		.4byte	0x7a
+ 1106 0144 02       		.byte	0x2
+ 1107 0145 91       		.byte	0x91
+ 1108 0146 4C       		.sleb128 -52
+ 1109 0147 0B       		.uleb128 0xb
+ 1110 0148 666100   		.ascii	"fa\000"
+ 1111 014b 01       		.byte	0x1
+ 1112 014c 8B       		.byte	0x8b
+ 1113 014d 7A000000 		.4byte	0x7a
+ 1114 0151 02       		.byte	0x2
+ 1115 0152 91       		.byte	0x91
+ 1116 0153 50       		.sleb128 -48
+ 1117 0154 0B       		.uleb128 0xb
+ 1118 0155 667400   		.ascii	"ft\000"
+ 1119 0158 01       		.byte	0x1
+ 1120 0159 8C       		.byte	0x8c
+ 1121 015a 7A000000 		.4byte	0x7a
+ 1122 015e 02       		.byte	0x2
+ 1123 015f 91       		.byte	0x91
+ 1124 0160 54       		.sleb128 -44
+ 1125 0161 0C       		.uleb128 0xc
+ 1126 0162 47000000 		.4byte	.LASF17
+ 1127 0166 01       		.byte	0x1
+ 1128 0167 8E       		.byte	0x8e
+ 1129 0168 7A000000 		.4byte	0x7a
+ 1130 016c 02       		.byte	0x2
+ 1131 016d 91       		.byte	0x91
+ 1132 016e 58       		.sleb128 -40
+ 1133 016f 0B       		.uleb128 0xb
+ 1134 0170 7800     		.ascii	"x\000"
+ 1135 0172 01       		.byte	0x1
+ 1136 0173 8F       		.byte	0x8f
+ 1137 0174 7A000000 		.4byte	0x7a
+ 1138 0178 02       		.byte	0x2
+ 1139 0179 91       		.byte	0x91
+ 1140 017a 5C       		.sleb128 -36
+ 1141 017b 00       		.byte	0x0
+ 1142 017c 0D       		.uleb128 0xd
+ 1143 017d 01       		.byte	0x1
+ 1144 017e 73676E00 		.ascii	"sgn\000"
+ 1145 0182 01       		.byte	0x1
+ 1146 0183 95       		.byte	0x95
+ 1147 0184 01       		.byte	0x1
+ 1148 0185 61000000 		.4byte	0x61
+ 1149 0189 00000000 		.4byte	.LFB33
+ 1150 018d 68000000 		.4byte	.LFE33
+ 1151 0191 BA000000 		.4byte	.LLST4
+ 1152 0195 A6010000 		.4byte	0x1a6
+ 1153 0199 09       		.uleb128 0x9
+ 1154 019a 7800     		.ascii	"x\000"
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 24
+
+
+ 1155 019c 01       		.byte	0x1
+ 1156 019d 95       		.byte	0x95
+ 1157 019e 7A000000 		.4byte	0x7a
+ 1158 01a2 02       		.byte	0x2
+ 1159 01a3 91       		.byte	0x91
+ 1160 01a4 6C       		.sleb128 -20
+ 1161 01a5 00       		.byte	0x0
+ 1162 01a6 0E       		.uleb128 0xe
+ 1163 01a7 6E000000 		.4byte	.LASF19
+ 1164 01ab 02       		.byte	0x2
+ 1165 01ac CE06     		.2byte	0x6ce
+ 1166 01ae B4010000 		.4byte	0x1b4
+ 1167 01b2 01       		.byte	0x1
+ 1168 01b3 01       		.byte	0x1
+ 1169 01b4 0F       		.uleb128 0xf
+ 1170 01b5 61000000 		.4byte	0x61
+ 1171 01b9 10       		.uleb128 0x10
+ 1172 01ba D3000000 		.4byte	.LASF20
+ 1173 01be 01       		.byte	0x1
+ 1174 01bf 13       		.byte	0x13
+ 1175 01c0 6F000000 		.4byte	0x6f
+ 1176 01c4 01       		.byte	0x1
+ 1177 01c5 05       		.byte	0x5
+ 1178 01c6 03       		.byte	0x3
+ 1179 01c7 00000000 		.4byte	adc_value
+ 1180 01cb 10       		.uleb128 0x10
+ 1181 01cc EA000000 		.4byte	.LASF21
+ 1182 01d0 01       		.byte	0x1
+ 1183 01d1 14       		.byte	0x14
+ 1184 01d2 7A000000 		.4byte	0x7a
+ 1185 01d6 01       		.byte	0x1
+ 1186 01d7 05       		.byte	0x5
+ 1187 01d8 03       		.byte	0x3
+ 1188 01d9 00000000 		.4byte	time
+ 1189 01dd 11       		.uleb128 0x11
+ 1190 01de 88000000 		.4byte	0x88
+ 1191 01e2 ED010000 		.4byte	0x1ed
+ 1192 01e6 12       		.uleb128 0x12
+ 1193 01e7 8F000000 		.4byte	0x8f
+ 1194 01eb 0F       		.byte	0xf
+ 1195 01ec 00       		.byte	0x0
+ 1196 01ed 10       		.uleb128 0x10
+ 1197 01ee 2B010000 		.4byte	.LASF22
+ 1198 01f2 01       		.byte	0x1
+ 1199 01f3 15       		.byte	0x15
+ 1200 01f4 DD010000 		.4byte	0x1dd
+ 1201 01f8 01       		.byte	0x1
+ 1202 01f9 05       		.byte	0x5
+ 1203 01fa 03       		.byte	0x3
+ 1204 01fb 00000000 		.4byte	tstr
+ 1205 01ff 13       		.uleb128 0x13
+ 1206 0200 4D00     		.ascii	"M\000"
+ 1207 0202 01       		.byte	0x1
+ 1208 0203 17       		.byte	0x17
+ 1209 0204 7A000000 		.4byte	0x7a
+ 1210 0208 01       		.byte	0x1
+ 1211 0209 05       		.byte	0x5
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 25
+
+
+ 1212 020a 03       		.byte	0x3
+ 1213 020b 00000000 		.4byte	M
+ 1214 020f 13       		.uleb128 0x13
+ 1215 0210 4B00     		.ascii	"K\000"
+ 1216 0212 01       		.byte	0x1
+ 1217 0213 18       		.byte	0x18
+ 1218 0214 7A000000 		.4byte	0x7a
+ 1219 0218 01       		.byte	0x1
+ 1220 0219 05       		.byte	0x5
+ 1221 021a 03       		.byte	0x3
+ 1222 021b 00000000 		.4byte	K
+ 1223 021f 13       		.uleb128 0x13
+ 1224 0220 524F00   		.ascii	"RO\000"
+ 1225 0223 01       		.byte	0x1
+ 1226 0224 19       		.byte	0x19
+ 1227 0225 7A000000 		.4byte	0x7a
+ 1228 0229 01       		.byte	0x1
+ 1229 022a 05       		.byte	0x5
+ 1230 022b 03       		.byte	0x3
+ 1231 022c 00000000 		.4byte	RO
+ 1232 0230 13       		.uleb128 0x13
+ 1233 0231 434400   		.ascii	"CD\000"
+ 1234 0234 01       		.byte	0x1
+ 1235 0235 1A       		.byte	0x1a
+ 1236 0236 7A000000 		.4byte	0x7a
+ 1237 023a 01       		.byte	0x1
+ 1238 023b 05       		.byte	0x5
+ 1239 023c 03       		.byte	0x3
+ 1240 023d 00000000 		.4byte	CD
+ 1241 0241 13       		.uleb128 0x13
+ 1242 0242 41667200 		.ascii	"Afr\000"
+ 1243 0246 01       		.byte	0x1
+ 1244 0247 1B       		.byte	0x1b
+ 1245 0248 7A000000 		.4byte	0x7a
+ 1246 024c 01       		.byte	0x1
+ 1247 024d 05       		.byte	0x5
+ 1248 024e 03       		.byte	0x3
+ 1249 024f 00000000 		.4byte	Afr
+ 1250 0253 13       		.uleb128 0x13
+ 1251 0254 433000   		.ascii	"C0\000"
+ 1252 0257 01       		.byte	0x1
+ 1253 0258 1C       		.byte	0x1c
+ 1254 0259 7A000000 		.4byte	0x7a
+ 1255 025d 01       		.byte	0x1
+ 1256 025e 05       		.byte	0x5
+ 1257 025f 03       		.byte	0x3
+ 1258 0260 00000000 		.4byte	C0
+ 1259 0264 13       		.uleb128 0x13
+ 1260 0265 433100   		.ascii	"C1\000"
+ 1261 0268 01       		.byte	0x1
+ 1262 0269 1D       		.byte	0x1d
+ 1263 026a 7A000000 		.4byte	0x7a
+ 1264 026e 01       		.byte	0x1
+ 1265 026f 05       		.byte	0x5
+ 1266 0270 03       		.byte	0x3
+ 1267 0271 00000000 		.4byte	C1
+ 1268 0275 13       		.uleb128 0x13
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 26
+
+
+ 1269 0276 4700     		.ascii	"G\000"
+ 1270 0278 01       		.byte	0x1
+ 1271 0279 1E       		.byte	0x1e
+ 1272 027a 7A000000 		.4byte	0x7a
+ 1273 027e 01       		.byte	0x1
+ 1274 027f 05       		.byte	0x5
+ 1275 0280 03       		.byte	0x3
+ 1276 0281 00000000 		.4byte	G
+ 1277 0285 13       		.uleb128 0x13
+ 1278 0286 5200     		.ascii	"R\000"
+ 1279 0288 01       		.byte	0x1
+ 1280 0289 1F       		.byte	0x1f
+ 1281 028a 7A000000 		.4byte	0x7a
+ 1282 028e 01       		.byte	0x1
+ 1283 028f 05       		.byte	0x5
+ 1284 0290 03       		.byte	0x3
+ 1285 0291 00000000 		.4byte	R
+ 1286 0295 10       		.uleb128 0x10
+ 1287 0296 DD000000 		.4byte	.LASF23
+ 1288 029a 01       		.byte	0x1
+ 1289 029b 20       		.byte	0x20
+ 1290 029c 7A000000 		.4byte	0x7a
+ 1291 02a0 01       		.byte	0x1
+ 1292 02a1 05       		.byte	0x5
+ 1293 02a2 03       		.byte	0x3
+ 1294 02a3 00000000 		.4byte	v_max
+ 1295 02a7 13       		.uleb128 0x13
+ 1296 02a8 746D00   		.ascii	"tm\000"
+ 1297 02ab 01       		.byte	0x1
+ 1298 02ac 22       		.byte	0x22
+ 1299 02ad B8020000 		.4byte	0x2b8
+ 1300 02b1 01       		.byte	0x1
+ 1301 02b2 05       		.byte	0x5
+ 1302 02b3 03       		.byte	0x3
+ 1303 02b4 00000000 		.4byte	tm
+ 1304 02b8 0F       		.uleb128 0xf
+ 1305 02b9 7A000000 		.4byte	0x7a
+ 1306 02bd 13       		.uleb128 0x13
+ 1307 02be 7600     		.ascii	"v\000"
+ 1308 02c0 01       		.byte	0x1
+ 1309 02c1 23       		.byte	0x23
+ 1310 02c2 B8020000 		.4byte	0x2b8
+ 1311 02c6 01       		.byte	0x1
+ 1312 02c7 05       		.byte	0x5
+ 1313 02c8 03       		.byte	0x3
+ 1314 02c9 00000000 		.4byte	v
+ 1315 02cd 10       		.uleb128 0x10
+ 1316 02ce 60000000 		.4byte	.LASF24
+ 1317 02d2 01       		.byte	0x1
+ 1318 02d3 25       		.byte	0x25
+ 1319 02d4 B8020000 		.4byte	0x2b8
+ 1320 02d8 01       		.byte	0x1
+ 1321 02d9 05       		.byte	0x5
+ 1322 02da 03       		.byte	0x3
+ 1323 02db 00000000 		.4byte	displayedData
+ 1324 02df 10       		.uleb128 0x10
+ 1325 02e0 AD000000 		.4byte	.LASF25
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 27
+
+
+ 1326 02e4 01       		.byte	0x1
+ 1327 02e5 26       		.byte	0x26
+ 1328 02e6 F1020000 		.4byte	0x2f1
+ 1329 02ea 01       		.byte	0x1
+ 1330 02eb 05       		.byte	0x5
+ 1331 02ec 03       		.byte	0x3
+ 1332 02ed 00000000 		.4byte	output_voltage
+ 1333 02f1 0F       		.uleb128 0xf
+ 1334 02f2 68000000 		.4byte	0x68
+ 1335 02f6 10       		.uleb128 0x10
+ 1336 02f7 7B000000 		.4byte	.LASF26
+ 1337 02fb 01       		.byte	0x1
+ 1338 02fc 28       		.byte	0x28
+ 1339 02fd 7A000000 		.4byte	0x7a
+ 1340 0301 01       		.byte	0x1
+ 1341 0302 05       		.byte	0x5
+ 1342 0303 03       		.byte	0x3
+ 1343 0304 00000000 		.4byte	T_INCR
+ 1344 0308 13       		.uleb128 0x13
+ 1345 0309 697400   		.ascii	"it\000"
+ 1346 030c 01       		.byte	0x1
+ 1347 030d 2A       		.byte	0x2a
+ 1348 030e B8020000 		.4byte	0x2b8
+ 1349 0312 01       		.byte	0x1
+ 1350 0313 05       		.byte	0x5
+ 1351 0314 03       		.byte	0x3
+ 1352 0315 00000000 		.4byte	it
+ 1353 0319 10       		.uleb128 0x10
+ 1354 031a 30010000 		.4byte	.LASF27
+ 1355 031e 01       		.byte	0x1
+ 1356 031f 2B       		.byte	0x2b
+ 1357 0320 B8020000 		.4byte	0x2b8
+ 1358 0324 01       		.byte	0x1
+ 1359 0325 05       		.byte	0x5
+ 1360 0326 03       		.byte	0x3
+ 1361 0327 00000000 		.4byte	alpha
+ 1362 032b 00       		.byte	0x0
+ 1363              		.section	.debug_abbrev
+ 1364 0000 01       		.uleb128 0x1
+ 1365 0001 11       		.uleb128 0x11
+ 1366 0002 01       		.byte	0x1
+ 1367 0003 25       		.uleb128 0x25
+ 1368 0004 0E       		.uleb128 0xe
+ 1369 0005 13       		.uleb128 0x13
+ 1370 0006 0B       		.uleb128 0xb
+ 1371 0007 03       		.uleb128 0x3
+ 1372 0008 0E       		.uleb128 0xe
+ 1373 0009 1B       		.uleb128 0x1b
+ 1374 000a 0E       		.uleb128 0xe
+ 1375 000b 11       		.uleb128 0x11
+ 1376 000c 01       		.uleb128 0x1
+ 1377 000d 52       		.uleb128 0x52
+ 1378 000e 01       		.uleb128 0x1
+ 1379 000f 55       		.uleb128 0x55
+ 1380 0010 06       		.uleb128 0x6
+ 1381 0011 10       		.uleb128 0x10
+ 1382 0012 06       		.uleb128 0x6
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 28
+
+
+ 1383 0013 00       		.byte	0x0
+ 1384 0014 00       		.byte	0x0
+ 1385 0015 02       		.uleb128 0x2
+ 1386 0016 24       		.uleb128 0x24
+ 1387 0017 00       		.byte	0x0
+ 1388 0018 0B       		.uleb128 0xb
+ 1389 0019 0B       		.uleb128 0xb
+ 1390 001a 3E       		.uleb128 0x3e
+ 1391 001b 0B       		.uleb128 0xb
+ 1392 001c 03       		.uleb128 0x3
+ 1393 001d 0E       		.uleb128 0xe
+ 1394 001e 00       		.byte	0x0
+ 1395 001f 00       		.byte	0x0
+ 1396 0020 03       		.uleb128 0x3
+ 1397 0021 24       		.uleb128 0x24
+ 1398 0022 00       		.byte	0x0
+ 1399 0023 0B       		.uleb128 0xb
+ 1400 0024 0B       		.uleb128 0xb
+ 1401 0025 3E       		.uleb128 0x3e
+ 1402 0026 0B       		.uleb128 0xb
+ 1403 0027 03       		.uleb128 0x3
+ 1404 0028 08       		.uleb128 0x8
+ 1405 0029 00       		.byte	0x0
+ 1406 002a 00       		.byte	0x0
+ 1407 002b 04       		.uleb128 0x4
+ 1408 002c 16       		.uleb128 0x16
+ 1409 002d 00       		.byte	0x0
+ 1410 002e 03       		.uleb128 0x3
+ 1411 002f 0E       		.uleb128 0xe
+ 1412 0030 3A       		.uleb128 0x3a
+ 1413 0031 0B       		.uleb128 0xb
+ 1414 0032 3B       		.uleb128 0x3b
+ 1415 0033 0B       		.uleb128 0xb
+ 1416 0034 49       		.uleb128 0x49
+ 1417 0035 13       		.uleb128 0x13
+ 1418 0036 00       		.byte	0x0
+ 1419 0037 00       		.byte	0x0
+ 1420 0038 05       		.uleb128 0x5
+ 1421 0039 24       		.uleb128 0x24
+ 1422 003a 00       		.byte	0x0
+ 1423 003b 0B       		.uleb128 0xb
+ 1424 003c 0B       		.uleb128 0xb
+ 1425 003d 3E       		.uleb128 0x3e
+ 1426 003e 0B       		.uleb128 0xb
+ 1427 003f 00       		.byte	0x0
+ 1428 0040 00       		.byte	0x0
+ 1429 0041 06       		.uleb128 0x6
+ 1430 0042 2E       		.uleb128 0x2e
+ 1431 0043 00       		.byte	0x0
+ 1432 0044 3F       		.uleb128 0x3f
+ 1433 0045 0C       		.uleb128 0xc
+ 1434 0046 03       		.uleb128 0x3
+ 1435 0047 0E       		.uleb128 0xe
+ 1436 0048 3A       		.uleb128 0x3a
+ 1437 0049 0B       		.uleb128 0xb
+ 1438 004a 3B       		.uleb128 0x3b
+ 1439 004b 0B       		.uleb128 0xb
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 29
+
+
+ 1440 004c 27       		.uleb128 0x27
+ 1441 004d 0C       		.uleb128 0xc
+ 1442 004e 11       		.uleb128 0x11
+ 1443 004f 01       		.uleb128 0x1
+ 1444 0050 12       		.uleb128 0x12
+ 1445 0051 01       		.uleb128 0x1
+ 1446 0052 40       		.uleb128 0x40
+ 1447 0053 06       		.uleb128 0x6
+ 1448 0054 00       		.byte	0x0
+ 1449 0055 00       		.byte	0x0
+ 1450 0056 07       		.uleb128 0x7
+ 1451 0057 2E       		.uleb128 0x2e
+ 1452 0058 00       		.byte	0x0
+ 1453 0059 3F       		.uleb128 0x3f
+ 1454 005a 0C       		.uleb128 0xc
+ 1455 005b 03       		.uleb128 0x3
+ 1456 005c 0E       		.uleb128 0xe
+ 1457 005d 3A       		.uleb128 0x3a
+ 1458 005e 0B       		.uleb128 0xb
+ 1459 005f 3B       		.uleb128 0x3b
+ 1460 0060 0B       		.uleb128 0xb
+ 1461 0061 11       		.uleb128 0x11
+ 1462 0062 01       		.uleb128 0x1
+ 1463 0063 12       		.uleb128 0x12
+ 1464 0064 01       		.uleb128 0x1
+ 1465 0065 40       		.uleb128 0x40
+ 1466 0066 06       		.uleb128 0x6
+ 1467 0067 00       		.byte	0x0
+ 1468 0068 00       		.byte	0x0
+ 1469 0069 08       		.uleb128 0x8
+ 1470 006a 2E       		.uleb128 0x2e
+ 1471 006b 01       		.byte	0x1
+ 1472 006c 3F       		.uleb128 0x3f
+ 1473 006d 0C       		.uleb128 0xc
+ 1474 006e 03       		.uleb128 0x3
+ 1475 006f 0E       		.uleb128 0xe
+ 1476 0070 3A       		.uleb128 0x3a
+ 1477 0071 0B       		.uleb128 0xb
+ 1478 0072 3B       		.uleb128 0x3b
+ 1479 0073 0B       		.uleb128 0xb
+ 1480 0074 27       		.uleb128 0x27
+ 1481 0075 0C       		.uleb128 0xc
+ 1482 0076 49       		.uleb128 0x49
+ 1483 0077 13       		.uleb128 0x13
+ 1484 0078 11       		.uleb128 0x11
+ 1485 0079 01       		.uleb128 0x1
+ 1486 007a 12       		.uleb128 0x12
+ 1487 007b 01       		.uleb128 0x1
+ 1488 007c 40       		.uleb128 0x40
+ 1489 007d 06       		.uleb128 0x6
+ 1490 007e 01       		.uleb128 0x1
+ 1491 007f 13       		.uleb128 0x13
+ 1492 0080 00       		.byte	0x0
+ 1493 0081 00       		.byte	0x0
+ 1494 0082 09       		.uleb128 0x9
+ 1495 0083 05       		.uleb128 0x5
+ 1496 0084 00       		.byte	0x0
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 30
+
+
+ 1497 0085 03       		.uleb128 0x3
+ 1498 0086 08       		.uleb128 0x8
+ 1499 0087 3A       		.uleb128 0x3a
+ 1500 0088 0B       		.uleb128 0xb
+ 1501 0089 3B       		.uleb128 0x3b
+ 1502 008a 0B       		.uleb128 0xb
+ 1503 008b 49       		.uleb128 0x49
+ 1504 008c 13       		.uleb128 0x13
+ 1505 008d 02       		.uleb128 0x2
+ 1506 008e 0A       		.uleb128 0xa
+ 1507 008f 00       		.byte	0x0
+ 1508 0090 00       		.byte	0x0
+ 1509 0091 0A       		.uleb128 0xa
+ 1510 0092 05       		.uleb128 0x5
+ 1511 0093 00       		.byte	0x0
+ 1512 0094 03       		.uleb128 0x3
+ 1513 0095 0E       		.uleb128 0xe
+ 1514 0096 3A       		.uleb128 0x3a
+ 1515 0097 0B       		.uleb128 0xb
+ 1516 0098 3B       		.uleb128 0x3b
+ 1517 0099 0B       		.uleb128 0xb
+ 1518 009a 49       		.uleb128 0x49
+ 1519 009b 13       		.uleb128 0x13
+ 1520 009c 02       		.uleb128 0x2
+ 1521 009d 0A       		.uleb128 0xa
+ 1522 009e 00       		.byte	0x0
+ 1523 009f 00       		.byte	0x0
+ 1524 00a0 0B       		.uleb128 0xb
+ 1525 00a1 34       		.uleb128 0x34
+ 1526 00a2 00       		.byte	0x0
+ 1527 00a3 03       		.uleb128 0x3
+ 1528 00a4 08       		.uleb128 0x8
+ 1529 00a5 3A       		.uleb128 0x3a
+ 1530 00a6 0B       		.uleb128 0xb
+ 1531 00a7 3B       		.uleb128 0x3b
+ 1532 00a8 0B       		.uleb128 0xb
+ 1533 00a9 49       		.uleb128 0x49
+ 1534 00aa 13       		.uleb128 0x13
+ 1535 00ab 02       		.uleb128 0x2
+ 1536 00ac 0A       		.uleb128 0xa
+ 1537 00ad 00       		.byte	0x0
+ 1538 00ae 00       		.byte	0x0
+ 1539 00af 0C       		.uleb128 0xc
+ 1540 00b0 34       		.uleb128 0x34
+ 1541 00b1 00       		.byte	0x0
+ 1542 00b2 03       		.uleb128 0x3
+ 1543 00b3 0E       		.uleb128 0xe
+ 1544 00b4 3A       		.uleb128 0x3a
+ 1545 00b5 0B       		.uleb128 0xb
+ 1546 00b6 3B       		.uleb128 0x3b
+ 1547 00b7 0B       		.uleb128 0xb
+ 1548 00b8 49       		.uleb128 0x49
+ 1549 00b9 13       		.uleb128 0x13
+ 1550 00ba 02       		.uleb128 0x2
+ 1551 00bb 0A       		.uleb128 0xa
+ 1552 00bc 00       		.byte	0x0
+ 1553 00bd 00       		.byte	0x0
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 31
+
+
+ 1554 00be 0D       		.uleb128 0xd
+ 1555 00bf 2E       		.uleb128 0x2e
+ 1556 00c0 01       		.byte	0x1
+ 1557 00c1 3F       		.uleb128 0x3f
+ 1558 00c2 0C       		.uleb128 0xc
+ 1559 00c3 03       		.uleb128 0x3
+ 1560 00c4 08       		.uleb128 0x8
+ 1561 00c5 3A       		.uleb128 0x3a
+ 1562 00c6 0B       		.uleb128 0xb
+ 1563 00c7 3B       		.uleb128 0x3b
+ 1564 00c8 0B       		.uleb128 0xb
+ 1565 00c9 27       		.uleb128 0x27
+ 1566 00ca 0C       		.uleb128 0xc
+ 1567 00cb 49       		.uleb128 0x49
+ 1568 00cc 13       		.uleb128 0x13
+ 1569 00cd 11       		.uleb128 0x11
+ 1570 00ce 01       		.uleb128 0x1
+ 1571 00cf 12       		.uleb128 0x12
+ 1572 00d0 01       		.uleb128 0x1
+ 1573 00d1 40       		.uleb128 0x40
+ 1574 00d2 06       		.uleb128 0x6
+ 1575 00d3 01       		.uleb128 0x1
+ 1576 00d4 13       		.uleb128 0x13
+ 1577 00d5 00       		.byte	0x0
+ 1578 00d6 00       		.byte	0x0
+ 1579 00d7 0E       		.uleb128 0xe
+ 1580 00d8 34       		.uleb128 0x34
+ 1581 00d9 00       		.byte	0x0
+ 1582 00da 03       		.uleb128 0x3
+ 1583 00db 0E       		.uleb128 0xe
+ 1584 00dc 3A       		.uleb128 0x3a
+ 1585 00dd 0B       		.uleb128 0xb
+ 1586 00de 3B       		.uleb128 0x3b
+ 1587 00df 05       		.uleb128 0x5
+ 1588 00e0 49       		.uleb128 0x49
+ 1589 00e1 13       		.uleb128 0x13
+ 1590 00e2 3F       		.uleb128 0x3f
+ 1591 00e3 0C       		.uleb128 0xc
+ 1592 00e4 3C       		.uleb128 0x3c
+ 1593 00e5 0C       		.uleb128 0xc
+ 1594 00e6 00       		.byte	0x0
+ 1595 00e7 00       		.byte	0x0
+ 1596 00e8 0F       		.uleb128 0xf
+ 1597 00e9 35       		.uleb128 0x35
+ 1598 00ea 00       		.byte	0x0
+ 1599 00eb 49       		.uleb128 0x49
+ 1600 00ec 13       		.uleb128 0x13
+ 1601 00ed 00       		.byte	0x0
+ 1602 00ee 00       		.byte	0x0
+ 1603 00ef 10       		.uleb128 0x10
+ 1604 00f0 34       		.uleb128 0x34
+ 1605 00f1 00       		.byte	0x0
+ 1606 00f2 03       		.uleb128 0x3
+ 1607 00f3 0E       		.uleb128 0xe
+ 1608 00f4 3A       		.uleb128 0x3a
+ 1609 00f5 0B       		.uleb128 0xb
+ 1610 00f6 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 32
+
+
+ 1611 00f7 0B       		.uleb128 0xb
+ 1612 00f8 49       		.uleb128 0x49
+ 1613 00f9 13       		.uleb128 0x13
+ 1614 00fa 3F       		.uleb128 0x3f
+ 1615 00fb 0C       		.uleb128 0xc
+ 1616 00fc 02       		.uleb128 0x2
+ 1617 00fd 0A       		.uleb128 0xa
+ 1618 00fe 00       		.byte	0x0
+ 1619 00ff 00       		.byte	0x0
+ 1620 0100 11       		.uleb128 0x11
+ 1621 0101 01       		.uleb128 0x1
+ 1622 0102 01       		.byte	0x1
+ 1623 0103 49       		.uleb128 0x49
+ 1624 0104 13       		.uleb128 0x13
+ 1625 0105 01       		.uleb128 0x1
+ 1626 0106 13       		.uleb128 0x13
+ 1627 0107 00       		.byte	0x0
+ 1628 0108 00       		.byte	0x0
+ 1629 0109 12       		.uleb128 0x12
+ 1630 010a 21       		.uleb128 0x21
+ 1631 010b 00       		.byte	0x0
+ 1632 010c 49       		.uleb128 0x49
+ 1633 010d 13       		.uleb128 0x13
+ 1634 010e 2F       		.uleb128 0x2f
+ 1635 010f 0B       		.uleb128 0xb
+ 1636 0110 00       		.byte	0x0
+ 1637 0111 00       		.byte	0x0
+ 1638 0112 13       		.uleb128 0x13
+ 1639 0113 34       		.uleb128 0x34
+ 1640 0114 00       		.byte	0x0
+ 1641 0115 03       		.uleb128 0x3
+ 1642 0116 08       		.uleb128 0x8
+ 1643 0117 3A       		.uleb128 0x3a
+ 1644 0118 0B       		.uleb128 0xb
+ 1645 0119 3B       		.uleb128 0x3b
+ 1646 011a 0B       		.uleb128 0xb
+ 1647 011b 49       		.uleb128 0x49
+ 1648 011c 13       		.uleb128 0x13
+ 1649 011d 3F       		.uleb128 0x3f
+ 1650 011e 0C       		.uleb128 0xc
+ 1651 011f 02       		.uleb128 0x2
+ 1652 0120 0A       		.uleb128 0xa
+ 1653 0121 00       		.byte	0x0
+ 1654 0122 00       		.byte	0x0
+ 1655 0123 00       		.byte	0x0
+ 1656              		.section	.debug_pubnames,"",%progbits
+ 1657 0000 F6000000 		.4byte	0xf6
+ 1658 0004 0200     		.2byte	0x2
+ 1659 0006 00000000 		.4byte	.Ldebug_info0
+ 1660 000a 2C030000 		.4byte	0x32c
+ 1661 000e 99000000 		.4byte	0x99
+ 1662 0012 736C6565 		.ascii	"sleep\000"
+ 1662      7000
+ 1663 0018 AE000000 		.4byte	0xae
+ 1664 001c 696E6974 		.ascii	"init\000"
+ 1664      00
+ 1665 0021 C3000000 		.4byte	0xc3
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 33
+
+
+ 1666 0025 6D61696E 		.ascii	"main\000"
+ 1666      00
+ 1667 002a D7000000 		.4byte	0xd7
+ 1668 002e 76656869 		.ascii	"vehicle_mod\000"
+ 1668      636C655F 
+ 1668      6D6F6400 
+ 1669 003a 7C010000 		.4byte	0x17c
+ 1670 003e 73676E00 		.ascii	"sgn\000"
+ 1671 0042 B9010000 		.4byte	0x1b9
+ 1672 0046 6164635F 		.ascii	"adc_value\000"
+ 1672      76616C75 
+ 1672      6500
+ 1673 0050 CB010000 		.4byte	0x1cb
+ 1674 0054 74696D65 		.ascii	"time\000"
+ 1674      00
+ 1675 0059 ED010000 		.4byte	0x1ed
+ 1676 005d 74737472 		.ascii	"tstr\000"
+ 1676      00
+ 1677 0062 FF010000 		.4byte	0x1ff
+ 1678 0066 4D00     		.ascii	"M\000"
+ 1679 0068 0F020000 		.4byte	0x20f
+ 1680 006c 4B00     		.ascii	"K\000"
+ 1681 006e 1F020000 		.4byte	0x21f
+ 1682 0072 524F00   		.ascii	"RO\000"
+ 1683 0075 30020000 		.4byte	0x230
+ 1684 0079 434400   		.ascii	"CD\000"
+ 1685 007c 41020000 		.4byte	0x241
+ 1686 0080 41667200 		.ascii	"Afr\000"
+ 1687 0084 53020000 		.4byte	0x253
+ 1688 0088 433000   		.ascii	"C0\000"
+ 1689 008b 64020000 		.4byte	0x264
+ 1690 008f 433100   		.ascii	"C1\000"
+ 1691 0092 75020000 		.4byte	0x275
+ 1692 0096 4700     		.ascii	"G\000"
+ 1693 0098 85020000 		.4byte	0x285
+ 1694 009c 5200     		.ascii	"R\000"
+ 1695 009e 95020000 		.4byte	0x295
+ 1696 00a2 765F6D61 		.ascii	"v_max\000"
+ 1696      7800
+ 1697 00a8 A7020000 		.4byte	0x2a7
+ 1698 00ac 746D00   		.ascii	"tm\000"
+ 1699 00af BD020000 		.4byte	0x2bd
+ 1700 00b3 7600     		.ascii	"v\000"
+ 1701 00b5 CD020000 		.4byte	0x2cd
+ 1702 00b9 64697370 		.ascii	"displayedData\000"
+ 1702      6C617965 
+ 1702      64446174 
+ 1702      6100
+ 1703 00c7 DF020000 		.4byte	0x2df
+ 1704 00cb 6F757470 		.ascii	"output_voltage\000"
+ 1704      75745F76 
+ 1704      6F6C7461 
+ 1704      676500
+ 1705 00da F6020000 		.4byte	0x2f6
+ 1706 00de 545F494E 		.ascii	"T_INCR\000"
+ 1706      435200
+ 1707 00e5 08030000 		.4byte	0x308
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 34
+
+
+ 1708 00e9 697400   		.ascii	"it\000"
+ 1709 00ec 19030000 		.4byte	0x319
+ 1710 00f0 616C7068 		.ascii	"alpha\000"
+ 1710      6100
+ 1711 00f6 00000000 		.4byte	0x0
+ 1712              		.section	.debug_aranges,"",%progbits
+ 1713 0000 3C000000 		.4byte	0x3c
+ 1714 0004 0200     		.2byte	0x2
+ 1715 0006 00000000 		.4byte	.Ldebug_info0
+ 1716 000a 04       		.byte	0x4
+ 1717 000b 00       		.byte	0x0
+ 1718 000c 0000     		.2byte	0x0
+ 1719 000e 0000     		.2byte	0x0
+ 1720 0010 00000000 		.4byte	.LFB29
+ 1721 0014 68010000 		.4byte	.LFE29-.LFB29
+ 1722 0018 00000000 		.4byte	.LFB30
+ 1723 001c 2A000000 		.4byte	.LFE30-.LFB30
+ 1724 0020 00000000 		.4byte	.LFB31
+ 1725 0024 14010000 		.4byte	.LFE31-.LFB31
+ 1726 0028 00000000 		.4byte	.LFB32
+ 1727 002c 6C020000 		.4byte	.LFE32-.LFB32
+ 1728 0030 00000000 		.4byte	.LFB33
+ 1729 0034 68000000 		.4byte	.LFE33-.LFB33
+ 1730 0038 00000000 		.4byte	0x0
+ 1731 003c 00000000 		.4byte	0x0
+ 1732              		.section	.debug_ranges,"",%progbits
+ 1733              	.Ldebug_ranges0:
+ 1734 0000 00000000 		.4byte	.Ltext0
+ 1735 0004 00000000 		.4byte	.Letext0
+ 1736 0008 00000000 		.4byte	.LFB29
+ 1737 000c 68010000 		.4byte	.LFE29
+ 1738 0010 00000000 		.4byte	.LFB30
+ 1739 0014 2A000000 		.4byte	.LFE30
+ 1740 0018 00000000 		.4byte	.LFB31
+ 1741 001c 14010000 		.4byte	.LFE31
+ 1742 0020 00000000 		.4byte	.LFB32
+ 1743 0024 6C020000 		.4byte	.LFE32
+ 1744 0028 00000000 		.4byte	.LFB33
+ 1745 002c 68000000 		.4byte	.LFE33
+ 1746 0030 00000000 		.4byte	0x0
+ 1747 0034 00000000 		.4byte	0x0
+ 1748              		.section	.debug_str,"MS",%progbits,1
+ 1749              	.LASF6:
+ 1750 0000 6C6F6E67 		.ascii	"long long int\000"
+ 1750      206C6F6E 
+ 1750      6720696E 
+ 1750      7400
+ 1751              	.LASF18:
+ 1752 000e 76656869 		.ascii	"vehicle_mod\000"
+ 1752      636C655F 
+ 1752      6D6F6400 
+ 1753              	.LASF15:
+ 1754 001a 74686574 		.ascii	"theta\000"
+ 1754      6100
+ 1755              	.LASF14:
+ 1756 0020 696E6974 		.ascii	"init\000"
+ 1756      00
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 35
+
+
+ 1757              	.LASF29:
+ 1758 0025 2E5C6D61 		.ascii	".\\main.c\000"
+ 1758      696E2E63 
+ 1758      00
+ 1759              	.LASF9:
+ 1760 002e 666C6F61 		.ascii	"float\000"
+ 1760      7400
+ 1761              	.LASF16:
+ 1762 0034 78416E74 		.ascii	"xAnt\000"
+ 1762      00
+ 1763              	.LASF1:
+ 1764 0039 756E7369 		.ascii	"unsigned char\000"
+ 1764      676E6564 
+ 1764      20636861 
+ 1764      7200
+ 1765              	.LASF17:
+ 1766 0047 785F646F 		.ascii	"x_dot\000"
+ 1766      7400
+ 1767              	.LASF3:
+ 1768 004d 73686F72 		.ascii	"short unsigned int\000"
+ 1768      7420756E 
+ 1768      7369676E 
+ 1768      65642069 
+ 1768      6E7400
+ 1769              	.LASF24:
+ 1770 0060 64697370 		.ascii	"displayedData\000"
+ 1770      6C617965 
+ 1770      64446174 
+ 1770      6100
+ 1771              	.LASF19:
+ 1772 006e 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1772      52784275 
+ 1772      66666572 
+ 1772      00
+ 1773              	.LASF26:
+ 1774 007b 545F494E 		.ascii	"T_INCR\000"
+ 1774      435200
+ 1775              	.LASF5:
+ 1776 0082 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1776      20756E73 
+ 1776      69676E65 
+ 1776      6420696E 
+ 1776      7400
+ 1777              	.LASF32:
+ 1778 0094 6D61696E 		.ascii	"main\000"
+ 1778      00
+ 1779              	.LASF31:
+ 1780 0099 75696E74 		.ascii	"uint16\000"
+ 1780      313600
+ 1781              	.LASF8:
+ 1782 00a0 756E7369 		.ascii	"unsigned int\000"
+ 1782      676E6564 
+ 1782      20696E74 
+ 1782      00
+ 1783              	.LASF25:
+ 1784 00ad 6F757470 		.ascii	"output_voltage\000"
+ 1784      75745F76 
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 36
+
+
+ 1784      6F6C7461 
+ 1784      676500
+ 1785              	.LASF7:
+ 1786 00bc 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1786      206C6F6E 
+ 1786      6720756E 
+ 1786      7369676E 
+ 1786      65642069 
+ 1787              	.LASF20:
+ 1788 00d3 6164635F 		.ascii	"adc_value\000"
+ 1788      76616C75 
+ 1788      6500
+ 1789              	.LASF23:
+ 1790 00dd 765F6D61 		.ascii	"v_max\000"
+ 1790      7800
+ 1791              	.LASF10:
+ 1792 00e3 646F7562 		.ascii	"double\000"
+ 1792      6C6500
+ 1793              	.LASF21:
+ 1794 00ea 74696D65 		.ascii	"time\000"
+ 1794      00
+ 1795              	.LASF28:
+ 1796 00ef 474E5520 		.ascii	"GNU C 4.4.1\000"
+ 1796      4320342E 
+ 1796      342E3100 
+ 1797              	.LASF11:
+ 1798 00fb 63686172 		.ascii	"char\000"
+ 1798      00
+ 1799              	.LASF2:
+ 1800 0100 73686F72 		.ascii	"short int\000"
+ 1800      7420696E 
+ 1800      7400
+ 1801              	.LASF4:
+ 1802 010a 6C6F6E67 		.ascii	"long int\000"
+ 1802      20696E74 
+ 1802      00
+ 1803              	.LASF12:
+ 1804 0113 6C6F6E67 		.ascii	"long double\000"
+ 1804      20646F75 
+ 1804      626C6500 
+ 1805              	.LASF0:
+ 1806 011f 7369676E 		.ascii	"signed char\000"
+ 1806      65642063 
+ 1806      68617200 
+ 1807              	.LASF22:
+ 1808 012b 74737472 		.ascii	"tstr\000"
+ 1808      00
+ 1809              	.LASF27:
+ 1810 0130 616C7068 		.ascii	"alpha\000"
+ 1810      6100
+ 1811              	.LASF30:
+ 1812 0136 433A5C55 		.ascii	"C:\\Users\\Isaac Souza\\Dropbox\\SharedWorkspace\\P"
+ 1812      73657273 
+ 1812      5C497361 
+ 1812      61632053 
+ 1812      6F757A61 
+ 1813 0164 536F4320 		.ascii	"SoC Creator Projects\\Testes\\STRDS.cydsn\000"
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccQtwPHm.s 			page 37
+
+
+ 1813      43726561 
+ 1813      746F7220 
+ 1813      50726F6A 
+ 1813      65637473 
+ 1814              	.LASF13:
+ 1815 018c 736C6565 		.ascii	"sleep\000"
+ 1815      7000
+ 1816              		.ident	"GCC: (Sourcery G++ Lite 2010q1-188) 4.4.1"

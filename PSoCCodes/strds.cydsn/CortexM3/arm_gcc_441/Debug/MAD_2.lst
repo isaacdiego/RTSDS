@@ -1,0 +1,3807 @@
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 18, 4
+  12              		.thumb
+  13              		.file	"MAD_2.c"
+  14              		.section	.debug_abbrev,"",%progbits
+  15              	.Ldebug_abbrev0:
+  16              		.section	.debug_info,"",%progbits
+  17              	.Ldebug_info0:
+  18              		.section	.debug_line,"",%progbits
+  19              	.Ldebug_line0:
+  20 0000 F1010000 		.text
+  20      02005E00 
+  20      00000201 
+  20      FB0E0D00 
+  20      01010101 
+  21              	.Ltext0:
+  22              		.cfi_sections	.debug_frame
+  23              		.global	MAD_2_initVar
+  24              		.bss
+  25              		.type	MAD_2_initVar, %object
+  26              		.size	MAD_2_initVar, 1
+  27              	MAD_2_initVar:
+  28 0000 00       		.space	1
+  29              		.comm	MAD_2_offset,2,2
+  30              		.comm	MAD_2_countsPerVolt,2,2
+  31              		.comm	MAD_2_shift,2,2
+  32              	MAD_2_resolution:
+  33 0001 00       		.space	1
+  34              		.section	.text.MAD_2_Start,"ax",%progbits
+  35              		.align	2
+  36              		.global	MAD_2_Start
+  37              		.thumb
+  38              		.thumb_func
+  39              		.type	MAD_2_Start, %function
+  40              	MAD_2_Start:
+  41              	.LFB0:
+  42              		.file 1 ".\\Generated_Source\\PSoC5\\MAD_2.c"
+   1:.\Generated_Source\PSoC5/MAD_2.c **** /*******************************************************************************
+   2:.\Generated_Source\PSoC5/MAD_2.c **** * File Name: MAD_2.c
+   3:.\Generated_Source\PSoC5/MAD_2.c **** * Version 2.0
+   4:.\Generated_Source\PSoC5/MAD_2.c **** *
+   5:.\Generated_Source\PSoC5/MAD_2.c **** * Description:
+   6:.\Generated_Source\PSoC5/MAD_2.c **** *  This file provides the source code to the API for the Successive
+   7:.\Generated_Source\PSoC5/MAD_2.c **** *  approximation ADC Component.
+   8:.\Generated_Source\PSoC5/MAD_2.c **** *
+   9:.\Generated_Source\PSoC5/MAD_2.c **** * Note:
+  10:.\Generated_Source\PSoC5/MAD_2.c **** *
+  11:.\Generated_Source\PSoC5/MAD_2.c **** ********************************************************************************
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 2
+
+
+  12:.\Generated_Source\PSoC5/MAD_2.c **** * Copyright 2008-2012, Cypress Semiconductor Corporation.  All rights reserved.
+  13:.\Generated_Source\PSoC5/MAD_2.c **** * You may use this file only in accordance with the license, terms, conditions,
+  14:.\Generated_Source\PSoC5/MAD_2.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  15:.\Generated_Source\PSoC5/MAD_2.c **** * the software package with which this file was provided.
+  16:.\Generated_Source\PSoC5/MAD_2.c **** *******************************************************************************/
+  17:.\Generated_Source\PSoC5/MAD_2.c **** 
+  18:.\Generated_Source\PSoC5/MAD_2.c **** #include "CyLib.h"
+  19:.\Generated_Source\PSoC5/MAD_2.c **** #include "MAD_2.h"
+  20:.\Generated_Source\PSoC5/MAD_2.c **** 
+  21:.\Generated_Source\PSoC5/MAD_2.c **** #if(MAD_2_DEFAULT_INTERNAL_CLK)
+  22:.\Generated_Source\PSoC5/MAD_2.c ****     #include "MAD_2_theACLK.h"
+  23:.\Generated_Source\PSoC5/MAD_2.c **** #endif /* End MAD_2_DEFAULT_INTERNAL_CLK */
+  24:.\Generated_Source\PSoC5/MAD_2.c **** 
+  25:.\Generated_Source\PSoC5/MAD_2.c **** 
+  26:.\Generated_Source\PSoC5/MAD_2.c **** /***************************************
+  27:.\Generated_Source\PSoC5/MAD_2.c **** * Forward function references
+  28:.\Generated_Source\PSoC5/MAD_2.c **** ***************************************/
+  29:.\Generated_Source\PSoC5/MAD_2.c **** static void MAD_2_CalcGain(uint8 resolution);
+  30:.\Generated_Source\PSoC5/MAD_2.c **** 
+  31:.\Generated_Source\PSoC5/MAD_2.c **** 
+  32:.\Generated_Source\PSoC5/MAD_2.c **** /***************************************
+  33:.\Generated_Source\PSoC5/MAD_2.c **** * Global data allocation
+  34:.\Generated_Source\PSoC5/MAD_2.c **** ***************************************/
+  35:.\Generated_Source\PSoC5/MAD_2.c **** uint8 MAD_2_initVar = 0u;
+  36:.\Generated_Source\PSoC5/MAD_2.c **** volatile int16 MAD_2_offset;
+  37:.\Generated_Source\PSoC5/MAD_2.c **** volatile int16 MAD_2_countsPerVolt;   /* Gain compensation */
+  38:.\Generated_Source\PSoC5/MAD_2.c **** volatile int16 MAD_2_shift;
+  39:.\Generated_Source\PSoC5/MAD_2.c **** 
+  40:.\Generated_Source\PSoC5/MAD_2.c **** 
+  41:.\Generated_Source\PSoC5/MAD_2.c **** /***************************************
+  42:.\Generated_Source\PSoC5/MAD_2.c **** * Local data allocation
+  43:.\Generated_Source\PSoC5/MAD_2.c **** ***************************************/
+  44:.\Generated_Source\PSoC5/MAD_2.c **** #if(CY_PSOC5A)
+  45:.\Generated_Source\PSoC5/MAD_2.c ****     static uint8 MAD_2_resolution;
+  46:.\Generated_Source\PSoC5/MAD_2.c **** #endif /* End CY_PSOC5A */
+  47:.\Generated_Source\PSoC5/MAD_2.c **** 
+  48:.\Generated_Source\PSoC5/MAD_2.c **** 
+  49:.\Generated_Source\PSoC5/MAD_2.c **** /*******************************************************************************
+  50:.\Generated_Source\PSoC5/MAD_2.c **** * Function Name: MAD_2_Start
+  51:.\Generated_Source\PSoC5/MAD_2.c **** ********************************************************************************
+  52:.\Generated_Source\PSoC5/MAD_2.c **** *
+  53:.\Generated_Source\PSoC5/MAD_2.c **** * Summary:
+  54:.\Generated_Source\PSoC5/MAD_2.c **** *  Performs all required initialization for this component and enables the
+  55:.\Generated_Source\PSoC5/MAD_2.c **** *  power.
+  56:.\Generated_Source\PSoC5/MAD_2.c **** *
+  57:.\Generated_Source\PSoC5/MAD_2.c **** * Parameters:
+  58:.\Generated_Source\PSoC5/MAD_2.c **** *  None.
+  59:.\Generated_Source\PSoC5/MAD_2.c **** *
+  60:.\Generated_Source\PSoC5/MAD_2.c **** * Return:
+  61:.\Generated_Source\PSoC5/MAD_2.c **** *  None.
+  62:.\Generated_Source\PSoC5/MAD_2.c **** *
+  63:.\Generated_Source\PSoC5/MAD_2.c **** * Global variables:
+  64:.\Generated_Source\PSoC5/MAD_2.c **** *  The MAD_2_initVar variable is used to indicate when/if initial
+  65:.\Generated_Source\PSoC5/MAD_2.c **** *  configuration of this component has happened. The variable is initialized to
+  66:.\Generated_Source\PSoC5/MAD_2.c **** *  zero and set to 1 the first time ADC_Start() is called. This allows for
+  67:.\Generated_Source\PSoC5/MAD_2.c **** *  component Re-Start without re-initialization in all subsequent calls to the
+  68:.\Generated_Source\PSoC5/MAD_2.c **** *  MAD_2_Start() routine.
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 3
+
+
+  69:.\Generated_Source\PSoC5/MAD_2.c **** *  If re-initialization of the component is required the variable should be set
+  70:.\Generated_Source\PSoC5/MAD_2.c **** *  to zero before call of MAD_2_Start() routine, or the user may call
+  71:.\Generated_Source\PSoC5/MAD_2.c **** *  MAD_2_Init() and MAD_2_Enable() as done in the
+  72:.\Generated_Source\PSoC5/MAD_2.c **** *  MAD_2_Start() routine.
+  73:.\Generated_Source\PSoC5/MAD_2.c **** *
+  74:.\Generated_Source\PSoC5/MAD_2.c **** *******************************************************************************/
+  75:.\Generated_Source\PSoC5/MAD_2.c **** void MAD_2_Start(void)
+  76:.\Generated_Source\PSoC5/MAD_2.c **** {
+  43              		.loc 1 76 0
+  44              		.cfi_startproc
+  45              		@ args = 0, pretend = 0, frame = 0
+  46              		@ frame_needed = 1, uses_anonymous_args = 0
+  47 0000 80B5     		push	{r7, lr}
+  48              	.LCFI0:
+  49              		.cfi_def_cfa_offset 8
+  50 0002 00AF     		add	r7, sp, #0
+  51              		.cfi_offset 14, -4
+  52              		.cfi_offset 7, -8
+  53              	.LCFI1:
+  54              		.cfi_def_cfa_register 7
+  77:.\Generated_Source\PSoC5/MAD_2.c **** 
+  78:.\Generated_Source\PSoC5/MAD_2.c ****     /* If not Initialized then initialize all required hardware and software */
+  79:.\Generated_Source\PSoC5/MAD_2.c ****     if(MAD_2_initVar == 0u)
+  55              		.loc 1 79 0
+  56 0004 40F20003 		movw	r3, #:lower16:MAD_2_initVar
+  57 0008 C0F20003 		movt	r3, #:upper16:MAD_2_initVar
+  58 000c 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+  59 000e 002B     		cmp	r3, #0
+  60 0010 08D1     		bne	.L2
+  80:.\Generated_Source\PSoC5/MAD_2.c ****     {
+  81:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_Init();
+  61              		.loc 1 81 0
+  62 0012 FFF7FEFF 		bl	MAD_2_Init
+  82:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_initVar = 1u;
+  63              		.loc 1 82 0
+  64 0016 40F20003 		movw	r3, #:lower16:MAD_2_initVar
+  65 001a C0F20003 		movt	r3, #:upper16:MAD_2_initVar
+  66 001e 4FF00102 		mov	r2, #1
+  67 0022 1A70     		strb	r2, [r3, #0]
+  68              	.L2:
+  83:.\Generated_Source\PSoC5/MAD_2.c ****     }
+  84:.\Generated_Source\PSoC5/MAD_2.c ****     MAD_2_Enable();
+  69              		.loc 1 84 0
+  70 0024 FFF7FEFF 		bl	MAD_2_Enable
+  85:.\Generated_Source\PSoC5/MAD_2.c **** }
+  71              		.loc 1 85 0
+  72 0028 80BD     		pop	{r7, pc}
+  73              		.cfi_endproc
+  74              	.LFE0:
+  75              		.size	MAD_2_Start, .-MAD_2_Start
+  76 002a 00BF     		.section	.text.MAD_2_Init,"ax",%progbits
+  77              		.align	2
+  78              		.global	MAD_2_Init
+  79              		.thumb
+  80              		.thumb_func
+  81              		.type	MAD_2_Init, %function
+  82              	MAD_2_Init:
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 4
+
+
+  83              	.LFB1:
+  86:.\Generated_Source\PSoC5/MAD_2.c **** 
+  87:.\Generated_Source\PSoC5/MAD_2.c **** 
+  88:.\Generated_Source\PSoC5/MAD_2.c **** /*******************************************************************************
+  89:.\Generated_Source\PSoC5/MAD_2.c **** * Function Name: MAD_2_Init
+  90:.\Generated_Source\PSoC5/MAD_2.c **** ********************************************************************************
+  91:.\Generated_Source\PSoC5/MAD_2.c **** *
+  92:.\Generated_Source\PSoC5/MAD_2.c **** * Summary:
+  93:.\Generated_Source\PSoC5/MAD_2.c **** *  Initialize component's parameters to the parameters set by user in the
+  94:.\Generated_Source\PSoC5/MAD_2.c **** *  customizer of the component placed onto schematic. Usually called in
+  95:.\Generated_Source\PSoC5/MAD_2.c **** *  MAD_2_Start().
+  96:.\Generated_Source\PSoC5/MAD_2.c **** *
+  97:.\Generated_Source\PSoC5/MAD_2.c **** * Parameters:
+  98:.\Generated_Source\PSoC5/MAD_2.c **** *  None.
+  99:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 100:.\Generated_Source\PSoC5/MAD_2.c **** * Return:
+ 101:.\Generated_Source\PSoC5/MAD_2.c **** *  None.
+ 102:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 103:.\Generated_Source\PSoC5/MAD_2.c **** * Global variables:
+ 104:.\Generated_Source\PSoC5/MAD_2.c **** *  The MAD_2_offset variable is initialized to 0.
+ 105:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 106:.\Generated_Source\PSoC5/MAD_2.c **** *******************************************************************************/
+ 107:.\Generated_Source\PSoC5/MAD_2.c **** void MAD_2_Init(void)
+ 108:.\Generated_Source\PSoC5/MAD_2.c **** {
+  84              		.loc 1 108 0
+  85              		.cfi_startproc
+  86              		@ args = 0, pretend = 0, frame = 0
+  87              		@ frame_needed = 1, uses_anonymous_args = 0
+  88 0000 80B5     		push	{r7, lr}
+  89              	.LCFI2:
+  90              		.cfi_def_cfa_offset 8
+  91 0002 00AF     		add	r7, sp, #0
+  92              		.cfi_offset 14, -4
+  93              		.cfi_offset 7, -8
+  94              	.LCFI3:
+  95              		.cfi_def_cfa_register 7
+ 109:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 110:.\Generated_Source\PSoC5/MAD_2.c ****     /* This is only valid if there is an internal clock */
+ 111:.\Generated_Source\PSoC5/MAD_2.c ****     #if(MAD_2_DEFAULT_INTERNAL_CLK)
+ 112:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_theACLK_SetMode(CYCLK_DUTY);
+  96              		.loc 1 112 0
+  97 0004 4FF01000 		mov	r0, #16
+  98 0008 FFF7FEFF 		bl	MAD_2_theACLK_SetModeRegister
+ 113:.\Generated_Source\PSoC5/MAD_2.c ****     #endif /* End MAD_2_DEFAULT_INTERNAL_CLK */
+ 114:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 115:.\Generated_Source\PSoC5/MAD_2.c ****     #if(MAD_2_IRQ_REMOVE == 0u)
+ 116:.\Generated_Source\PSoC5/MAD_2.c ****         /* Start and set interrupt vector */
+ 117:.\Generated_Source\PSoC5/MAD_2.c ****         CyIntSetPriority(MAD_2_INTC_NUMBER, MAD_2_INTC_PRIOR_NUMBER);
+  99              		.loc 1 117 0
+ 100 000c 4FF00100 		mov	r0, #1
+ 101 0010 4FF00701 		mov	r1, #7
+ 102 0014 FFF7FEFF 		bl	CyIntSetPriority
+ 118:.\Generated_Source\PSoC5/MAD_2.c ****         (void)CyIntSetVector(MAD_2_INTC_NUMBER, &MAD_2_ISR);
+ 103              		.loc 1 118 0
+ 104 0018 4FF00100 		mov	r0, #1
+ 105 001c 40F20001 		movw	r1, #:lower16:MAD_2_ISR
+ 106 0020 C0F20001 		movt	r1, #:upper16:MAD_2_ISR
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 5
+
+
+ 107 0024 FFF7FEFF 		bl	CyIntSetVector
+ 119:.\Generated_Source\PSoC5/MAD_2.c ****     #endif   /* End MAD_2_IRQ_REMOVE */        
+ 120:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 121:.\Generated_Source\PSoC5/MAD_2.c ****     /* Enable IRQ mode*/
+ 122:.\Generated_Source\PSoC5/MAD_2.c ****     MAD_2_SAR_CSR1_REG |= MAD_2_SAR_IRQ_MASK_EN | MAD_2_SAR_IRQ_MODE_EDGE;
+ 108              		.loc 1 122 0
+ 109 0028 45F60113 		movw	r3, #:lower16:1073764609
+ 110 002c C4F20003 		movt	r3, #:upper16:1073764609
+ 111 0030 45F60112 		movw	r2, #:lower16:1073764609
+ 112 0034 C4F20002 		movt	r2, #:upper16:1073764609
+ 113 0038 1278     		ldrb	r2, [r2, #0]
+ 114 003a D2B2     		uxtb	r2, r2
+ 115 003c 42F00602 		orr	r2, r2, #6
+ 116 0040 D2B2     		uxtb	r2, r2
+ 117 0042 1A70     		strb	r2, [r3, #0]
+ 123:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 124:.\Generated_Source\PSoC5/MAD_2.c ****     /*Set SAR ADC resolution ADC */
+ 125:.\Generated_Source\PSoC5/MAD_2.c ****     MAD_2_SetResolution(MAD_2_DEFAULT_RESOLUTION);
+ 118              		.loc 1 125 0
+ 119 0044 4FF00C00 		mov	r0, #12
+ 120 0048 FFF7FEFF 		bl	MAD_2_SetResolution
+ 126:.\Generated_Source\PSoC5/MAD_2.c ****     MAD_2_offset = 0;
+ 121              		.loc 1 126 0
+ 122 004c 40F20003 		movw	r3, #:lower16:MAD_2_offset
+ 123 0050 C0F20003 		movt	r3, #:upper16:MAD_2_offset
+ 124 0054 4FF00002 		mov	r2, #0
+ 125 0058 1A80     		strh	r2, [r3, #0]	@ movhi
+ 127:.\Generated_Source\PSoC5/MAD_2.c **** }
+ 126              		.loc 1 127 0
+ 127 005a 80BD     		pop	{r7, pc}
+ 128              		.cfi_endproc
+ 129              	.LFE1:
+ 130              		.size	MAD_2_Init, .-MAD_2_Init
+ 131              		.section	.text.MAD_2_Enable,"ax",%progbits
+ 132              		.align	2
+ 133              		.global	MAD_2_Enable
+ 134              		.thumb
+ 135              		.thumb_func
+ 136              		.type	MAD_2_Enable, %function
+ 137              	MAD_2_Enable:
+ 138              	.LFB2:
+ 128:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 129:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 130:.\Generated_Source\PSoC5/MAD_2.c **** /*******************************************************************************
+ 131:.\Generated_Source\PSoC5/MAD_2.c **** * Function Name: MAD_2_Enable
+ 132:.\Generated_Source\PSoC5/MAD_2.c **** ********************************************************************************
+ 133:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 134:.\Generated_Source\PSoC5/MAD_2.c **** * Summary:
+ 135:.\Generated_Source\PSoC5/MAD_2.c **** *  Enables the reference, clock and power for SAR ADC.
+ 136:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 137:.\Generated_Source\PSoC5/MAD_2.c **** * Parameters:
+ 138:.\Generated_Source\PSoC5/MAD_2.c **** *  None.
+ 139:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 140:.\Generated_Source\PSoC5/MAD_2.c **** * Return:
+ 141:.\Generated_Source\PSoC5/MAD_2.c **** *  None.
+ 142:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 143:.\Generated_Source\PSoC5/MAD_2.c **** *******************************************************************************/
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 6
+
+
+ 144:.\Generated_Source\PSoC5/MAD_2.c **** void MAD_2_Enable(void)
+ 145:.\Generated_Source\PSoC5/MAD_2.c **** {
+ 139              		.loc 1 145 0
+ 140              		.cfi_startproc
+ 141              		@ args = 0, pretend = 0, frame = 8
+ 142              		@ frame_needed = 1, uses_anonymous_args = 0
+ 143 0000 80B5     		push	{r7, lr}
+ 144              	.LCFI4:
+ 145              		.cfi_def_cfa_offset 8
+ 146 0002 82B0     		sub	sp, sp, #8
+ 147              	.LCFI5:
+ 148              		.cfi_def_cfa_offset 16
+ 149 0004 00AF     		add	r7, sp, #0
+ 150              		.cfi_offset 14, -4
+ 151              		.cfi_offset 7, -8
+ 152              	.LCFI6:
+ 153              		.cfi_def_cfa_register 7
+ 146:.\Generated_Source\PSoC5/MAD_2.c ****     uint8 tmpReg;
+ 147:.\Generated_Source\PSoC5/MAD_2.c ****     uint8 enableInterrupts;
+ 148:.\Generated_Source\PSoC5/MAD_2.c ****     enableInterrupts = CyEnterCriticalSection();
+ 154              		.loc 1 148 0
+ 155 0006 FFF7FEFF 		bl	CyEnterCriticalSection
+ 156 000a 0346     		mov	r3, r0
+ 157 000c FB71     		strb	r3, [r7, #7]
+ 149:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 150:.\Generated_Source\PSoC5/MAD_2.c ****     /* Enable the SAR ADC block in Active Power Mode */
+ 151:.\Generated_Source\PSoC5/MAD_2.c ****     MAD_2_PWRMGR_SAR_REG |= MAD_2_ACT_PWR_SAR_EN;
+ 158              		.loc 1 151 0
+ 159 000e 44F2AB33 		movw	r3, #:lower16:1073759147
+ 160 0012 C4F20003 		movt	r3, #:upper16:1073759147
+ 161 0016 44F2AB32 		movw	r2, #:lower16:1073759147
+ 162 001a C4F20002 		movt	r2, #:upper16:1073759147
+ 163 001e 1278     		ldrb	r2, [r2, #0]
+ 164 0020 D2B2     		uxtb	r2, r2
+ 165 0022 42F00102 		orr	r2, r2, #1
+ 166 0026 D2B2     		uxtb	r2, r2
+ 167 0028 1A70     		strb	r2, [r3, #0]
+ 152:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 153:.\Generated_Source\PSoC5/MAD_2.c ****      /* Enable the SAR ADC in Standby Power Mode*/
+ 154:.\Generated_Source\PSoC5/MAD_2.c ****     MAD_2_STBY_PWRMGR_SAR_REG |= MAD_2_STBY_PWR_SAR_EN;
+ 168              		.loc 1 154 0
+ 169 002a 44F2BB33 		movw	r3, #:lower16:1073759163
+ 170 002e C4F20003 		movt	r3, #:upper16:1073759163
+ 171 0032 44F2BB32 		movw	r2, #:lower16:1073759163
+ 172 0036 C4F20002 		movt	r2, #:upper16:1073759163
+ 173 003a 1278     		ldrb	r2, [r2, #0]
+ 174 003c D2B2     		uxtb	r2, r2
+ 175 003e 42F00102 		orr	r2, r2, #1
+ 176 0042 D2B2     		uxtb	r2, r2
+ 177 0044 1A70     		strb	r2, [r3, #0]
+ 155:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 156:.\Generated_Source\PSoC5/MAD_2.c ****     /* This is only valid if there is an internal clock */
+ 157:.\Generated_Source\PSoC5/MAD_2.c ****     #if(MAD_2_DEFAULT_INTERNAL_CLK)
+ 158:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_PWRMGR_CLK_REG |= MAD_2_ACT_PWR_CLK_EN;
+ 178              		.loc 1 158 0
+ 179 0046 44F2A133 		movw	r3, #:lower16:1073759137
+ 180 004a C4F20003 		movt	r3, #:upper16:1073759137
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 7
+
+
+ 181 004e 44F2A132 		movw	r2, #:lower16:1073759137
+ 182 0052 C4F20002 		movt	r2, #:upper16:1073759137
+ 183 0056 1278     		ldrb	r2, [r2, #0]
+ 184 0058 D2B2     		uxtb	r2, r2
+ 185 005a 42F00102 		orr	r2, r2, #1
+ 186 005e D2B2     		uxtb	r2, r2
+ 187 0060 1A70     		strb	r2, [r3, #0]
+ 159:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_STBY_PWRMGR_CLK_REG |= MAD_2_STBY_PWR_CLK_EN;
+ 188              		.loc 1 159 0
+ 189 0062 44F2B133 		movw	r3, #:lower16:1073759153
+ 190 0066 C4F20003 		movt	r3, #:upper16:1073759153
+ 191 006a 44F2B132 		movw	r2, #:lower16:1073759153
+ 192 006e C4F20002 		movt	r2, #:upper16:1073759153
+ 193 0072 1278     		ldrb	r2, [r2, #0]
+ 194 0074 D2B2     		uxtb	r2, r2
+ 195 0076 42F00102 		orr	r2, r2, #1
+ 196 007a D2B2     		uxtb	r2, r2
+ 197 007c 1A70     		strb	r2, [r3, #0]
+ 160:.\Generated_Source\PSoC5/MAD_2.c ****     #endif /* End MAD_2_DEFAULT_INTERNAL_CLK */
+ 161:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 162:.\Generated_Source\PSoC5/MAD_2.c ****     /* Enable VCM buffer and Enable Int Ref Amp */
+ 163:.\Generated_Source\PSoC5/MAD_2.c ****     tmpReg = MAD_2_SAR_CSR3_REG;
+ 198              		.loc 1 163 0
+ 199 007e 45F60313 		movw	r3, #:lower16:1073764611
+ 200 0082 C4F20003 		movt	r3, #:upper16:1073764611
+ 201 0086 1B78     		ldrb	r3, [r3, #0]
+ 202 0088 BB71     		strb	r3, [r7, #6]
+ 164:.\Generated_Source\PSoC5/MAD_2.c ****     #if(CY_PSOC5A) /* Make sure that full power is applied for VREF buffer */
+ 165:.\Generated_Source\PSoC5/MAD_2.c ****         tmpReg &= (uint8)~MAD_2_SAR_PWR_CTRL_VREF_DIV_BY4;
+ 203              		.loc 1 165 0
+ 204 008a BB79     		ldrb	r3, [r7, #6]
+ 205 008c 23F00C03 		bic	r3, r3, #12
+ 206 0090 BB71     		strb	r3, [r7, #6]
+ 166:.\Generated_Source\PSoC5/MAD_2.c ****     #endif /* CY_PSOC5A */
+ 167:.\Generated_Source\PSoC5/MAD_2.c ****     tmpReg |= MAD_2_SAR_EN_BUF_VCM_EN;
+ 207              		.loc 1 167 0
+ 208 0092 BB79     		ldrb	r3, [r7, #6]
+ 209 0094 43F00203 		orr	r3, r3, #2
+ 210 0098 BB71     		strb	r3, [r7, #6]
+ 168:.\Generated_Source\PSoC5/MAD_2.c ****     /* PD_BUF_VREF is OFF in External reference or Vdda reference mode */
+ 169:.\Generated_Source\PSoC5/MAD_2.c ****     #if((MAD_2_DEFAULT_REFERENCE == MAD_2__EXT_REF) || \
+ 170:.\Generated_Source\PSoC5/MAD_2.c ****         (MAD_2_DEFAULT_RANGE == MAD_2__VNEG_VDDA_DIFF))
+ 171:.\Generated_Source\PSoC5/MAD_2.c ****         tmpReg &= (uint8)~MAD_2_SAR_EN_BUF_VREF_EN;
+ 172:.\Generated_Source\PSoC5/MAD_2.c ****     #else /* In INTREF or INTREF Bypassed this buffer is ON */
+ 173:.\Generated_Source\PSoC5/MAD_2.c ****         tmpReg |= MAD_2_SAR_EN_BUF_VREF_EN;
+ 211              		.loc 1 173 0
+ 212 009a BB79     		ldrb	r3, [r7, #6]
+ 213 009c 43F00103 		orr	r3, r3, #1
+ 214 00a0 BB71     		strb	r3, [r7, #6]
+ 174:.\Generated_Source\PSoC5/MAD_2.c ****     #endif /* MAD_2_DEFAULT_REFERENCE == MAD_2__EXT_REF */
+ 175:.\Generated_Source\PSoC5/MAD_2.c ****     MAD_2_SAR_CSR3_REG = tmpReg;
+ 215              		.loc 1 175 0
+ 216 00a2 45F60313 		movw	r3, #:lower16:1073764611
+ 217 00a6 C4F20003 		movt	r3, #:upper16:1073764611
+ 218 00aa BA79     		ldrb	r2, [r7, #6]
+ 219 00ac 1A70     		strb	r2, [r3, #0]
+ 176:.\Generated_Source\PSoC5/MAD_2.c **** 
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 8
+
+
+ 177:.\Generated_Source\PSoC5/MAD_2.c ****     /* Set reference for ADC */
+ 178:.\Generated_Source\PSoC5/MAD_2.c ****     #if(MAD_2_DEFAULT_RANGE == MAD_2__VNEG_VDDA_DIFF)
+ 179:.\Generated_Source\PSoC5/MAD_2.c ****         #if(MAD_2_DEFAULT_REFERENCE == MAD_2__EXT_REF)
+ 180:.\Generated_Source\PSoC5/MAD_2.c ****             MAD_2_SAR_CSR6_REG = MAD_2_INT_BYPASS_EXT_VREF; /* S2 */
+ 181:.\Generated_Source\PSoC5/MAD_2.c ****         #else /* Internal Vdda reference or obsolete bypass mode */
+ 182:.\Generated_Source\PSoC5/MAD_2.c ****             MAD_2_SAR_CSR6_REG = MAD_2_VDDA_VREF;           /* S7 */
+ 183:.\Generated_Source\PSoC5/MAD_2.c ****         #endif /* MAD_2_DEFAULT_REFERENCE == MAD_2__EXT_REF */
+ 184:.\Generated_Source\PSoC5/MAD_2.c ****     #else  /* Reference goes through internal buffer */
+ 185:.\Generated_Source\PSoC5/MAD_2.c ****         #if(MAD_2_DEFAULT_REFERENCE == MAD_2__INT_REF_NOT_BYPASSED)
+ 186:.\Generated_Source\PSoC5/MAD_2.c ****             MAD_2_SAR_CSR6_REG = MAD_2_INT_VREF;            /* S3 + S4 */
+ 187:.\Generated_Source\PSoC5/MAD_2.c ****         #else /* INTREF Bypassed of External */
+ 188:.\Generated_Source\PSoC5/MAD_2.c ****             MAD_2_SAR_CSR6_REG = MAD_2_INT_BYPASS_EXT_VREF; /* S2 */
+ 220              		.loc 1 188 0
+ 221 00ae 45F60613 		movw	r3, #:lower16:1073764614
+ 222 00b2 C4F20003 		movt	r3, #:upper16:1073764614
+ 223 00b6 4FF00402 		mov	r2, #4
+ 224 00ba 1A70     		strb	r2, [r3, #0]
+ 189:.\Generated_Source\PSoC5/MAD_2.c ****         #endif /* MAD_2_DEFAULT_REFERENCE == MAD_2__INT_REF_NOT_BYPASSED */
+ 190:.\Generated_Source\PSoC5/MAD_2.c ****     #endif /* VNEG_VDDA_DIFF */
+ 191:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 192:.\Generated_Source\PSoC5/MAD_2.c ****     /* Low non-overlap delay for sampling clock signals (for 1MSPS) */
+ 193:.\Generated_Source\PSoC5/MAD_2.c ****     #if(MAD_2_HIGH_POWER_PULSE == 0u) /* MinPulseWidth <= 50 ns */
+ 194:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_SAR_CSR5_REG &= (uint8)~MAD_2_SAR_DLY_INC;
+ 225              		.loc 1 194 0
+ 226 00bc 45F60513 		movw	r3, #:lower16:1073764613
+ 227 00c0 C4F20003 		movt	r3, #:upper16:1073764613
+ 228 00c4 45F60512 		movw	r2, #:lower16:1073764613
+ 229 00c8 C4F20002 		movt	r2, #:upper16:1073764613
+ 230 00cc 1278     		ldrb	r2, [r2, #0]
+ 231 00ce D2B2     		uxtb	r2, r2
+ 232 00d0 02F0BF02 		and	r2, r2, #191
+ 233 00d4 1A70     		strb	r2, [r3, #0]
+ 195:.\Generated_Source\PSoC5/MAD_2.c ****     #else /* Set High non-overlap delay for sampling clock signals (for <500KSPS)*/
+ 196:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_SAR_CSR5_REG |= MAD_2_SAR_DLY_INC;
+ 197:.\Generated_Source\PSoC5/MAD_2.c ****     #endif /* MAD_2_CLOCK_FREQUENCY > (MAD_2_MAX_FREQUENCY / 2) */
+ 198:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 199:.\Generated_Source\PSoC5/MAD_2.c ****      /* Delay control for comparator latch enable, low delay, (Default for 1MSPS) */
+ 200:.\Generated_Source\PSoC5/MAD_2.c ****     #if(MAD_2_HIGH_POWER_PULSE == 0u) /* MinPulseWidth <= 50 ns */
+ 201:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_SAR_CSR5_REG |= MAD_2_SAR_DCEN;
+ 234              		.loc 1 201 0
+ 235 00d6 45F60513 		movw	r3, #:lower16:1073764613
+ 236 00da C4F20003 		movt	r3, #:upper16:1073764613
+ 237 00de 45F60512 		movw	r2, #:lower16:1073764613
+ 238 00e2 C4F20002 		movt	r2, #:upper16:1073764613
+ 239 00e6 1278     		ldrb	r2, [r2, #0]
+ 240 00e8 D2B2     		uxtb	r2, r2
+ 241 00ea 42F02002 		orr	r2, r2, #32
+ 242 00ee D2B2     		uxtb	r2, r2
+ 243 00f0 1A70     		strb	r2, [r3, #0]
+ 202:.\Generated_Source\PSoC5/MAD_2.c ****     #else /* Delay control for comparator latch enable, high delay (for <500ksps)*/
+ 203:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_SAR_CSR5_REG &= (uint8)~MAD_2_SAR_DCEN;
+ 204:.\Generated_Source\PSoC5/MAD_2.c ****     #endif /* MAD_2_CLOCK_FREQUENCY > (MAD_2_MAX_FREQUENCY / 2) */
+ 205:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 206:.\Generated_Source\PSoC5/MAD_2.c ****     /* Set default power and other configurations for control register 0 in multiple lines */
+ 207:.\Generated_Source\PSoC5/MAD_2.c ****     MAD_2_SAR_CSR0_REG = (uint8)((uint8)MAD_2_DEFAULT_POWER << MAD_2_SAR_POWER_SHIFT)
+ 244              		.loc 1 207 0
+ 245 00f2 45F60013 		movw	r3, #:lower16:1073764608
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 9
+
+
+ 246 00f6 C4F20003 		movt	r3, #:upper16:1073764608
+ 247 00fa 4FF00E02 		mov	r2, #14
+ 248 00fe 1A70     		strb	r2, [r3, #0]
+ 208:.\Generated_Source\PSoC5/MAD_2.c ****     /* SAR_HIZ_CLEAR:   Should not be used for LP */
+ 209:.\Generated_Source\PSoC5/MAD_2.c ****     #if ((CY_PSOC5LP) || (MAD_2_DEFAULT_REFERENCE != MAD_2__EXT_REF))
+ 210:.\Generated_Source\PSoC5/MAD_2.c ****         | MAD_2_SAR_HIZ_CLEAR
+ 211:.\Generated_Source\PSoC5/MAD_2.c ****     #endif /* SAR_HIZ_CLEAR */
+ 212:.\Generated_Source\PSoC5/MAD_2.c ****     /*Set Convertion mode */
+ 213:.\Generated_Source\PSoC5/MAD_2.c ****     #if(MAD_2_DEFAULT_CONV_MODE != MAD_2__FREE_RUNNING)      /* If triggered mode */
+ 214:.\Generated_Source\PSoC5/MAD_2.c ****         | MAD_2_SAR_MX_SOF_UDB           /* source: UDB */
+ 215:.\Generated_Source\PSoC5/MAD_2.c ****         | MAD_2_SAR_SOF_MODE_EDGE        /* Set edge-sensitive sof source */
+ 216:.\Generated_Source\PSoC5/MAD_2.c ****     #endif /* MAD_2_DEFAULT_CONV_MODE */
+ 217:.\Generated_Source\PSoC5/MAD_2.c ****     ; /* end of multiple line initialization */
+ 218:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 219:.\Generated_Source\PSoC5/MAD_2.c ****     /* Enable clock for SAR ADC*/
+ 220:.\Generated_Source\PSoC5/MAD_2.c ****     MAD_2_SAR_CLK_REG |= MAD_2_SAR_MX_CLK_EN;
+ 249              		.loc 1 220 0
+ 250 0100 45F62733 		movw	r3, #:lower16:1073765159
+ 251 0104 C4F20003 		movt	r3, #:upper16:1073765159
+ 252 0108 45F62732 		movw	r2, #:lower16:1073765159
+ 253 010c C4F20002 		movt	r2, #:upper16:1073765159
+ 254 0110 1278     		ldrb	r2, [r2, #0]
+ 255 0112 D2B2     		uxtb	r2, r2
+ 256 0114 42F00802 		orr	r2, r2, #8
+ 257 0118 D2B2     		uxtb	r2, r2
+ 258 011a 1A70     		strb	r2, [r3, #0]
+ 221:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 222:.\Generated_Source\PSoC5/MAD_2.c ****     #if(CY_PSOC5A)
+ 223:.\Generated_Source\PSoC5/MAD_2.c ****         /* Software Reset */
+ 224:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_SAR_CSR0_REG |= MAD_2_SAR_RESET_SOFT_ACTIVE;
+ 259              		.loc 1 224 0
+ 260 011c 45F60013 		movw	r3, #:lower16:1073764608
+ 261 0120 C4F20003 		movt	r3, #:upper16:1073764608
+ 262 0124 45F60012 		movw	r2, #:lower16:1073764608
+ 263 0128 C4F20002 		movt	r2, #:upper16:1073764608
+ 264 012c 1278     		ldrb	r2, [r2, #0]
+ 265 012e D2B2     		uxtb	r2, r2
+ 266 0130 42F02002 		orr	r2, r2, #32
+ 267 0134 D2B2     		uxtb	r2, r2
+ 268 0136 1A70     		strb	r2, [r3, #0]
+ 225:.\Generated_Source\PSoC5/MAD_2.c ****         CyDelayUs(2u); /* 2us delay is required for the lowest 1Mhz clock connected to SAR */
+ 269              		.loc 1 225 0
+ 270 0138 4FF00200 		mov	r0, #2
+ 271 013c FFF7FEFF 		bl	CyDelayUs
+ 226:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_SAR_CSR0_REG &= (uint8)~MAD_2_SAR_RESET_SOFT_ACTIVE;
+ 272              		.loc 1 226 0
+ 273 0140 45F60013 		movw	r3, #:lower16:1073764608
+ 274 0144 C4F20003 		movt	r3, #:upper16:1073764608
+ 275 0148 45F60012 		movw	r2, #:lower16:1073764608
+ 276 014c C4F20002 		movt	r2, #:upper16:1073764608
+ 277 0150 1278     		ldrb	r2, [r2, #0]
+ 278 0152 D2B2     		uxtb	r2, r2
+ 279 0154 02F0DF02 		and	r2, r2, #223
+ 280 0158 1A70     		strb	r2, [r3, #0]
+ 227:.\Generated_Source\PSoC5/MAD_2.c ****     #else
+ 228:.\Generated_Source\PSoC5/MAD_2.c ****         CyDelayUs(10u); /* The block is ready to use 10 us after the enable signal is set high. */
+ 229:.\Generated_Source\PSoC5/MAD_2.c ****     #endif /* End CY_PSOC5A */
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 10
+
+
+ 230:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 231:.\Generated_Source\PSoC5/MAD_2.c ****     #if(MAD_2_IRQ_REMOVE == 0u)
+ 232:.\Generated_Source\PSoC5/MAD_2.c ****         /* Clear a pending interrupt */
+ 233:.\Generated_Source\PSoC5/MAD_2.c ****         CyIntClearPending(MAD_2_INTC_NUMBER);
+ 281              		.loc 1 233 0
+ 282 015a 4EF28023 		movw	r3, #:lower16:-536812928
+ 283 015e CEF20003 		movt	r3, #:upper16:-536812928
+ 284 0162 4FF00202 		mov	r2, #2
+ 285 0166 1A60     		str	r2, [r3, #0]
+ 234:.\Generated_Source\PSoC5/MAD_2.c ****     #endif   /* End MAD_2_IRQ_REMOVE */        
+ 235:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 236:.\Generated_Source\PSoC5/MAD_2.c ****     CyExitCriticalSection(enableInterrupts);
+ 286              		.loc 1 236 0
+ 287 0168 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 288 016a 1846     		mov	r0, r3
+ 289 016c FFF7FEFF 		bl	CyExitCriticalSection
+ 237:.\Generated_Source\PSoC5/MAD_2.c **** }
+ 290              		.loc 1 237 0
+ 291 0170 07F10807 		add	r7, r7, #8
+ 292 0174 BD46     		mov	sp, r7
+ 293 0176 80BD     		pop	{r7, pc}
+ 294              		.cfi_endproc
+ 295              	.LFE2:
+ 296              		.size	MAD_2_Enable, .-MAD_2_Enable
+ 297              		.section	.text.MAD_2_Stop,"ax",%progbits
+ 298              		.align	2
+ 299              		.global	MAD_2_Stop
+ 300              		.thumb
+ 301              		.thumb_func
+ 302              		.type	MAD_2_Stop, %function
+ 303              	MAD_2_Stop:
+ 304              	.LFB3:
+ 238:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 239:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 240:.\Generated_Source\PSoC5/MAD_2.c **** /*******************************************************************************
+ 241:.\Generated_Source\PSoC5/MAD_2.c **** * Function Name: MAD_2_Stop
+ 242:.\Generated_Source\PSoC5/MAD_2.c **** ********************************************************************************
+ 243:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 244:.\Generated_Source\PSoC5/MAD_2.c **** * Summary:
+ 245:.\Generated_Source\PSoC5/MAD_2.c **** *  Stops convertion and reduce the power to the minimum.
+ 246:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 247:.\Generated_Source\PSoC5/MAD_2.c **** * Parameters:
+ 248:.\Generated_Source\PSoC5/MAD_2.c **** *  None.
+ 249:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 250:.\Generated_Source\PSoC5/MAD_2.c **** * Return:
+ 251:.\Generated_Source\PSoC5/MAD_2.c **** *  None.
+ 252:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 253:.\Generated_Source\PSoC5/MAD_2.c **** *******************************************************************************/
+ 254:.\Generated_Source\PSoC5/MAD_2.c **** void MAD_2_Stop(void)
+ 255:.\Generated_Source\PSoC5/MAD_2.c **** {
+ 305              		.loc 1 255 0
+ 306              		.cfi_startproc
+ 307              		@ args = 0, pretend = 0, frame = 8
+ 308              		@ frame_needed = 1, uses_anonymous_args = 0
+ 309 0000 80B5     		push	{r7, lr}
+ 310              	.LCFI7:
+ 311              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 11
+
+
+ 312 0002 82B0     		sub	sp, sp, #8
+ 313              	.LCFI8:
+ 314              		.cfi_def_cfa_offset 16
+ 315 0004 00AF     		add	r7, sp, #0
+ 316              		.cfi_offset 14, -4
+ 317              		.cfi_offset 7, -8
+ 318              	.LCFI9:
+ 319              		.cfi_def_cfa_register 7
+ 256:.\Generated_Source\PSoC5/MAD_2.c ****     uint8 enableInterrupts;
+ 257:.\Generated_Source\PSoC5/MAD_2.c ****     enableInterrupts = CyEnterCriticalSection();
+ 320              		.loc 1 257 0
+ 321 0006 FFF7FEFF 		bl	CyEnterCriticalSection
+ 322 000a 0346     		mov	r3, r0
+ 323 000c FB71     		strb	r3, [r7, #7]
+ 258:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 259:.\Generated_Source\PSoC5/MAD_2.c ****     /* Stop all conversions */
+ 260:.\Generated_Source\PSoC5/MAD_2.c ****     MAD_2_SAR_CSR0_REG &= (uint8)~MAD_2_SAR_SOF_START_CONV;
+ 324              		.loc 1 260 0
+ 325 000e 45F60013 		movw	r3, #:lower16:1073764608
+ 326 0012 C4F20003 		movt	r3, #:upper16:1073764608
+ 327 0016 45F60012 		movw	r2, #:lower16:1073764608
+ 328 001a C4F20002 		movt	r2, #:upper16:1073764608
+ 329 001e 1278     		ldrb	r2, [r2, #0]
+ 330 0020 D2B2     		uxtb	r2, r2
+ 331 0022 02F0FE02 		and	r2, r2, #254
+ 332 0026 1A70     		strb	r2, [r3, #0]
+ 261:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 262:.\Generated_Source\PSoC5/MAD_2.c ****     #if(CY_PSOC5A)
+ 263:.\Generated_Source\PSoC5/MAD_2.c ****         /* Leave the SAR block powered and reduce the power to the minimum */
+ 264:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_SAR_CSR0_REG |= MAD_2_ICONT_LV_3;
+ 333              		.loc 1 264 0
+ 334 0028 45F60013 		movw	r3, #:lower16:1073764608
+ 335 002c C4F20003 		movt	r3, #:upper16:1073764608
+ 336 0030 45F60012 		movw	r2, #:lower16:1073764608
+ 337 0034 C4F20002 		movt	r2, #:upper16:1073764608
+ 338 0038 1278     		ldrb	r2, [r2, #0]
+ 339 003a D2B2     		uxtb	r2, r2
+ 340 003c 6FEA8262 		mvn	r2, r2, lsl #26
+ 341 0040 6FEA9262 		mvn	r2, r2, lsr #26
+ 342 0044 D2B2     		uxtb	r2, r2
+ 343 0046 1A70     		strb	r2, [r3, #0]
+ 265:.\Generated_Source\PSoC5/MAD_2.c ****          /* Disconnect Bypass Cap */
+ 266:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_SAR_CSR6_REG &= (uint8)~MAD_2_INT_BYPASS_EXT_VREF;
+ 344              		.loc 1 266 0
+ 345 0048 45F60613 		movw	r3, #:lower16:1073764614
+ 346 004c C4F20003 		movt	r3, #:upper16:1073764614
+ 347 0050 45F60612 		movw	r2, #:lower16:1073764614
+ 348 0054 C4F20002 		movt	r2, #:upper16:1073764614
+ 349 0058 1278     		ldrb	r2, [r2, #0]
+ 350 005a D2B2     		uxtb	r2, r2
+ 351 005c 02F0FB02 		and	r2, r2, #251
+ 352 0060 1A70     		strb	r2, [r3, #0]
+ 267:.\Generated_Source\PSoC5/MAD_2.c ****         /* Disable reference buffer and reduce the reference power to the minimum */
+ 268:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_SAR_CSR3_REG &= (uint8)~MAD_2_SAR_EN_BUF_VREF_EN; /*VCM buffer is absent in PSOC5A*/
+ 353              		.loc 1 268 0
+ 354 0062 45F60313 		movw	r3, #:lower16:1073764611
+ 355 0066 C4F20003 		movt	r3, #:upper16:1073764611
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 12
+
+
+ 356 006a 45F60312 		movw	r2, #:lower16:1073764611
+ 357 006e C4F20002 		movt	r2, #:upper16:1073764611
+ 358 0072 1278     		ldrb	r2, [r2, #0]
+ 359 0074 D2B2     		uxtb	r2, r2
+ 360 0076 02F0FE02 		and	r2, r2, #254
+ 361 007a 1A70     		strb	r2, [r3, #0]
+ 269:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_SAR_CSR3_REG |= MAD_2_SAR_PWR_CTRL_VREF_DIV_BY4;
+ 362              		.loc 1 269 0
+ 363 007c 45F60313 		movw	r3, #:lower16:1073764611
+ 364 0080 C4F20003 		movt	r3, #:upper16:1073764611
+ 365 0084 45F60312 		movw	r2, #:lower16:1073764611
+ 366 0088 C4F20002 		movt	r2, #:upper16:1073764611
+ 367 008c 1278     		ldrb	r2, [r2, #0]
+ 368 008e D2B2     		uxtb	r2, r2
+ 369 0090 42F00C02 		orr	r2, r2, #12
+ 370 0094 D2B2     		uxtb	r2, r2
+ 371 0096 1A70     		strb	r2, [r3, #0]
+ 270:.\Generated_Source\PSoC5/MAD_2.c ****     #else
+ 271:.\Generated_Source\PSoC5/MAD_2.c ****         /* Disable the SAR ADC block in Active Power Mode */
+ 272:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_PWRMGR_SAR_REG &= (uint8)~MAD_2_ACT_PWR_SAR_EN;
+ 273:.\Generated_Source\PSoC5/MAD_2.c ****         /* Disable the SAR ADC in Standby Power Mode */
+ 274:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_STBY_PWRMGR_SAR_REG &= (uint8)~MAD_2_STBY_PWR_SAR_EN;
+ 275:.\Generated_Source\PSoC5/MAD_2.c ****     #endif /* End CY_PSOC5A */
+ 276:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 277:.\Generated_Source\PSoC5/MAD_2.c ****     /* This is only valid if there is an internal clock */
+ 278:.\Generated_Source\PSoC5/MAD_2.c ****     #if(MAD_2_DEFAULT_INTERNAL_CLK)
+ 279:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_PWRMGR_CLK_REG &= (uint8)~MAD_2_ACT_PWR_CLK_EN;
+ 372              		.loc 1 279 0
+ 373 0098 44F2A133 		movw	r3, #:lower16:1073759137
+ 374 009c C4F20003 		movt	r3, #:upper16:1073759137
+ 375 00a0 44F2A132 		movw	r2, #:lower16:1073759137
+ 376 00a4 C4F20002 		movt	r2, #:upper16:1073759137
+ 377 00a8 1278     		ldrb	r2, [r2, #0]
+ 378 00aa D2B2     		uxtb	r2, r2
+ 379 00ac 02F0FE02 		and	r2, r2, #254
+ 380 00b0 1A70     		strb	r2, [r3, #0]
+ 280:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_STBY_PWRMGR_CLK_REG &= (uint8)~MAD_2_STBY_PWR_CLK_EN;
+ 381              		.loc 1 280 0
+ 382 00b2 44F2B133 		movw	r3, #:lower16:1073759153
+ 383 00b6 C4F20003 		movt	r3, #:upper16:1073759153
+ 384 00ba 44F2B132 		movw	r2, #:lower16:1073759153
+ 385 00be C4F20002 		movt	r2, #:upper16:1073759153
+ 386 00c2 1278     		ldrb	r2, [r2, #0]
+ 387 00c4 D2B2     		uxtb	r2, r2
+ 388 00c6 02F0FE02 		and	r2, r2, #254
+ 389 00ca 1A70     		strb	r2, [r3, #0]
+ 281:.\Generated_Source\PSoC5/MAD_2.c ****     #endif /* End MAD_2_DEFAULT_INTERNAL_CLK */
+ 282:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 283:.\Generated_Source\PSoC5/MAD_2.c ****     CyExitCriticalSection(enableInterrupts);
+ 390              		.loc 1 283 0
+ 391 00cc FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 392 00ce 1846     		mov	r0, r3
+ 393 00d0 FFF7FEFF 		bl	CyExitCriticalSection
+ 284:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 285:.\Generated_Source\PSoC5/MAD_2.c **** }
+ 394              		.loc 1 285 0
+ 395 00d4 07F10807 		add	r7, r7, #8
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 13
+
+
+ 396 00d8 BD46     		mov	sp, r7
+ 397 00da 80BD     		pop	{r7, pc}
+ 398              		.cfi_endproc
+ 399              	.LFE3:
+ 400              		.size	MAD_2_Stop, .-MAD_2_Stop
+ 401              		.section	.text.MAD_2_SetPower,"ax",%progbits
+ 402              		.align	2
+ 403              		.global	MAD_2_SetPower
+ 404              		.thumb
+ 405              		.thumb_func
+ 406              		.type	MAD_2_SetPower, %function
+ 407              	MAD_2_SetPower:
+ 408              	.LFB4:
+ 286:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 287:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 288:.\Generated_Source\PSoC5/MAD_2.c **** /*******************************************************************************
+ 289:.\Generated_Source\PSoC5/MAD_2.c **** * Function Name: MAD_2_SetPower
+ 290:.\Generated_Source\PSoC5/MAD_2.c **** ********************************************************************************
+ 291:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 292:.\Generated_Source\PSoC5/MAD_2.c **** * Summary:
+ 293:.\Generated_Source\PSoC5/MAD_2.c **** *  Sets the Power mode.
+ 294:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 295:.\Generated_Source\PSoC5/MAD_2.c **** * Parameters:
+ 296:.\Generated_Source\PSoC5/MAD_2.c **** *  power:  Power setting for ADC
+ 297:.\Generated_Source\PSoC5/MAD_2.c **** *  0 ->    Normal
+ 298:.\Generated_Source\PSoC5/MAD_2.c **** *  1 ->    Half power
+ 299:.\Generated_Source\PSoC5/MAD_2.c **** *  2 ->    1/3rd power
+ 300:.\Generated_Source\PSoC5/MAD_2.c **** *  3 ->    Quarter power.
+ 301:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 302:.\Generated_Source\PSoC5/MAD_2.c **** * Return:
+ 303:.\Generated_Source\PSoC5/MAD_2.c **** *  None.
+ 304:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 305:.\Generated_Source\PSoC5/MAD_2.c **** *******************************************************************************/
+ 306:.\Generated_Source\PSoC5/MAD_2.c **** void MAD_2_SetPower(uint8 power)
+ 307:.\Generated_Source\PSoC5/MAD_2.c **** {
+ 409              		.loc 1 307 0
+ 410              		.cfi_startproc
+ 411              		@ args = 0, pretend = 0, frame = 16
+ 412              		@ frame_needed = 1, uses_anonymous_args = 0
+ 413              		@ link register save eliminated.
+ 414 0000 80B4     		push	{r7}
+ 415              	.LCFI10:
+ 416              		.cfi_def_cfa_offset 4
+ 417 0002 85B0     		sub	sp, sp, #20
+ 418              	.LCFI11:
+ 419              		.cfi_def_cfa_offset 24
+ 420 0004 00AF     		add	r7, sp, #0
+ 421              		.cfi_offset 7, -4
+ 422              	.LCFI12:
+ 423              		.cfi_def_cfa_register 7
+ 424 0006 0346     		mov	r3, r0
+ 425 0008 FB71     		strb	r3, [r7, #7]
+ 308:.\Generated_Source\PSoC5/MAD_2.c ****     uint8 tmpReg;
+ 309:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 310:.\Generated_Source\PSoC5/MAD_2.c ****     /* mask off invalid power settings */
+ 311:.\Generated_Source\PSoC5/MAD_2.c ****     power &= MAD_2_SAR_API_POWER_MASK;
+ 426              		.loc 1 311 0
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 14
+
+
+ 427 000a FB79     		ldrb	r3, [r7, #7]
+ 428 000c 03F00303 		and	r3, r3, #3
+ 429 0010 FB71     		strb	r3, [r7, #7]
+ 312:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 313:.\Generated_Source\PSoC5/MAD_2.c ****     /* Set Power parameter  */
+ 314:.\Generated_Source\PSoC5/MAD_2.c ****     tmpReg = MAD_2_SAR_CSR0_REG & (uint8)~MAD_2_SAR_POWER_MASK;
+ 430              		.loc 1 314 0
+ 431 0012 45F60013 		movw	r3, #:lower16:1073764608
+ 432 0016 C4F20003 		movt	r3, #:upper16:1073764608
+ 433 001a 1B78     		ldrb	r3, [r3, #0]
+ 434 001c DBB2     		uxtb	r3, r3
+ 435 001e 03F03F03 		and	r3, r3, #63
+ 436 0022 FB73     		strb	r3, [r7, #15]
+ 315:.\Generated_Source\PSoC5/MAD_2.c ****     tmpReg |= (uint8)(power << MAD_2_SAR_POWER_SHIFT);
+ 437              		.loc 1 315 0
+ 438 0024 FB79     		ldrb	r3, [r7, #7]
+ 439 0026 4FEA8313 		lsl	r3, r3, #6
+ 440 002a DAB2     		uxtb	r2, r3
+ 441 002c FB7B     		ldrb	r3, [r7, #15]
+ 442 002e 42EA0303 		orr	r3, r2, r3
+ 443 0032 FB73     		strb	r3, [r7, #15]
+ 316:.\Generated_Source\PSoC5/MAD_2.c ****     MAD_2_SAR_CSR0_REG = tmpReg;
+ 444              		.loc 1 316 0
+ 445 0034 45F60013 		movw	r3, #:lower16:1073764608
+ 446 0038 C4F20003 		movt	r3, #:upper16:1073764608
+ 447 003c FA7B     		ldrb	r2, [r7, #15]
+ 448 003e 1A70     		strb	r2, [r3, #0]
+ 317:.\Generated_Source\PSoC5/MAD_2.c **** }
+ 449              		.loc 1 317 0
+ 450 0040 07F11407 		add	r7, r7, #20
+ 451 0044 BD46     		mov	sp, r7
+ 452 0046 80BC     		pop	{r7}
+ 453 0048 7047     		bx	lr
+ 454              		.cfi_endproc
+ 455              	.LFE4:
+ 456              		.size	MAD_2_SetPower, .-MAD_2_SetPower
+ 457 004a 00BF     		.section	.text.MAD_2_SetResolution,"ax",%progbits
+ 458              		.align	2
+ 459              		.global	MAD_2_SetResolution
+ 460              		.thumb
+ 461              		.thumb_func
+ 462              		.type	MAD_2_SetResolution, %function
+ 463              	MAD_2_SetResolution:
+ 464              	.LFB5:
+ 318:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 319:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 320:.\Generated_Source\PSoC5/MAD_2.c **** /*******************************************************************************
+ 321:.\Generated_Source\PSoC5/MAD_2.c **** * Function Name: MAD_2_SetResolution
+ 322:.\Generated_Source\PSoC5/MAD_2.c **** ********************************************************************************
+ 323:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 324:.\Generated_Source\PSoC5/MAD_2.c **** * Summary:
+ 325:.\Generated_Source\PSoC5/MAD_2.c **** *  Sets the Relution of the SAR.
+ 326:.\Generated_Source\PSoC5/MAD_2.c **** *  This function does not affect the actual conversion with PSoC5 ES1 silicon.
+ 327:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 328:.\Generated_Source\PSoC5/MAD_2.c **** * Parameters:
+ 329:.\Generated_Source\PSoC5/MAD_2.c **** *  resolution:
+ 330:.\Generated_Source\PSoC5/MAD_2.c **** *  12 ->    RES12
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 15
+
+
+ 331:.\Generated_Source\PSoC5/MAD_2.c **** *  10 ->    RES10
+ 332:.\Generated_Source\PSoC5/MAD_2.c **** *  8  ->    RES8
+ 333:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 334:.\Generated_Source\PSoC5/MAD_2.c **** * Return:
+ 335:.\Generated_Source\PSoC5/MAD_2.c **** *  None.
+ 336:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 337:.\Generated_Source\PSoC5/MAD_2.c **** * Side Effects:
+ 338:.\Generated_Source\PSoC5/MAD_2.c **** *  The ADC resolution cannot be changed during a conversion cycle. The
+ 339:.\Generated_Source\PSoC5/MAD_2.c **** *  recommended best practice is to stop conversions with
+ 340:.\Generated_Source\PSoC5/MAD_2.c **** *  ADC_StopConvert(), change the resolution, then restart the
+ 341:.\Generated_Source\PSoC5/MAD_2.c **** *  conversions with ADC_StartConvert().
+ 342:.\Generated_Source\PSoC5/MAD_2.c **** *  If you decide not to stop conversions before calling this API, you
+ 343:.\Generated_Source\PSoC5/MAD_2.c **** *  should use ADC_IsEndConversion() to wait until conversion is complete
+ 344:.\Generated_Source\PSoC5/MAD_2.c **** *  before changing the resolution.
+ 345:.\Generated_Source\PSoC5/MAD_2.c **** *  If you call ADC_SetResolution() during a conversion, the resolution will
+ 346:.\Generated_Source\PSoC5/MAD_2.c **** *  not be changed until the current conversion is complete. Data will not be
+ 347:.\Generated_Source\PSoC5/MAD_2.c **** *  available in the new resolution for another 6 + "New Resolution(in bits)"
+ 348:.\Generated_Source\PSoC5/MAD_2.c **** *  clock cycles.
+ 349:.\Generated_Source\PSoC5/MAD_2.c **** *  You may need add a delay of this number of clock cycles after
+ 350:.\Generated_Source\PSoC5/MAD_2.c **** *  ADC_SetResolution() is called before data is valid again.
+ 351:.\Generated_Source\PSoC5/MAD_2.c **** *  Affects ADC_CountsTo_Volts(), ADC_CountsTo_mVolts(), and
+ 352:.\Generated_Source\PSoC5/MAD_2.c **** *  ADC_CountsTo_uVolts() by calculating the correct conversion between ADC
+ 353:.\Generated_Source\PSoC5/MAD_2.c **** *  counts and the applied input voltage. Calculation depends on resolution,
+ 354:.\Generated_Source\PSoC5/MAD_2.c **** *  input range, and voltage reference.
+ 355:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 356:.\Generated_Source\PSoC5/MAD_2.c **** *******************************************************************************/
+ 357:.\Generated_Source\PSoC5/MAD_2.c **** void MAD_2_SetResolution(uint8 resolution)
+ 358:.\Generated_Source\PSoC5/MAD_2.c **** {
+ 465              		.loc 1 358 0
+ 466              		.cfi_startproc
+ 467              		@ args = 0, pretend = 0, frame = 16
+ 468              		@ frame_needed = 1, uses_anonymous_args = 0
+ 469 0000 80B5     		push	{r7, lr}
+ 470              	.LCFI13:
+ 471              		.cfi_def_cfa_offset 8
+ 472 0002 84B0     		sub	sp, sp, #16
+ 473              	.LCFI14:
+ 474              		.cfi_def_cfa_offset 24
+ 475 0004 00AF     		add	r7, sp, #0
+ 476              		.cfi_offset 14, -4
+ 477              		.cfi_offset 7, -8
+ 478              	.LCFI15:
+ 479              		.cfi_def_cfa_register 7
+ 480 0006 0346     		mov	r3, r0
+ 481 0008 FB71     		strb	r3, [r7, #7]
+ 359:.\Generated_Source\PSoC5/MAD_2.c ****     uint8 tmpReg;
+ 360:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 361:.\Generated_Source\PSoC5/MAD_2.c ****     /* remember resolution for the GetResult APIs */
+ 362:.\Generated_Source\PSoC5/MAD_2.c ****     #if(CY_PSOC5A)
+ 363:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_resolution = resolution;
+ 482              		.loc 1 363 0
+ 483 000a 40F20003 		movw	r3, #:lower16:MAD_2_resolution
+ 484 000e C0F20003 		movt	r3, #:upper16:MAD_2_resolution
+ 485 0012 FA79     		ldrb	r2, [r7, #7]
+ 486 0014 1A70     		strb	r2, [r3, #0]
+ 364:.\Generated_Source\PSoC5/MAD_2.c ****     #endif /* End CY_PSOC5A */
+ 365:.\Generated_Source\PSoC5/MAD_2.c **** 
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 16
+
+
+ 366:.\Generated_Source\PSoC5/MAD_2.c ****     /* Set SAR ADC resolution and sample width: 18 conversion cycles at 12bits + 1 gap */
+ 367:.\Generated_Source\PSoC5/MAD_2.c ****     switch (resolution)
+ 487              		.loc 1 367 0
+ 488 0016 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 489 0018 0A2B     		cmp	r3, #10
+ 490 001a 08D0     		beq	.L15
+ 491 001c 0C2B     		cmp	r3, #12
+ 492 001e 02D0     		beq	.L16
+ 493 0020 082B     		cmp	r3, #8
+ 494 0022 08D0     		beq	.L14
+ 495 0024 0BE0     		b	.L19
+ 496              	.L16:
+ 368:.\Generated_Source\PSoC5/MAD_2.c ****     {
+ 369:.\Generated_Source\PSoC5/MAD_2.c ****         case (uint8)MAD_2__BITS_12:
+ 370:.\Generated_Source\PSoC5/MAD_2.c ****             tmpReg = MAD_2_SAR_RESOLUTION_12BIT | MAD_2_SAR_SAMPLE_WIDTH;
+ 497              		.loc 1 370 0
+ 498 0026 6FF03A03 		mvn	r3, #58
+ 499 002a FB73     		strb	r3, [r7, #15]
+ 371:.\Generated_Source\PSoC5/MAD_2.c ****             break;
+ 500              		.loc 1 371 0
+ 501 002c 0EE0     		b	.L17
+ 502              	.L15:
+ 372:.\Generated_Source\PSoC5/MAD_2.c ****         case (uint8)MAD_2__BITS_10:
+ 373:.\Generated_Source\PSoC5/MAD_2.c ****             /* Use 12bits for PSoC5 production silicon and shift the
+ 374:.\Generated_Source\PSoC5/MAD_2.c ****             *  results for lower resolution in GetResult16() API
+ 375:.\Generated_Source\PSoC5/MAD_2.c ****             */
+ 376:.\Generated_Source\PSoC5/MAD_2.c ****             #if(CY_PSOC5A)
+ 377:.\Generated_Source\PSoC5/MAD_2.c ****                 tmpReg = MAD_2_SAR_RESOLUTION_12BIT | MAD_2_SAR_SAMPLE_WIDTH;
+ 503              		.loc 1 377 0
+ 504 002e 6FF03A03 		mvn	r3, #58
+ 505 0032 FB73     		strb	r3, [r7, #15]
+ 378:.\Generated_Source\PSoC5/MAD_2.c ****             #else
+ 379:.\Generated_Source\PSoC5/MAD_2.c ****                 tmpReg = MAD_2_SAR_RESOLUTION_10BIT | MAD_2_SAR_SAMPLE_WIDTH;
+ 380:.\Generated_Source\PSoC5/MAD_2.c ****             #endif /* End CY_PSOC5A */
+ 381:.\Generated_Source\PSoC5/MAD_2.c ****             break;
+ 506              		.loc 1 381 0
+ 507 0034 0AE0     		b	.L17
+ 508              	.L14:
+ 382:.\Generated_Source\PSoC5/MAD_2.c ****         case (uint8)MAD_2__BITS_8:
+ 383:.\Generated_Source\PSoC5/MAD_2.c ****             #if(CY_PSOC5A)
+ 384:.\Generated_Source\PSoC5/MAD_2.c ****                 tmpReg = MAD_2_SAR_RESOLUTION_12BIT | MAD_2_SAR_SAMPLE_WIDTH;
+ 509              		.loc 1 384 0
+ 510 0036 6FF03A03 		mvn	r3, #58
+ 511 003a FB73     		strb	r3, [r7, #15]
+ 385:.\Generated_Source\PSoC5/MAD_2.c ****             #else
+ 386:.\Generated_Source\PSoC5/MAD_2.c ****                 tmpReg = MAD_2_SAR_RESOLUTION_8BIT | MAD_2_SAR_SAMPLE_WIDTH;
+ 387:.\Generated_Source\PSoC5/MAD_2.c ****             #endif /* End CY_PSOC5A */
+ 388:.\Generated_Source\PSoC5/MAD_2.c ****             break;
+ 512              		.loc 1 388 0
+ 513 003c 06E0     		b	.L17
+ 514              	.L19:
+ 389:.\Generated_Source\PSoC5/MAD_2.c ****         default:
+ 390:.\Generated_Source\PSoC5/MAD_2.c ****             tmpReg = MAD_2_SAR_RESOLUTION_12BIT | MAD_2_SAR_SAMPLE_WIDTH;
+ 515              		.loc 1 390 0
+ 516 003e 6FF03A03 		mvn	r3, #58
+ 517 0042 FB73     		strb	r3, [r7, #15]
+ 391:.\Generated_Source\PSoC5/MAD_2.c ****             /* Halt CPU in debug mode if resolution is out of valid range */
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 17
+
+
+ 392:.\Generated_Source\PSoC5/MAD_2.c ****             CYASSERT(0u != 0u);
+ 518              		.loc 1 392 0
+ 519 0044 4FF00000 		mov	r0, #0
+ 520 0048 FFF7FEFF 		bl	CyHalt
+ 521              	.L17:
+ 393:.\Generated_Source\PSoC5/MAD_2.c ****             break;
+ 394:.\Generated_Source\PSoC5/MAD_2.c ****     }
+ 395:.\Generated_Source\PSoC5/MAD_2.c ****     MAD_2_SAR_CSR2_REG = tmpReg;
+ 522              		.loc 1 395 0
+ 523 004c 45F60213 		movw	r3, #:lower16:1073764610
+ 524 0050 C4F20003 		movt	r3, #:upper16:1073764610
+ 525 0054 FA7B     		ldrb	r2, [r7, #15]
+ 526 0056 1A70     		strb	r2, [r3, #0]
+ 396:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 397:.\Generated_Source\PSoC5/MAD_2.c ****      /* Calculate gain for convert counts to volts */
+ 398:.\Generated_Source\PSoC5/MAD_2.c ****     MAD_2_CalcGain(resolution);
+ 527              		.loc 1 398 0
+ 528 0058 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 529 005a 1846     		mov	r0, r3
+ 530 005c FFF7FEFF 		bl	MAD_2_CalcGain
+ 399:.\Generated_Source\PSoC5/MAD_2.c **** }
+ 531              		.loc 1 399 0
+ 532 0060 07F11007 		add	r7, r7, #16
+ 533 0064 BD46     		mov	sp, r7
+ 534 0066 80BD     		pop	{r7, pc}
+ 535              		.cfi_endproc
+ 536              	.LFE5:
+ 537              		.size	MAD_2_SetResolution, .-MAD_2_SetResolution
+ 538              		.section	.text.MAD_2_StartConvert,"ax",%progbits
+ 539              		.align	2
+ 540              		.global	MAD_2_StartConvert
+ 541              		.thumb
+ 542              		.thumb_func
+ 543              		.type	MAD_2_StartConvert, %function
+ 544              	MAD_2_StartConvert:
+ 545              	.LFB6:
+ 400:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 401:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 402:.\Generated_Source\PSoC5/MAD_2.c **** #if(MAD_2_DEFAULT_CONV_MODE != MAD_2__HARDWARE_TRIGGER)
+ 403:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 404:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 405:.\Generated_Source\PSoC5/MAD_2.c ****     /*******************************************************************************
+ 406:.\Generated_Source\PSoC5/MAD_2.c ****     * Function Name: MAD_2_StartConvert
+ 407:.\Generated_Source\PSoC5/MAD_2.c ****     ********************************************************************************
+ 408:.\Generated_Source\PSoC5/MAD_2.c ****     *
+ 409:.\Generated_Source\PSoC5/MAD_2.c ****     * Summary:
+ 410:.\Generated_Source\PSoC5/MAD_2.c ****     *  Starts ADC conversion using the given mode. The API is available in the 
+ 411:.\Generated_Source\PSoC5/MAD_2.c ****     *  free running and the software trigger mode.
+ 412:.\Generated_Source\PSoC5/MAD_2.c ****     *
+ 413:.\Generated_Source\PSoC5/MAD_2.c ****     * Parameters:
+ 414:.\Generated_Source\PSoC5/MAD_2.c ****     *  None.
+ 415:.\Generated_Source\PSoC5/MAD_2.c ****     *
+ 416:.\Generated_Source\PSoC5/MAD_2.c ****     * Return:
+ 417:.\Generated_Source\PSoC5/MAD_2.c ****     *  None.
+ 418:.\Generated_Source\PSoC5/MAD_2.c ****     *
+ 419:.\Generated_Source\PSoC5/MAD_2.c ****     * Theory:
+ 420:.\Generated_Source\PSoC5/MAD_2.c ****     *  Forces the ADC to initiate a conversion. In Free Running mode, the ADC will
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 18
+
+
+ 421:.\Generated_Source\PSoC5/MAD_2.c ****     *  run continuously. In a software trigger mode the function also acts as a 
+ 422:.\Generated_Source\PSoC5/MAD_2.c ****     *  software version of the SOC. Here every conversion has to be triggered by 
+ 423:.\Generated_Source\PSoC5/MAD_2.c ****     *  the routine. This writes into the SOC bit in SAR_CTRL reg.
+ 424:.\Generated_Source\PSoC5/MAD_2.c ****     *
+ 425:.\Generated_Source\PSoC5/MAD_2.c ****     * Side Effects:
+ 426:.\Generated_Source\PSoC5/MAD_2.c ****     *  In a software trigger mode the function switches source for SOF from the 
+ 427:.\Generated_Source\PSoC5/MAD_2.c ****     *  external pin to the internal SOF generation. Application should not call 
+ 428:.\Generated_Source\PSoC5/MAD_2.c ****     *  StartConvert if external source used for SOF.
+ 429:.\Generated_Source\PSoC5/MAD_2.c ****     *******************************************************************************/
+ 430:.\Generated_Source\PSoC5/MAD_2.c ****     void MAD_2_StartConvert(void)
+ 431:.\Generated_Source\PSoC5/MAD_2.c ****     {
+ 546              		.loc 1 431 0
+ 547              		.cfi_startproc
+ 548              		@ args = 0, pretend = 0, frame = 0
+ 549              		@ frame_needed = 1, uses_anonymous_args = 0
+ 550              		@ link register save eliminated.
+ 551 0000 80B4     		push	{r7}
+ 552              	.LCFI16:
+ 553              		.cfi_def_cfa_offset 4
+ 554 0002 00AF     		add	r7, sp, #0
+ 555              		.cfi_offset 7, -4
+ 556              	.LCFI17:
+ 557              		.cfi_def_cfa_register 7
+ 432:.\Generated_Source\PSoC5/MAD_2.c ****         #if(MAD_2_DEFAULT_CONV_MODE != MAD_2__FREE_RUNNING)  /* If software triggered mode */
+ 433:.\Generated_Source\PSoC5/MAD_2.c ****             MAD_2_SAR_CSR0_REG &= (uint8)~MAD_2_SAR_MX_SOF_UDB;   /* source: SOF bit */
+ 558              		.loc 1 433 0
+ 559 0004 45F60013 		movw	r3, #:lower16:1073764608
+ 560 0008 C4F20003 		movt	r3, #:upper16:1073764608
+ 561 000c 45F60012 		movw	r2, #:lower16:1073764608
+ 562 0010 C4F20002 		movt	r2, #:upper16:1073764608
+ 563 0014 1278     		ldrb	r2, [r2, #0]
+ 564 0016 D2B2     		uxtb	r2, r2
+ 565 0018 02F0FB02 		and	r2, r2, #251
+ 566 001c 1A70     		strb	r2, [r3, #0]
+ 434:.\Generated_Source\PSoC5/MAD_2.c ****         #endif /* End MAD_2_DEFAULT_CONV_MODE */
+ 435:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 436:.\Generated_Source\PSoC5/MAD_2.c ****         /* Start the conversion */
+ 437:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_SAR_CSR0_REG |= MAD_2_SAR_SOF_START_CONV;
+ 567              		.loc 1 437 0
+ 568 001e 45F60013 		movw	r3, #:lower16:1073764608
+ 569 0022 C4F20003 		movt	r3, #:upper16:1073764608
+ 570 0026 45F60012 		movw	r2, #:lower16:1073764608
+ 571 002a C4F20002 		movt	r2, #:upper16:1073764608
+ 572 002e 1278     		ldrb	r2, [r2, #0]
+ 573 0030 D2B2     		uxtb	r2, r2
+ 574 0032 42F00102 		orr	r2, r2, #1
+ 575 0036 D2B2     		uxtb	r2, r2
+ 576 0038 1A70     		strb	r2, [r3, #0]
+ 438:.\Generated_Source\PSoC5/MAD_2.c ****     }
+ 577              		.loc 1 438 0
+ 578 003a BD46     		mov	sp, r7
+ 579 003c 80BC     		pop	{r7}
+ 580 003e 7047     		bx	lr
+ 581              		.cfi_endproc
+ 582              	.LFE6:
+ 583              		.size	MAD_2_StartConvert, .-MAD_2_StartConvert
+ 584              		.section	.text.MAD_2_StopConvert,"ax",%progbits
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 19
+
+
+ 585              		.align	2
+ 586              		.global	MAD_2_StopConvert
+ 587              		.thumb
+ 588              		.thumb_func
+ 589              		.type	MAD_2_StopConvert, %function
+ 590              	MAD_2_StopConvert:
+ 591              	.LFB7:
+ 439:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 440:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 441:.\Generated_Source\PSoC5/MAD_2.c ****     /*******************************************************************************
+ 442:.\Generated_Source\PSoC5/MAD_2.c ****     * Function Name: MAD_2_StopConvert
+ 443:.\Generated_Source\PSoC5/MAD_2.c ****     ********************************************************************************
+ 444:.\Generated_Source\PSoC5/MAD_2.c ****     *
+ 445:.\Generated_Source\PSoC5/MAD_2.c ****     * Summary:
+ 446:.\Generated_Source\PSoC5/MAD_2.c ****     *  Stops ADC conversion using the given mode. The API is available in the 
+ 447:.\Generated_Source\PSoC5/MAD_2.c ****     *  free running and the software trigger mode.
+ 448:.\Generated_Source\PSoC5/MAD_2.c ****     *
+ 449:.\Generated_Source\PSoC5/MAD_2.c ****     * Parameters:
+ 450:.\Generated_Source\PSoC5/MAD_2.c ****     *  None.
+ 451:.\Generated_Source\PSoC5/MAD_2.c ****     *
+ 452:.\Generated_Source\PSoC5/MAD_2.c ****     * Return:
+ 453:.\Generated_Source\PSoC5/MAD_2.c ****     *  None.
+ 454:.\Generated_Source\PSoC5/MAD_2.c ****     *
+ 455:.\Generated_Source\PSoC5/MAD_2.c ****     * Theory:
+ 456:.\Generated_Source\PSoC5/MAD_2.c ****     *  Stops ADC conversion in Free Running mode.
+ 457:.\Generated_Source\PSoC5/MAD_2.c ****     *  This writes into the SOC bit in SAR_CTRL reg.
+ 458:.\Generated_Source\PSoC5/MAD_2.c ****     *
+ 459:.\Generated_Source\PSoC5/MAD_2.c ****     * Side Effects:
+ 460:.\Generated_Source\PSoC5/MAD_2.c ****     *  In a software trigger mode the function set a software version of the SOC 
+ 461:.\Generated_Source\PSoC5/MAD_2.c ****     *  to low level and switch SOF source to hardware SOF input.
+ 462:.\Generated_Source\PSoC5/MAD_2.c ****     *
+ 463:.\Generated_Source\PSoC5/MAD_2.c ****     *******************************************************************************/
+ 464:.\Generated_Source\PSoC5/MAD_2.c ****     void MAD_2_StopConvert(void)
+ 465:.\Generated_Source\PSoC5/MAD_2.c ****     {
+ 592              		.loc 1 465 0
+ 593              		.cfi_startproc
+ 594              		@ args = 0, pretend = 0, frame = 0
+ 595              		@ frame_needed = 1, uses_anonymous_args = 0
+ 596              		@ link register save eliminated.
+ 597 0000 80B4     		push	{r7}
+ 598              	.LCFI18:
+ 599              		.cfi_def_cfa_offset 4
+ 600 0002 00AF     		add	r7, sp, #0
+ 601              		.cfi_offset 7, -4
+ 602              	.LCFI19:
+ 603              		.cfi_def_cfa_register 7
+ 466:.\Generated_Source\PSoC5/MAD_2.c ****         /* Stop all conversions */
+ 467:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_SAR_CSR0_REG &= (uint8)~MAD_2_SAR_SOF_START_CONV;
+ 604              		.loc 1 467 0
+ 605 0004 45F60013 		movw	r3, #:lower16:1073764608
+ 606 0008 C4F20003 		movt	r3, #:upper16:1073764608
+ 607 000c 45F60012 		movw	r2, #:lower16:1073764608
+ 608 0010 C4F20002 		movt	r2, #:upper16:1073764608
+ 609 0014 1278     		ldrb	r2, [r2, #0]
+ 610 0016 D2B2     		uxtb	r2, r2
+ 611 0018 02F0FE02 		and	r2, r2, #254
+ 612 001c 1A70     		strb	r2, [r3, #0]
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 20
+
+
+ 468:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 469:.\Generated_Source\PSoC5/MAD_2.c ****         #if(MAD_2_DEFAULT_CONV_MODE != MAD_2__FREE_RUNNING)  /* If software triggered mode */
+ 470:.\Generated_Source\PSoC5/MAD_2.c ****             /* Return source to UDB for hardware SOF signal */
+ 471:.\Generated_Source\PSoC5/MAD_2.c ****             MAD_2_SAR_CSR0_REG |= MAD_2_SAR_MX_SOF_UDB;    /* source: UDB */
+ 613              		.loc 1 471 0
+ 614 001e 45F60013 		movw	r3, #:lower16:1073764608
+ 615 0022 C4F20003 		movt	r3, #:upper16:1073764608
+ 616 0026 45F60012 		movw	r2, #:lower16:1073764608
+ 617 002a C4F20002 		movt	r2, #:upper16:1073764608
+ 618 002e 1278     		ldrb	r2, [r2, #0]
+ 619 0030 D2B2     		uxtb	r2, r2
+ 620 0032 42F00402 		orr	r2, r2, #4
+ 621 0036 D2B2     		uxtb	r2, r2
+ 622 0038 1A70     		strb	r2, [r3, #0]
+ 472:.\Generated_Source\PSoC5/MAD_2.c ****         #endif /* End MAD_2_DEFAULT_CONV_MODE */
+ 473:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 474:.\Generated_Source\PSoC5/MAD_2.c ****     }
+ 623              		.loc 1 474 0
+ 624 003a BD46     		mov	sp, r7
+ 625 003c 80BC     		pop	{r7}
+ 626 003e 7047     		bx	lr
+ 627              		.cfi_endproc
+ 628              	.LFE7:
+ 629              		.size	MAD_2_StopConvert, .-MAD_2_StopConvert
+ 630              		.section	.text.MAD_2_IsEndConversion,"ax",%progbits
+ 631              		.align	2
+ 632              		.global	MAD_2_IsEndConversion
+ 633              		.thumb
+ 634              		.thumb_func
+ 635              		.type	MAD_2_IsEndConversion, %function
+ 636              	MAD_2_IsEndConversion:
+ 637              	.LFB8:
+ 475:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 476:.\Generated_Source\PSoC5/MAD_2.c **** #endif /* End MAD_2_DEFAULT_CONV_MODE != MAD_2__HARDWARE_TRIGGER */
+ 477:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 478:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 479:.\Generated_Source\PSoC5/MAD_2.c **** /*******************************************************************************
+ 480:.\Generated_Source\PSoC5/MAD_2.c **** * Function Name: MAD_2_IsEndConversion
+ 481:.\Generated_Source\PSoC5/MAD_2.c **** ********************************************************************************
+ 482:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 483:.\Generated_Source\PSoC5/MAD_2.c **** * Summary:
+ 484:.\Generated_Source\PSoC5/MAD_2.c **** *  Queries the ADC to see if conversion is complete
+ 485:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 486:.\Generated_Source\PSoC5/MAD_2.c **** * Parameters:
+ 487:.\Generated_Source\PSoC5/MAD_2.c **** *  retMode:  Wait mode,
+ 488:.\Generated_Source\PSoC5/MAD_2.c **** *   0 if return with answer imediately.
+ 489:.\Generated_Source\PSoC5/MAD_2.c **** *   1 if wait until conversion is complete, then return.
+ 490:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 491:.\Generated_Source\PSoC5/MAD_2.c **** * Return:
+ 492:.\Generated_Source\PSoC5/MAD_2.c **** *  (uint8)  0 =>  Conversion not complete.
+ 493:.\Generated_Source\PSoC5/MAD_2.c **** *           1 =>  Conversion complete.
+ 494:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 495:.\Generated_Source\PSoC5/MAD_2.c **** *******************************************************************************/
+ 496:.\Generated_Source\PSoC5/MAD_2.c **** uint8 MAD_2_IsEndConversion(uint8 retMode)
+ 497:.\Generated_Source\PSoC5/MAD_2.c **** {
+ 638              		.loc 1 497 0
+ 639              		.cfi_startproc
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 21
+
+
+ 640              		@ args = 0, pretend = 0, frame = 16
+ 641              		@ frame_needed = 1, uses_anonymous_args = 0
+ 642 0000 80B5     		push	{r7, lr}
+ 643              	.LCFI20:
+ 644              		.cfi_def_cfa_offset 8
+ 645 0002 84B0     		sub	sp, sp, #16
+ 646              	.LCFI21:
+ 647              		.cfi_def_cfa_offset 24
+ 648 0004 00AF     		add	r7, sp, #0
+ 649              		.cfi_offset 14, -4
+ 650              		.cfi_offset 7, -8
+ 651              	.LCFI22:
+ 652              		.cfi_def_cfa_register 7
+ 653 0006 0346     		mov	r3, r0
+ 654 0008 FB71     		strb	r3, [r7, #7]
+ 655              	.L26:
+ 498:.\Generated_Source\PSoC5/MAD_2.c ****     uint8 status;
+ 499:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 500:.\Generated_Source\PSoC5/MAD_2.c ****     do
+ 501:.\Generated_Source\PSoC5/MAD_2.c ****     {
+ 502:.\Generated_Source\PSoC5/MAD_2.c ****         status = MAD_2_SAR_CSR1_REG & MAD_2_SAR_EOF_1;
+ 656              		.loc 1 502 0
+ 657 000a 45F60113 		movw	r3, #:lower16:1073764609
+ 658 000e C4F20003 		movt	r3, #:upper16:1073764609
+ 659 0012 1B78     		ldrb	r3, [r3, #0]
+ 660 0014 DBB2     		uxtb	r3, r3
+ 661 0016 03F00103 		and	r3, r3, #1
+ 662 001a FB73     		strb	r3, [r7, #15]
+ 503:.\Generated_Source\PSoC5/MAD_2.c ****     } while ((status != MAD_2_SAR_EOF_1) && (retMode == MAD_2_WAIT_FOR_RESULT));
+ 663              		.loc 1 503 0
+ 664 001c FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 665 001e 012B     		cmp	r3, #1
+ 666 0020 02D0     		beq	.L25
+ 667 0022 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 668 0024 002B     		cmp	r3, #0
+ 669 0026 F0D0     		beq	.L26
+ 670              	.L25:
+ 504:.\Generated_Source\PSoC5/MAD_2.c ****     /* If convertion complete, wait until EOF bit released */
+ 505:.\Generated_Source\PSoC5/MAD_2.c ****     if(status == MAD_2_SAR_EOF_1)
+ 671              		.loc 1 505 0
+ 672 0028 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 673 002a 012B     		cmp	r3, #1
+ 674 002c 08D1     		bne	.L27
+ 506:.\Generated_Source\PSoC5/MAD_2.c ****     {
+ 507:.\Generated_Source\PSoC5/MAD_2.c ****         /* wait one ADC clock to let the EOC status bit release */
+ 508:.\Generated_Source\PSoC5/MAD_2.c ****         CyDelayUs(1u);
+ 675              		.loc 1 508 0
+ 676 002e 4FF00100 		mov	r0, #1
+ 677 0032 FFF7FEFF 		bl	CyDelayUs
+ 509:.\Generated_Source\PSoC5/MAD_2.c ****         /* Do the unconditional read operation of the CSR1 register to make sure the EOC bit has be
+ 510:.\Generated_Source\PSoC5/MAD_2.c ****         CY_GET_REG8(MAD_2_SAR_CSR1_PTR);
+ 678              		.loc 1 510 0
+ 679 0036 45F60113 		movw	r3, #:lower16:1073764609
+ 680 003a C4F20003 		movt	r3, #:upper16:1073764609
+ 681 003e 1B78     		ldrb	r3, [r3, #0]
+ 682              	.L27:
+ 511:.\Generated_Source\PSoC5/MAD_2.c ****     }
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 22
+
+
+ 512:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 513:.\Generated_Source\PSoC5/MAD_2.c ****     return(status);
+ 683              		.loc 1 513 0
+ 684 0040 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 514:.\Generated_Source\PSoC5/MAD_2.c **** }
+ 685              		.loc 1 514 0
+ 686 0042 1846     		mov	r0, r3
+ 687 0044 07F11007 		add	r7, r7, #16
+ 688 0048 BD46     		mov	sp, r7
+ 689 004a 80BD     		pop	{r7, pc}
+ 690              		.cfi_endproc
+ 691              	.LFE8:
+ 692              		.size	MAD_2_IsEndConversion, .-MAD_2_IsEndConversion
+ 693              		.section	.text.MAD_2_GetResult8,"ax",%progbits
+ 694              		.align	2
+ 695              		.global	MAD_2_GetResult8
+ 696              		.thumb
+ 697              		.thumb_func
+ 698              		.type	MAD_2_GetResult8, %function
+ 699              	MAD_2_GetResult8:
+ 700              	.LFB9:
+ 515:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 516:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 517:.\Generated_Source\PSoC5/MAD_2.c **** /*******************************************************************************
+ 518:.\Generated_Source\PSoC5/MAD_2.c **** * Function Name: MAD_2_GetResult8
+ 519:.\Generated_Source\PSoC5/MAD_2.c **** ********************************************************************************
+ 520:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 521:.\Generated_Source\PSoC5/MAD_2.c **** * Summary:
+ 522:.\Generated_Source\PSoC5/MAD_2.c **** *  Returns an 8-bit result or the LSB of the last conversion.
+ 523:.\Generated_Source\PSoC5/MAD_2.c **** *  MAD_2_IsEndConversion() should be called to verify that the data
+ 524:.\Generated_Source\PSoC5/MAD_2.c **** *   sample is ready
+ 525:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 526:.\Generated_Source\PSoC5/MAD_2.c **** * Parameters:
+ 527:.\Generated_Source\PSoC5/MAD_2.c **** *  None.
+ 528:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 529:.\Generated_Source\PSoC5/MAD_2.c **** * Return:
+ 530:.\Generated_Source\PSoC5/MAD_2.c **** *  ADC result.
+ 531:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 532:.\Generated_Source\PSoC5/MAD_2.c **** * Global Variables:
+ 533:.\Generated_Source\PSoC5/MAD_2.c **** *  MAD_2_shift - used to convert the ADC counts to the 2's
+ 534:.\Generated_Source\PSoC5/MAD_2.c **** *  compliment form.
+ 535:.\Generated_Source\PSoC5/MAD_2.c **** *  MAD_2_resolution - used to shift the results for lower
+ 536:.\Generated_Source\PSoC5/MAD_2.c **** *   resolution.
+ 537:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 538:.\Generated_Source\PSoC5/MAD_2.c **** *******************************************************************************/
+ 539:.\Generated_Source\PSoC5/MAD_2.c **** int8 MAD_2_GetResult8( void )
+ 540:.\Generated_Source\PSoC5/MAD_2.c **** {
+ 701              		.loc 1 540 0
+ 702              		.cfi_startproc
+ 703              		@ args = 0, pretend = 0, frame = 8
+ 704              		@ frame_needed = 1, uses_anonymous_args = 0
+ 705              		@ link register save eliminated.
+ 706 0000 80B4     		push	{r7}
+ 707              	.LCFI23:
+ 708              		.cfi_def_cfa_offset 4
+ 709 0002 83B0     		sub	sp, sp, #12
+ 710              	.LCFI24:
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 23
+
+
+ 711              		.cfi_def_cfa_offset 16
+ 712 0004 00AF     		add	r7, sp, #0
+ 713              		.cfi_offset 7, -4
+ 714              	.LCFI25:
+ 715              		.cfi_def_cfa_register 7
+ 541:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 542:.\Generated_Source\PSoC5/MAD_2.c ****     #if(CY_PSOC5A)
+ 543:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 544:.\Generated_Source\PSoC5/MAD_2.c ****         uint16 res;
+ 545:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 546:.\Generated_Source\PSoC5/MAD_2.c ****         res = CY_GET_REG16(MAD_2_SAR_WRK_PTR);
+ 716              		.loc 1 546 0
+ 717 0006 45F6A033 		movw	r3, #:lower16:1073765280
+ 718 000a C4F20003 		movt	r3, #:upper16:1073765280
+ 719 000e 1B88     		ldrh	r3, [r3, #0]	@ movhi
+ 720 0010 FB80     		strh	r3, [r7, #6]	@ movhi
+ 547:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 548:.\Generated_Source\PSoC5/MAD_2.c ****         /* Use 12bits for PSoC5 production silicon and shift the results for lower resolution in th
+ 549:.\Generated_Source\PSoC5/MAD_2.c ****         switch (MAD_2_resolution)
+ 721              		.loc 1 549 0
+ 722 0012 40F20003 		movw	r3, #:lower16:MAD_2_resolution
+ 723 0016 C0F20003 		movt	r3, #:upper16:MAD_2_resolution
+ 724 001a 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 725 001c 082B     		cmp	r3, #8
+ 726 001e 06D0     		beq	.L31
+ 727 0020 0A2B     		cmp	r3, #10
+ 728 0022 08D1     		bne	.L30
+ 729              	.L32:
+ 550:.\Generated_Source\PSoC5/MAD_2.c ****         {
+ 551:.\Generated_Source\PSoC5/MAD_2.c ****             case (uint8)MAD_2__BITS_10:
+ 552:.\Generated_Source\PSoC5/MAD_2.c ****                 res >>= 2u;
+ 730              		.loc 1 552 0
+ 731 0024 FB88     		ldrh	r3, [r7, #6]
+ 732 0026 4FEA9303 		lsr	r3, r3, #2
+ 733 002a FB80     		strh	r3, [r7, #6]	@ movhi
+ 553:.\Generated_Source\PSoC5/MAD_2.c ****                 break;
+ 734              		.loc 1 553 0
+ 735 002c 03E0     		b	.L30
+ 736              	.L31:
+ 554:.\Generated_Source\PSoC5/MAD_2.c ****             case (uint8)MAD_2__BITS_8:
+ 555:.\Generated_Source\PSoC5/MAD_2.c ****                 res >>= 4u;
+ 737              		.loc 1 555 0
+ 738 002e FB88     		ldrh	r3, [r7, #6]
+ 739 0030 4FEA1313 		lsr	r3, r3, #4
+ 740 0034 FB80     		strh	r3, [r7, #6]	@ movhi
+ 741              	.L30:
+ 556:.\Generated_Source\PSoC5/MAD_2.c ****                 break;
+ 557:.\Generated_Source\PSoC5/MAD_2.c ****             default: /* Do not shift for 12 bits */
+ 558:.\Generated_Source\PSoC5/MAD_2.c ****                 break;
+ 559:.\Generated_Source\PSoC5/MAD_2.c ****         }
+ 560:.\Generated_Source\PSoC5/MAD_2.c ****         return( (int8)((int16)res - MAD_2_shift) );
+ 742              		.loc 1 560 0
+ 743 0036 FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 744 0038 DAB2     		uxtb	r2, r3
+ 745 003a 40F20003 		movw	r3, #:lower16:MAD_2_shift
+ 746 003e C0F20003 		movt	r3, #:upper16:MAD_2_shift
+ 747 0042 1B88     		ldrh	r3, [r3, #0]	@ movhi
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 24
+
+
+ 748 0044 9BB2     		uxth	r3, r3
+ 749 0046 DBB2     		uxtb	r3, r3
+ 750 0048 C3EB0203 		rsb	r3, r3, r2
+ 751 004c DBB2     		uxtb	r3, r3
+ 752 004e 5BB2     		sxtb	r3, r3
+ 561:.\Generated_Source\PSoC5/MAD_2.c ****     #else
+ 562:.\Generated_Source\PSoC5/MAD_2.c ****         return( (int8)MAD_2_SAR_WRK0_REG - (int8)MAD_2_shift);
+ 563:.\Generated_Source\PSoC5/MAD_2.c ****     #endif /* End CY_PSOC5A */
+ 564:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 565:.\Generated_Source\PSoC5/MAD_2.c **** }
+ 753              		.loc 1 565 0
+ 754 0050 1846     		mov	r0, r3
+ 755 0052 07F10C07 		add	r7, r7, #12
+ 756 0056 BD46     		mov	sp, r7
+ 757 0058 80BC     		pop	{r7}
+ 758 005a 7047     		bx	lr
+ 759              		.cfi_endproc
+ 760              	.LFE9:
+ 761              		.size	MAD_2_GetResult8, .-MAD_2_GetResult8
+ 762              		.section	.text.MAD_2_GetResult16,"ax",%progbits
+ 763              		.align	2
+ 764              		.global	MAD_2_GetResult16
+ 765              		.thumb
+ 766              		.thumb_func
+ 767              		.type	MAD_2_GetResult16, %function
+ 768              	MAD_2_GetResult16:
+ 769              	.LFB10:
+ 566:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 567:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 568:.\Generated_Source\PSoC5/MAD_2.c **** /*******************************************************************************
+ 569:.\Generated_Source\PSoC5/MAD_2.c **** * Function Name: MAD_2_GetResult16
+ 570:.\Generated_Source\PSoC5/MAD_2.c **** ********************************************************************************
+ 571:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 572:.\Generated_Source\PSoC5/MAD_2.c **** * Summary:
+ 573:.\Generated_Source\PSoC5/MAD_2.c **** *  Gets the data available in the SAR DATA registers.
+ 574:.\Generated_Source\PSoC5/MAD_2.c **** *  MAD_2_IsEndConversion() should be called to verify that the data
+ 575:.\Generated_Source\PSoC5/MAD_2.c **** *   sample is ready
+ 576:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 577:.\Generated_Source\PSoC5/MAD_2.c **** * Parameters:
+ 578:.\Generated_Source\PSoC5/MAD_2.c **** *  None.
+ 579:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 580:.\Generated_Source\PSoC5/MAD_2.c **** * Return:
+ 581:.\Generated_Source\PSoC5/MAD_2.c **** *  ADC result. WORD value which has the converted 12bits. In the differential
+ 582:.\Generated_Source\PSoC5/MAD_2.c **** *  input mode the SAR ADC outputs digitally converted data in binary offset
+ 583:.\Generated_Source\PSoC5/MAD_2.c **** *  scheme, this function converts the data into 2's compliment form.
+ 584:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 585:.\Generated_Source\PSoC5/MAD_2.c **** * Global Variables:
+ 586:.\Generated_Source\PSoC5/MAD_2.c **** *  MAD_2_shift - used to convert the ADC counts to the 2's
+ 587:.\Generated_Source\PSoC5/MAD_2.c **** *  compliment form.
+ 588:.\Generated_Source\PSoC5/MAD_2.c **** *  MAD_2_resolution - used to shift the results for lower
+ 589:.\Generated_Source\PSoC5/MAD_2.c **** *   resolution.
+ 590:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 591:.\Generated_Source\PSoC5/MAD_2.c **** *******************************************************************************/
+ 592:.\Generated_Source\PSoC5/MAD_2.c **** int16 MAD_2_GetResult16( void )
+ 593:.\Generated_Source\PSoC5/MAD_2.c **** {
+ 770              		.loc 1 593 0
+ 771              		.cfi_startproc
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 25
+
+
+ 772              		@ args = 0, pretend = 0, frame = 8
+ 773              		@ frame_needed = 1, uses_anonymous_args = 0
+ 774              		@ link register save eliminated.
+ 775 0000 80B4     		push	{r7}
+ 776              	.LCFI26:
+ 777              		.cfi_def_cfa_offset 4
+ 778 0002 83B0     		sub	sp, sp, #12
+ 779              	.LCFI27:
+ 780              		.cfi_def_cfa_offset 16
+ 781 0004 00AF     		add	r7, sp, #0
+ 782              		.cfi_offset 7, -4
+ 783              	.LCFI28:
+ 784              		.cfi_def_cfa_register 7
+ 594:.\Generated_Source\PSoC5/MAD_2.c ****     uint16 res;
+ 595:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 596:.\Generated_Source\PSoC5/MAD_2.c ****     res = CY_GET_REG16(MAD_2_SAR_WRK_PTR);
+ 785              		.loc 1 596 0
+ 786 0006 45F6A033 		movw	r3, #:lower16:1073765280
+ 787 000a C4F20003 		movt	r3, #:upper16:1073765280
+ 788 000e 1B88     		ldrh	r3, [r3, #0]	@ movhi
+ 789 0010 FB80     		strh	r3, [r7, #6]	@ movhi
+ 597:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 598:.\Generated_Source\PSoC5/MAD_2.c ****     #if(CY_PSOC5A)
+ 599:.\Generated_Source\PSoC5/MAD_2.c ****         /* Use 12bits for PSoC5 production silicon and shift the results for lower resolution in th
+ 600:.\Generated_Source\PSoC5/MAD_2.c ****         switch (MAD_2_resolution)
+ 790              		.loc 1 600 0
+ 791 0012 40F20003 		movw	r3, #:lower16:MAD_2_resolution
+ 792 0016 C0F20003 		movt	r3, #:upper16:MAD_2_resolution
+ 793 001a 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 794 001c 082B     		cmp	r3, #8
+ 795 001e 06D0     		beq	.L36
+ 796 0020 0A2B     		cmp	r3, #10
+ 797 0022 08D1     		bne	.L35
+ 798              	.L37:
+ 601:.\Generated_Source\PSoC5/MAD_2.c ****         {
+ 602:.\Generated_Source\PSoC5/MAD_2.c ****             case (uint8)MAD_2__BITS_10:
+ 603:.\Generated_Source\PSoC5/MAD_2.c ****                 res >>= 2u;
+ 799              		.loc 1 603 0
+ 800 0024 FB88     		ldrh	r3, [r7, #6]
+ 801 0026 4FEA9303 		lsr	r3, r3, #2
+ 802 002a FB80     		strh	r3, [r7, #6]	@ movhi
+ 604:.\Generated_Source\PSoC5/MAD_2.c ****                 break;
+ 803              		.loc 1 604 0
+ 804 002c 03E0     		b	.L35
+ 805              	.L36:
+ 605:.\Generated_Source\PSoC5/MAD_2.c ****             case (uint8)MAD_2__BITS_8:
+ 606:.\Generated_Source\PSoC5/MAD_2.c ****                 res >>= 4u;
+ 806              		.loc 1 606 0
+ 807 002e FB88     		ldrh	r3, [r7, #6]
+ 808 0030 4FEA1313 		lsr	r3, r3, #4
+ 809 0034 FB80     		strh	r3, [r7, #6]	@ movhi
+ 810              	.L35:
+ 607:.\Generated_Source\PSoC5/MAD_2.c ****                 break;
+ 608:.\Generated_Source\PSoC5/MAD_2.c ****             default: /* Do not shift for 12 bits */
+ 609:.\Generated_Source\PSoC5/MAD_2.c ****                 break;
+ 610:.\Generated_Source\PSoC5/MAD_2.c ****         }
+ 611:.\Generated_Source\PSoC5/MAD_2.c ****     #endif /* End CY_PSOC5A */
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 26
+
+
+ 612:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 613:.\Generated_Source\PSoC5/MAD_2.c ****     return( (int16)res - MAD_2_shift );
+ 811              		.loc 1 613 0
+ 812 0036 40F20003 		movw	r3, #:lower16:MAD_2_shift
+ 813 003a C0F20003 		movt	r3, #:upper16:MAD_2_shift
+ 814 003e 1B88     		ldrh	r3, [r3, #0]	@ movhi
+ 815 0040 9BB2     		uxth	r3, r3
+ 816 0042 9BB2     		uxth	r3, r3
+ 817 0044 FA88     		ldrh	r2, [r7, #6]	@ movhi
+ 818 0046 C3EB0203 		rsb	r3, r3, r2
+ 819 004a 9BB2     		uxth	r3, r3
+ 820 004c 1BB2     		sxth	r3, r3
+ 614:.\Generated_Source\PSoC5/MAD_2.c **** }
+ 821              		.loc 1 614 0
+ 822 004e 1846     		mov	r0, r3
+ 823 0050 07F10C07 		add	r7, r7, #12
+ 824 0054 BD46     		mov	sp, r7
+ 825 0056 80BC     		pop	{r7}
+ 826 0058 7047     		bx	lr
+ 827              		.cfi_endproc
+ 828              	.LFE10:
+ 829              		.size	MAD_2_GetResult16, .-MAD_2_GetResult16
+ 830 005a 00BF     		.section	.text.MAD_2_SetOffset,"ax",%progbits
+ 831              		.align	2
+ 832              		.global	MAD_2_SetOffset
+ 833              		.thumb
+ 834              		.thumb_func
+ 835              		.type	MAD_2_SetOffset, %function
+ 836              	MAD_2_SetOffset:
+ 837              	.LFB11:
+ 615:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 616:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 617:.\Generated_Source\PSoC5/MAD_2.c **** /*******************************************************************************
+ 618:.\Generated_Source\PSoC5/MAD_2.c **** * Function Name: MAD_2_SetOffset
+ 619:.\Generated_Source\PSoC5/MAD_2.c **** ********************************************************************************
+ 620:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 621:.\Generated_Source\PSoC5/MAD_2.c **** * Summary:
+ 622:.\Generated_Source\PSoC5/MAD_2.c **** *  This function sets the offset for voltage readings.
+ 623:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 624:.\Generated_Source\PSoC5/MAD_2.c **** * Parameters:
+ 625:.\Generated_Source\PSoC5/MAD_2.c **** *  int16: Offset in counts
+ 626:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 627:.\Generated_Source\PSoC5/MAD_2.c **** * Return:
+ 628:.\Generated_Source\PSoC5/MAD_2.c **** *  None.
+ 629:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 630:.\Generated_Source\PSoC5/MAD_2.c **** * Global Variables:
+ 631:.\Generated_Source\PSoC5/MAD_2.c **** *  The MAD_2_offset variable modified. This variable is used for
+ 632:.\Generated_Source\PSoC5/MAD_2.c **** *  offset calibration purpose.
+ 633:.\Generated_Source\PSoC5/MAD_2.c **** *  Affects the MAD_2_CountsTo_Volts,
+ 634:.\Generated_Source\PSoC5/MAD_2.c **** *  MAD_2_CountsTo_mVolts, MAD_2_CountsTo_uVolts functions
+ 635:.\Generated_Source\PSoC5/MAD_2.c **** *  by subtracting the given offset.
+ 636:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 637:.\Generated_Source\PSoC5/MAD_2.c **** *******************************************************************************/
+ 638:.\Generated_Source\PSoC5/MAD_2.c **** void MAD_2_SetOffset(int16 offset)
+ 639:.\Generated_Source\PSoC5/MAD_2.c **** {
+ 838              		.loc 1 639 0
+ 839              		.cfi_startproc
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 27
+
+
+ 840              		@ args = 0, pretend = 0, frame = 8
+ 841              		@ frame_needed = 1, uses_anonymous_args = 0
+ 842              		@ link register save eliminated.
+ 843 0000 80B4     		push	{r7}
+ 844              	.LCFI29:
+ 845              		.cfi_def_cfa_offset 4
+ 846 0002 83B0     		sub	sp, sp, #12
+ 847              	.LCFI30:
+ 848              		.cfi_def_cfa_offset 16
+ 849 0004 00AF     		add	r7, sp, #0
+ 850              		.cfi_offset 7, -4
+ 851              	.LCFI31:
+ 852              		.cfi_def_cfa_register 7
+ 853 0006 0346     		mov	r3, r0
+ 854 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 640:.\Generated_Source\PSoC5/MAD_2.c ****     MAD_2_offset = offset;
+ 855              		.loc 1 640 0
+ 856 000a 40F20003 		movw	r3, #:lower16:MAD_2_offset
+ 857 000e C0F20003 		movt	r3, #:upper16:MAD_2_offset
+ 858 0012 FA88     		ldrh	r2, [r7, #6]	@ movhi
+ 859 0014 1A80     		strh	r2, [r3, #0]	@ movhi
+ 641:.\Generated_Source\PSoC5/MAD_2.c **** }
+ 860              		.loc 1 641 0
+ 861 0016 07F10C07 		add	r7, r7, #12
+ 862 001a BD46     		mov	sp, r7
+ 863 001c 80BC     		pop	{r7}
+ 864 001e 7047     		bx	lr
+ 865              		.cfi_endproc
+ 866              	.LFE11:
+ 867              		.size	MAD_2_SetOffset, .-MAD_2_SetOffset
+ 868              		.section	.text.MAD_2_CalcGain,"ax",%progbits
+ 869              		.align	2
+ 870              		.thumb
+ 871              		.thumb_func
+ 872              		.type	MAD_2_CalcGain, %function
+ 873              	MAD_2_CalcGain:
+ 874              	.LFB12:
+ 642:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 643:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 644:.\Generated_Source\PSoC5/MAD_2.c **** /*******************************************************************************
+ 645:.\Generated_Source\PSoC5/MAD_2.c **** * Function Name: MAD_2_CalcGain
+ 646:.\Generated_Source\PSoC5/MAD_2.c **** ********************************************************************************
+ 647:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 648:.\Generated_Source\PSoC5/MAD_2.c **** * Summary:
+ 649:.\Generated_Source\PSoC5/MAD_2.c **** *  This function calculates the ADC gain in counts per volt.
+ 650:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 651:.\Generated_Source\PSoC5/MAD_2.c **** * Parameters:
+ 652:.\Generated_Source\PSoC5/MAD_2.c **** *  uint8: resolution
+ 653:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 654:.\Generated_Source\PSoC5/MAD_2.c **** * Return:
+ 655:.\Generated_Source\PSoC5/MAD_2.c **** *  None.
+ 656:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 657:.\Generated_Source\PSoC5/MAD_2.c **** * Global Variables:
+ 658:.\Generated_Source\PSoC5/MAD_2.c **** *  MAD_2_shift variable initialized. This variable is used to
+ 659:.\Generated_Source\PSoC5/MAD_2.c **** *  convert the ADC counts to the 2's compliment form.
+ 660:.\Generated_Source\PSoC5/MAD_2.c **** *  MAD_2_countsPerVolt variable initialized. This variable is used
+ 661:.\Generated_Source\PSoC5/MAD_2.c **** *  for gain calibration purpose.
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 28
+
+
+ 662:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 663:.\Generated_Source\PSoC5/MAD_2.c **** *******************************************************************************/
+ 664:.\Generated_Source\PSoC5/MAD_2.c **** static void MAD_2_CalcGain( uint8 resolution )
+ 665:.\Generated_Source\PSoC5/MAD_2.c **** {
+ 875              		.loc 1 665 0
+ 876              		.cfi_startproc
+ 877              		@ args = 0, pretend = 0, frame = 16
+ 878              		@ frame_needed = 1, uses_anonymous_args = 0
+ 879 0000 80B5     		push	{r7, lr}
+ 880              	.LCFI32:
+ 881              		.cfi_def_cfa_offset 8
+ 882 0002 84B0     		sub	sp, sp, #16
+ 883              	.LCFI33:
+ 884              		.cfi_def_cfa_offset 24
+ 885 0004 00AF     		add	r7, sp, #0
+ 886              		.cfi_offset 14, -4
+ 887              		.cfi_offset 7, -8
+ 888              	.LCFI34:
+ 889              		.cfi_def_cfa_register 7
+ 890 0006 0346     		mov	r3, r0
+ 891 0008 FB71     		strb	r3, [r7, #7]
+ 666:.\Generated_Source\PSoC5/MAD_2.c ****     int32 counts;
+ 667:.\Generated_Source\PSoC5/MAD_2.c ****     #if(!((MAD_2_DEFAULT_RANGE == MAD_2__VSS_TO_VREF) || \
+ 668:.\Generated_Source\PSoC5/MAD_2.c ****          (MAD_2_DEFAULT_RANGE == MAD_2__VSSA_TO_VDDA) || \
+ 669:.\Generated_Source\PSoC5/MAD_2.c ****          (MAD_2_DEFAULT_RANGE == MAD_2__VSSA_TO_VDAC)) )
+ 670:.\Generated_Source\PSoC5/MAD_2.c ****         uint16 diff_zero;
+ 671:.\Generated_Source\PSoC5/MAD_2.c ****     #endif /* End MAD_2_DEFAULT_RANGE */
+ 672:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 673:.\Generated_Source\PSoC5/MAD_2.c ****     switch (resolution)
+ 892              		.loc 1 673 0
+ 893 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 894 000c 0A2B     		cmp	r3, #10
+ 895 000e 08D0     		beq	.L44
+ 896 0010 0C2B     		cmp	r3, #12
+ 897 0012 02D0     		beq	.L45
+ 898 0014 082B     		cmp	r3, #8
+ 899 0016 08D0     		beq	.L43
+ 900 0018 0BE0     		b	.L48
+ 901              	.L45:
+ 674:.\Generated_Source\PSoC5/MAD_2.c ****     {
+ 675:.\Generated_Source\PSoC5/MAD_2.c ****         case (uint8)MAD_2__BITS_12:
+ 676:.\Generated_Source\PSoC5/MAD_2.c ****             counts = (int32)MAD_2_SAR_WRK_MAX;
+ 902              		.loc 1 676 0
+ 903 001a 40F6FF73 		movw	r3, #4095
+ 904 001e FB60     		str	r3, [r7, #12]
+ 677:.\Generated_Source\PSoC5/MAD_2.c ****             #if(!((MAD_2_DEFAULT_RANGE == MAD_2__VSS_TO_VREF) || \
+ 678:.\Generated_Source\PSoC5/MAD_2.c ****                  (MAD_2_DEFAULT_RANGE == MAD_2__VSSA_TO_VDDA) || \
+ 679:.\Generated_Source\PSoC5/MAD_2.c ****                  (MAD_2_DEFAULT_RANGE == MAD_2__VSSA_TO_VDAC)) )
+ 680:.\Generated_Source\PSoC5/MAD_2.c ****                 diff_zero = MAD_2_SAR_DIFF_SHIFT;
+ 681:.\Generated_Source\PSoC5/MAD_2.c ****             #endif /* End MAD_2_DEFAULT_RANGE */
+ 682:.\Generated_Source\PSoC5/MAD_2.c ****             break;
+ 905              		.loc 1 682 0
+ 906 0020 0EE0     		b	.L46
+ 907              	.L44:
+ 683:.\Generated_Source\PSoC5/MAD_2.c ****         case (uint8)MAD_2__BITS_10:
+ 684:.\Generated_Source\PSoC5/MAD_2.c ****             counts = (int32)(MAD_2_SAR_WRK_MAX >> 2u);
+ 908              		.loc 1 684 0
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 29
+
+
+ 909 0022 40F2FF33 		movw	r3, #1023
+ 910 0026 FB60     		str	r3, [r7, #12]
+ 685:.\Generated_Source\PSoC5/MAD_2.c ****             #if(!((MAD_2_DEFAULT_RANGE == MAD_2__VSS_TO_VREF) || \
+ 686:.\Generated_Source\PSoC5/MAD_2.c ****                  (MAD_2_DEFAULT_RANGE == MAD_2__VSSA_TO_VDDA) || \
+ 687:.\Generated_Source\PSoC5/MAD_2.c ****                  (MAD_2_DEFAULT_RANGE == MAD_2__VSSA_TO_VDAC)) )
+ 688:.\Generated_Source\PSoC5/MAD_2.c ****                 diff_zero = MAD_2_SAR_DIFF_SHIFT >> 2u;
+ 689:.\Generated_Source\PSoC5/MAD_2.c ****             #endif /* End MAD_2_DEFAULT_RANGE */
+ 690:.\Generated_Source\PSoC5/MAD_2.c ****             break;
+ 911              		.loc 1 690 0
+ 912 0028 0AE0     		b	.L46
+ 913              	.L43:
+ 691:.\Generated_Source\PSoC5/MAD_2.c ****         case (uint8)MAD_2__BITS_8:
+ 692:.\Generated_Source\PSoC5/MAD_2.c ****             counts = (int32)(MAD_2_SAR_WRK_MAX >> 4u);
+ 914              		.loc 1 692 0
+ 915 002a 4FF0FF03 		mov	r3, #255
+ 916 002e FB60     		str	r3, [r7, #12]
+ 693:.\Generated_Source\PSoC5/MAD_2.c ****             #if(!((MAD_2_DEFAULT_RANGE == MAD_2__VSS_TO_VREF) || \
+ 694:.\Generated_Source\PSoC5/MAD_2.c ****                  (MAD_2_DEFAULT_RANGE == MAD_2__VSSA_TO_VDDA) || \
+ 695:.\Generated_Source\PSoC5/MAD_2.c ****                  (MAD_2_DEFAULT_RANGE == MAD_2__VSSA_TO_VDAC)) )
+ 696:.\Generated_Source\PSoC5/MAD_2.c ****                 diff_zero = MAD_2_SAR_DIFF_SHIFT >> 4u;
+ 697:.\Generated_Source\PSoC5/MAD_2.c ****             #endif /* End MAD_2_DEFAULT_RANGE */
+ 698:.\Generated_Source\PSoC5/MAD_2.c ****             break;
+ 917              		.loc 1 698 0
+ 918 0030 06E0     		b	.L46
+ 919              	.L48:
+ 699:.\Generated_Source\PSoC5/MAD_2.c ****         default: /* Halt CPU in debug mode if resolution is out of valid range */
+ 700:.\Generated_Source\PSoC5/MAD_2.c ****             counts = 0;
+ 920              		.loc 1 700 0
+ 921 0032 4FF00003 		mov	r3, #0
+ 922 0036 FB60     		str	r3, [r7, #12]
+ 701:.\Generated_Source\PSoC5/MAD_2.c ****             #if(!((MAD_2_DEFAULT_RANGE == MAD_2__VSS_TO_VREF) || \
+ 702:.\Generated_Source\PSoC5/MAD_2.c ****                  (MAD_2_DEFAULT_RANGE == MAD_2__VSSA_TO_VDDA) || \
+ 703:.\Generated_Source\PSoC5/MAD_2.c ****                  (MAD_2_DEFAULT_RANGE == MAD_2__VSSA_TO_VDAC)) )
+ 704:.\Generated_Source\PSoC5/MAD_2.c ****                 diff_zero = 0u;
+ 705:.\Generated_Source\PSoC5/MAD_2.c ****             #endif /* End MAD_2_DEFAULT_RANGE */
+ 706:.\Generated_Source\PSoC5/MAD_2.c ****             CYASSERT(0u != 0u);
+ 923              		.loc 1 706 0
+ 924 0038 4FF00000 		mov	r0, #0
+ 925 003c FFF7FEFF 		bl	CyHalt
+ 926              	.L46:
+ 707:.\Generated_Source\PSoC5/MAD_2.c ****             break;
+ 708:.\Generated_Source\PSoC5/MAD_2.c ****     }
+ 709:.\Generated_Source\PSoC5/MAD_2.c ****     counts *= 1000; /* To avoid float point arithmetic*/
+ 927              		.loc 1 709 0
+ 928 0040 FB68     		ldr	r3, [r7, #12]
+ 929 0042 4FF47A72 		mov	r2, #1000
+ 930 0046 02FB03F3 		mul	r3, r2, r3
+ 931 004a FB60     		str	r3, [r7, #12]
+ 710:.\Generated_Source\PSoC5/MAD_2.c ****     MAD_2_countsPerVolt = (int16)(counts / MAD_2_DEFAULT_REF_VOLTAGE_MV / 2);
+ 932              		.loc 1 710 0
+ 933 004c FB68     		ldr	r3, [r7, #12]
+ 934 004e 03F5FE62 		add	r2, r3, #2032
+ 935 0052 02F10F02 		add	r2, r2, #15
+ 936 0056 002B     		cmp	r3, #0
+ 937 0058 B8BF     		it	lt
+ 938 005a 1346     		movlt	r3, r2
+ 939 005c 4FEAE323 		asr	r3, r3, #11
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 30
+
+
+ 940 0060 9AB2     		uxth	r2, r3
+ 941 0062 40F20003 		movw	r3, #:lower16:MAD_2_countsPerVolt
+ 942 0066 C0F20003 		movt	r3, #:upper16:MAD_2_countsPerVolt
+ 943 006a 1A80     		strh	r2, [r3, #0]	@ movhi
+ 711:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 712:.\Generated_Source\PSoC5/MAD_2.c ****     #if( (MAD_2_DEFAULT_RANGE == MAD_2__VSS_TO_VREF) || \
+ 713:.\Generated_Source\PSoC5/MAD_2.c ****          (MAD_2_DEFAULT_RANGE == MAD_2__VSSA_TO_VDDA) || \
+ 714:.\Generated_Source\PSoC5/MAD_2.c ****          (MAD_2_DEFAULT_RANGE == MAD_2__VSSA_TO_VDAC) )
+ 715:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_shift = 0;
+ 944              		.loc 1 715 0
+ 945 006c 40F20003 		movw	r3, #:lower16:MAD_2_shift
+ 946 0070 C0F20003 		movt	r3, #:upper16:MAD_2_shift
+ 947 0074 4FF00002 		mov	r2, #0
+ 948 0078 1A80     		strh	r2, [r3, #0]	@ movhi
+ 716:.\Generated_Source\PSoC5/MAD_2.c ****     #else
+ 717:.\Generated_Source\PSoC5/MAD_2.c ****         MAD_2_shift = diff_zero;
+ 718:.\Generated_Source\PSoC5/MAD_2.c ****     #endif /* End MAD_2_DEFAULT_RANGE */
+ 719:.\Generated_Source\PSoC5/MAD_2.c **** }
+ 949              		.loc 1 719 0
+ 950 007a 07F11007 		add	r7, r7, #16
+ 951 007e BD46     		mov	sp, r7
+ 952 0080 80BD     		pop	{r7, pc}
+ 953              		.cfi_endproc
+ 954              	.LFE12:
+ 955              		.size	MAD_2_CalcGain, .-MAD_2_CalcGain
+ 956 0082 00BF     		.section	.text.MAD_2_SetGain,"ax",%progbits
+ 957              		.align	2
+ 958              		.global	MAD_2_SetGain
+ 959              		.thumb
+ 960              		.thumb_func
+ 961              		.type	MAD_2_SetGain, %function
+ 962              	MAD_2_SetGain:
+ 963              	.LFB13:
+ 720:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 721:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 722:.\Generated_Source\PSoC5/MAD_2.c **** /*******************************************************************************
+ 723:.\Generated_Source\PSoC5/MAD_2.c **** * Function Name: MAD_2_SetGain
+ 724:.\Generated_Source\PSoC5/MAD_2.c **** ********************************************************************************
+ 725:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 726:.\Generated_Source\PSoC5/MAD_2.c **** * Summary:
+ 727:.\Generated_Source\PSoC5/MAD_2.c **** *  This function sets the ADC gain in counts per volt.
+ 728:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 729:.\Generated_Source\PSoC5/MAD_2.c **** * Parameters:
+ 730:.\Generated_Source\PSoC5/MAD_2.c **** *  int16  adcGain  counts per volt
+ 731:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 732:.\Generated_Source\PSoC5/MAD_2.c **** * Return:
+ 733:.\Generated_Source\PSoC5/MAD_2.c **** *  None.
+ 734:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 735:.\Generated_Source\PSoC5/MAD_2.c **** * Global Variables:
+ 736:.\Generated_Source\PSoC5/MAD_2.c **** *  MAD_2_countsPerVolt variable modified. This variable is used
+ 737:.\Generated_Source\PSoC5/MAD_2.c **** *  for gain calibration purpose.
+ 738:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 739:.\Generated_Source\PSoC5/MAD_2.c **** *******************************************************************************/
+ 740:.\Generated_Source\PSoC5/MAD_2.c **** void MAD_2_SetGain(int16 adcGain)
+ 741:.\Generated_Source\PSoC5/MAD_2.c **** {
+ 964              		.loc 1 741 0
+ 965              		.cfi_startproc
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 31
+
+
+ 966              		@ args = 0, pretend = 0, frame = 8
+ 967              		@ frame_needed = 1, uses_anonymous_args = 0
+ 968              		@ link register save eliminated.
+ 969 0000 80B4     		push	{r7}
+ 970              	.LCFI35:
+ 971              		.cfi_def_cfa_offset 4
+ 972 0002 83B0     		sub	sp, sp, #12
+ 973              	.LCFI36:
+ 974              		.cfi_def_cfa_offset 16
+ 975 0004 00AF     		add	r7, sp, #0
+ 976              		.cfi_offset 7, -4
+ 977              	.LCFI37:
+ 978              		.cfi_def_cfa_register 7
+ 979 0006 0346     		mov	r3, r0
+ 980 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 742:.\Generated_Source\PSoC5/MAD_2.c ****     MAD_2_countsPerVolt = adcGain;
+ 981              		.loc 1 742 0
+ 982 000a 40F20003 		movw	r3, #:lower16:MAD_2_countsPerVolt
+ 983 000e C0F20003 		movt	r3, #:upper16:MAD_2_countsPerVolt
+ 984 0012 FA88     		ldrh	r2, [r7, #6]	@ movhi
+ 985 0014 1A80     		strh	r2, [r3, #0]	@ movhi
+ 743:.\Generated_Source\PSoC5/MAD_2.c **** }
+ 986              		.loc 1 743 0
+ 987 0016 07F10C07 		add	r7, r7, #12
+ 988 001a BD46     		mov	sp, r7
+ 989 001c 80BC     		pop	{r7}
+ 990 001e 7047     		bx	lr
+ 991              		.cfi_endproc
+ 992              	.LFE13:
+ 993              		.size	MAD_2_SetGain, .-MAD_2_SetGain
+ 994              		.section	.text.MAD_2_CountsTo_mVolts,"ax",%progbits
+ 995              		.align	2
+ 996              		.global	MAD_2_CountsTo_mVolts
+ 997              		.thumb
+ 998              		.thumb_func
+ 999              		.type	MAD_2_CountsTo_mVolts, %function
+ 1000              	MAD_2_CountsTo_mVolts:
+ 1001              	.LFB14:
+ 744:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 745:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 746:.\Generated_Source\PSoC5/MAD_2.c **** /*******************************************************************************
+ 747:.\Generated_Source\PSoC5/MAD_2.c **** * Function Name: MAD_2_CountsTo_mVolts
+ 748:.\Generated_Source\PSoC5/MAD_2.c **** ********************************************************************************
+ 749:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 750:.\Generated_Source\PSoC5/MAD_2.c **** * Summary:
+ 751:.\Generated_Source\PSoC5/MAD_2.c **** *  This function converts ADC counts to mVolts
+ 752:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 753:.\Generated_Source\PSoC5/MAD_2.c **** * Parameters:
+ 754:.\Generated_Source\PSoC5/MAD_2.c **** *  int16  adcCounts   Reading from ADC.
+ 755:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 756:.\Generated_Source\PSoC5/MAD_2.c **** * Return:
+ 757:.\Generated_Source\PSoC5/MAD_2.c **** *  int16  Result in mVolts
+ 758:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 759:.\Generated_Source\PSoC5/MAD_2.c **** * Global Variables:
+ 760:.\Generated_Source\PSoC5/MAD_2.c **** *  MAD_2_offset variable used.
+ 761:.\Generated_Source\PSoC5/MAD_2.c **** *  MAD_2_countsPerVolt variable used.
+ 762:.\Generated_Source\PSoC5/MAD_2.c **** *
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 32
+
+
+ 763:.\Generated_Source\PSoC5/MAD_2.c **** *******************************************************************************/
+ 764:.\Generated_Source\PSoC5/MAD_2.c **** int16 MAD_2_CountsTo_mVolts(int16 adcCounts)
+ 765:.\Generated_Source\PSoC5/MAD_2.c **** {
+ 1002              		.loc 1 765 0
+ 1003              		.cfi_startproc
+ 1004              		@ args = 0, pretend = 0, frame = 16
+ 1005              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1006              		@ link register save eliminated.
+ 1007 0000 80B4     		push	{r7}
+ 1008              	.LCFI38:
+ 1009              		.cfi_def_cfa_offset 4
+ 1010 0002 85B0     		sub	sp, sp, #20
+ 1011              	.LCFI39:
+ 1012              		.cfi_def_cfa_offset 24
+ 1013 0004 00AF     		add	r7, sp, #0
+ 1014              		.cfi_offset 7, -4
+ 1015              	.LCFI40:
+ 1016              		.cfi_def_cfa_register 7
+ 1017 0006 0346     		mov	r3, r0
+ 1018 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 766:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 767:.\Generated_Source\PSoC5/MAD_2.c ****     int16 mVolts;
+ 768:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 769:.\Generated_Source\PSoC5/MAD_2.c ****     /* Subtract ADC offset */
+ 770:.\Generated_Source\PSoC5/MAD_2.c ****     adcCounts -= MAD_2_offset;
+ 1019              		.loc 1 770 0
+ 1020 000a FA88     		ldrh	r2, [r7, #6]
+ 1021 000c 40F20003 		movw	r3, #:lower16:MAD_2_offset
+ 1022 0010 C0F20003 		movt	r3, #:upper16:MAD_2_offset
+ 1023 0014 1B88     		ldrh	r3, [r3, #0]	@ movhi
+ 1024 0016 9BB2     		uxth	r3, r3
+ 1025 0018 9BB2     		uxth	r3, r3
+ 1026 001a C3EB0203 		rsb	r3, r3, r2
+ 1027 001e 9BB2     		uxth	r3, r3
+ 1028 0020 FB80     		strh	r3, [r7, #6]	@ movhi
+ 771:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 772:.\Generated_Source\PSoC5/MAD_2.c ****     mVolts = (int16)(( (int32)adcCounts * 1000 ) / MAD_2_countsPerVolt) ;
+ 1029              		.loc 1 772 0
+ 1030 0022 B7F90630 		ldrsh	r3, [r7, #6]
+ 1031 0026 4FF47A72 		mov	r2, #1000
+ 1032 002a 02FB03F2 		mul	r2, r2, r3
+ 1033 002e 40F20003 		movw	r3, #:lower16:MAD_2_countsPerVolt
+ 1034 0032 C0F20003 		movt	r3, #:upper16:MAD_2_countsPerVolt
+ 1035 0036 1B88     		ldrh	r3, [r3, #0]	@ movhi
+ 1036 0038 9BB2     		uxth	r3, r3
+ 1037 003a 1BB2     		sxth	r3, r3
+ 1038 003c 92FBF3F3 		sdiv	r3, r2, r3
+ 1039 0040 FB81     		strh	r3, [r7, #14]	@ movhi
+ 773:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 774:.\Generated_Source\PSoC5/MAD_2.c ****     return( mVolts );
+ 1040              		.loc 1 774 0
+ 1041 0042 FB89     		ldrh	r3, [r7, #14]
+ 1042 0044 1BB2     		sxth	r3, r3
+ 775:.\Generated_Source\PSoC5/MAD_2.c **** }
+ 1043              		.loc 1 775 0
+ 1044 0046 1846     		mov	r0, r3
+ 1045 0048 07F11407 		add	r7, r7, #20
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 33
+
+
+ 1046 004c BD46     		mov	sp, r7
+ 1047 004e 80BC     		pop	{r7}
+ 1048 0050 7047     		bx	lr
+ 1049              		.cfi_endproc
+ 1050              	.LFE14:
+ 1051              		.size	MAD_2_CountsTo_mVolts, .-MAD_2_CountsTo_mVolts
+ 1052 0052 00BF     		.section	.text.MAD_2_CountsTo_uVolts,"ax",%progbits
+ 1053              		.align	2
+ 1054              		.global	MAD_2_CountsTo_uVolts
+ 1055              		.thumb
+ 1056              		.thumb_func
+ 1057              		.type	MAD_2_CountsTo_uVolts, %function
+ 1058              	MAD_2_CountsTo_uVolts:
+ 1059              	.LFB15:
+ 776:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 777:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 778:.\Generated_Source\PSoC5/MAD_2.c **** /*******************************************************************************
+ 779:.\Generated_Source\PSoC5/MAD_2.c **** * Function Name: MAD_2_CountsTo_uVolts
+ 780:.\Generated_Source\PSoC5/MAD_2.c **** ********************************************************************************
+ 781:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 782:.\Generated_Source\PSoC5/MAD_2.c **** * Summary:
+ 783:.\Generated_Source\PSoC5/MAD_2.c **** *  This function converts ADC counts to micro Volts
+ 784:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 785:.\Generated_Source\PSoC5/MAD_2.c **** * Parameters:
+ 786:.\Generated_Source\PSoC5/MAD_2.c **** *  int16  adcCounts   Reading from ADC.
+ 787:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 788:.\Generated_Source\PSoC5/MAD_2.c **** * Return:
+ 789:.\Generated_Source\PSoC5/MAD_2.c **** *  int32  Result in micro Volts
+ 790:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 791:.\Generated_Source\PSoC5/MAD_2.c **** * Global Variables:
+ 792:.\Generated_Source\PSoC5/MAD_2.c **** *  MAD_2_offset variable used.
+ 793:.\Generated_Source\PSoC5/MAD_2.c **** *  MAD_2_countsPerVolt variable used.
+ 794:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 795:.\Generated_Source\PSoC5/MAD_2.c **** *******************************************************************************/
+ 796:.\Generated_Source\PSoC5/MAD_2.c **** int32 MAD_2_CountsTo_uVolts(int16 adcCounts)
+ 797:.\Generated_Source\PSoC5/MAD_2.c **** {
+ 1060              		.loc 1 797 0
+ 1061              		.cfi_startproc
+ 1062              		@ args = 0, pretend = 0, frame = 16
+ 1063              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1064              		@ link register save eliminated.
+ 1065 0000 80B4     		push	{r7}
+ 1066              	.LCFI41:
+ 1067              		.cfi_def_cfa_offset 4
+ 1068 0002 85B0     		sub	sp, sp, #20
+ 1069              	.LCFI42:
+ 1070              		.cfi_def_cfa_offset 24
+ 1071 0004 00AF     		add	r7, sp, #0
+ 1072              		.cfi_offset 7, -4
+ 1073              	.LCFI43:
+ 1074              		.cfi_def_cfa_register 7
+ 1075 0006 0346     		mov	r3, r0
+ 1076 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 798:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 799:.\Generated_Source\PSoC5/MAD_2.c ****     int32 uVolts;
+ 800:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 801:.\Generated_Source\PSoC5/MAD_2.c ****     /* Subtract ADC offset */
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 34
+
+
+ 802:.\Generated_Source\PSoC5/MAD_2.c ****     adcCounts -= MAD_2_offset;
+ 1077              		.loc 1 802 0
+ 1078 000a FA88     		ldrh	r2, [r7, #6]
+ 1079 000c 40F20003 		movw	r3, #:lower16:MAD_2_offset
+ 1080 0010 C0F20003 		movt	r3, #:upper16:MAD_2_offset
+ 1081 0014 1B88     		ldrh	r3, [r3, #0]	@ movhi
+ 1082 0016 9BB2     		uxth	r3, r3
+ 1083 0018 9BB2     		uxth	r3, r3
+ 1084 001a C3EB0203 		rsb	r3, r3, r2
+ 1085 001e 9BB2     		uxth	r3, r3
+ 1086 0020 FB80     		strh	r3, [r7, #6]	@ movhi
+ 803:.\Generated_Source\PSoC5/MAD_2.c ****     /* To convert adcCounts to microVolts it is required to be multiplied
+ 804:.\Generated_Source\PSoC5/MAD_2.c ****     *  on 1 million. It is multiplied on 500000 and later on 2 to
+ 805:.\Generated_Source\PSoC5/MAD_2.c ****     *  to avoid 32bit arithmetic overflows.
+ 806:.\Generated_Source\PSoC5/MAD_2.c ****     */
+ 807:.\Generated_Source\PSoC5/MAD_2.c ****     uVolts = (( (int32)adcCounts * 500000 ) / MAD_2_countsPerVolt) * 2;
+ 1087              		.loc 1 807 0
+ 1088 0022 B7F90620 		ldrsh	r2, [r7, #6]
+ 1089 0026 4AF22013 		movw	r3, #:lower16:500000
+ 1090 002a C0F20703 		movt	r3, #:upper16:500000
+ 1091 002e 03FB02F2 		mul	r2, r3, r2
+ 1092 0032 40F20003 		movw	r3, #:lower16:MAD_2_countsPerVolt
+ 1093 0036 C0F20003 		movt	r3, #:upper16:MAD_2_countsPerVolt
+ 1094 003a 1B88     		ldrh	r3, [r3, #0]	@ movhi
+ 1095 003c 9BB2     		uxth	r3, r3
+ 1096 003e 1BB2     		sxth	r3, r3
+ 1097 0040 92FBF3F3 		sdiv	r3, r2, r3
+ 1098 0044 4FEA4303 		lsl	r3, r3, #1
+ 1099 0048 FB60     		str	r3, [r7, #12]
+ 808:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 809:.\Generated_Source\PSoC5/MAD_2.c ****     return( uVolts );
+ 1100              		.loc 1 809 0
+ 1101 004a FB68     		ldr	r3, [r7, #12]
+ 810:.\Generated_Source\PSoC5/MAD_2.c **** }
+ 1102              		.loc 1 810 0
+ 1103 004c 1846     		mov	r0, r3
+ 1104 004e 07F11407 		add	r7, r7, #20
+ 1105 0052 BD46     		mov	sp, r7
+ 1106 0054 80BC     		pop	{r7}
+ 1107 0056 7047     		bx	lr
+ 1108              		.cfi_endproc
+ 1109              	.LFE15:
+ 1110              		.size	MAD_2_CountsTo_uVolts, .-MAD_2_CountsTo_uVolts
+ 1111              		.global	__aeabi_i2f
+ 1112              		.global	__aeabi_fdiv
+ 1113              		.section	.text.MAD_2_CountsTo_Volts,"ax",%progbits
+ 1114              		.align	2
+ 1115              		.global	MAD_2_CountsTo_Volts
+ 1116              		.thumb
+ 1117              		.thumb_func
+ 1118              		.type	MAD_2_CountsTo_Volts, %function
+ 1119              	MAD_2_CountsTo_Volts:
+ 1120              	.LFB16:
+ 811:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 812:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 813:.\Generated_Source\PSoC5/MAD_2.c **** /*******************************************************************************
+ 814:.\Generated_Source\PSoC5/MAD_2.c **** * Function Name: MAD_2_CountsTo_Volts
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 35
+
+
+ 815:.\Generated_Source\PSoC5/MAD_2.c **** ********************************************************************************
+ 816:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 817:.\Generated_Source\PSoC5/MAD_2.c **** * Summary:
+ 818:.\Generated_Source\PSoC5/MAD_2.c **** *  This function converts ADC counts to Volts
+ 819:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 820:.\Generated_Source\PSoC5/MAD_2.c **** * Parameters:
+ 821:.\Generated_Source\PSoC5/MAD_2.c **** *  int16  adcCounts   Reading from ADC.
+ 822:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 823:.\Generated_Source\PSoC5/MAD_2.c **** * Return:
+ 824:.\Generated_Source\PSoC5/MAD_2.c **** *  float  Result in mVolts
+ 825:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 826:.\Generated_Source\PSoC5/MAD_2.c **** * Global Variables:
+ 827:.\Generated_Source\PSoC5/MAD_2.c **** *  MAD_2_offset variable used.
+ 828:.\Generated_Source\PSoC5/MAD_2.c **** *  MAD_2_countsPerVolt variable used.
+ 829:.\Generated_Source\PSoC5/MAD_2.c **** *
+ 830:.\Generated_Source\PSoC5/MAD_2.c **** *******************************************************************************/
+ 831:.\Generated_Source\PSoC5/MAD_2.c **** float32 MAD_2_CountsTo_Volts(int16 adcCounts)
+ 832:.\Generated_Source\PSoC5/MAD_2.c **** {
+ 1121              		.loc 1 832 0
+ 1122              		.cfi_startproc
+ 1123              		@ args = 0, pretend = 0, frame = 16
+ 1124              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1125 0000 90B5     		push	{r4, r7, lr}
+ 1126              	.LCFI44:
+ 1127              		.cfi_def_cfa_offset 12
+ 1128 0002 85B0     		sub	sp, sp, #20
+ 1129              	.LCFI45:
+ 1130              		.cfi_def_cfa_offset 32
+ 1131 0004 00AF     		add	r7, sp, #0
+ 1132              		.cfi_offset 14, -4
+ 1133              		.cfi_offset 7, -8
+ 1134              		.cfi_offset 4, -12
+ 1135              	.LCFI46:
+ 1136              		.cfi_def_cfa_register 7
+ 1137 0006 0346     		mov	r3, r0
+ 1138 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 833:.\Generated_Source\PSoC5/MAD_2.c ****     float32 volts;
+ 834:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 835:.\Generated_Source\PSoC5/MAD_2.c ****     /* Subtract ADC offset */
+ 836:.\Generated_Source\PSoC5/MAD_2.c ****     adcCounts -= MAD_2_offset;
+ 1139              		.loc 1 836 0
+ 1140 000a FA88     		ldrh	r2, [r7, #6]
+ 1141 000c 40F20003 		movw	r3, #:lower16:MAD_2_offset
+ 1142 0010 C0F20003 		movt	r3, #:upper16:MAD_2_offset
+ 1143 0014 1B88     		ldrh	r3, [r3, #0]	@ movhi
+ 1144 0016 9BB2     		uxth	r3, r3
+ 1145 0018 9BB2     		uxth	r3, r3
+ 1146 001a C3EB0203 		rsb	r3, r3, r2
+ 1147 001e 9BB2     		uxth	r3, r3
+ 1148 0020 FB80     		strh	r3, [r7, #6]	@ movhi
+ 837:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 838:.\Generated_Source\PSoC5/MAD_2.c ****     volts = (float32)adcCounts / (float32)MAD_2_countsPerVolt;
+ 1149              		.loc 1 838 0
+ 1150 0022 B7F90630 		ldrsh	r3, [r7, #6]
+ 1151 0026 1846     		mov	r0, r3
+ 1152 0028 FFF7FEFF 		bl	__aeabi_i2f
+ 1153 002c 0446     		mov	r4, r0
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 36
+
+
+ 1154 002e 40F20003 		movw	r3, #:lower16:MAD_2_countsPerVolt
+ 1155 0032 C0F20003 		movt	r3, #:upper16:MAD_2_countsPerVolt
+ 1156 0036 1B88     		ldrh	r3, [r3, #0]	@ movhi
+ 1157 0038 9BB2     		uxth	r3, r3
+ 1158 003a 1BB2     		sxth	r3, r3
+ 1159 003c 1846     		mov	r0, r3
+ 1160 003e FFF7FEFF 		bl	__aeabi_i2f
+ 1161 0042 0346     		mov	r3, r0
+ 1162 0044 2046     		mov	r0, r4
+ 1163 0046 1946     		mov	r1, r3
+ 1164 0048 FFF7FEFF 		bl	__aeabi_fdiv
+ 1165 004c 0346     		mov	r3, r0
+ 1166 004e FB60     		str	r3, [r7, #12]	@ float
+ 839:.\Generated_Source\PSoC5/MAD_2.c **** 
+ 840:.\Generated_Source\PSoC5/MAD_2.c ****     return( volts );
+ 1167              		.loc 1 840 0
+ 1168 0050 FB68     		ldr	r3, [r7, #12]	@ float
+ 841:.\Generated_Source\PSoC5/MAD_2.c **** }
+ 1169              		.loc 1 841 0
+ 1170 0052 1846     		mov	r0, r3
+ 1171 0054 07F11407 		add	r7, r7, #20
+ 1172 0058 BD46     		mov	sp, r7
+ 1173 005a 90BD     		pop	{r4, r7, pc}
+ 1174              		.cfi_endproc
+ 1175              	.LFE16:
+ 1176              		.size	MAD_2_CountsTo_Volts, .-MAD_2_CountsTo_Volts
+ 1177              		.text
+ 1178              	.Letext0:
+ 1179              		.section	.debug_loc,"",%progbits
+ 1180              	.Ldebug_loc0:
+ 1181              	.LLST0:
+ 1182 0000 00000000 		.4byte	.LFB0
+ 1183 0004 02000000 		.4byte	.LCFI0
+ 1184 0008 0100     		.2byte	0x1
+ 1185 000a 5D       		.byte	0x5d
+ 1186 000b 02000000 		.4byte	.LCFI0
+ 1187 000f 04000000 		.4byte	.LCFI1
+ 1188 0013 0200     		.2byte	0x2
+ 1189 0015 7D       		.byte	0x7d
+ 1190 0016 08       		.sleb128 8
+ 1191 0017 04000000 		.4byte	.LCFI1
+ 1192 001b 2A000000 		.4byte	.LFE0
+ 1193 001f 0200     		.2byte	0x2
+ 1194 0021 77       		.byte	0x77
+ 1195 0022 08       		.sleb128 8
+ 1196 0023 00000000 		.4byte	0x0
+ 1197 0027 00000000 		.4byte	0x0
+ 1198              	.LLST1:
+ 1199 002b 00000000 		.4byte	.LFB1
+ 1200 002f 02000000 		.4byte	.LCFI2
+ 1201 0033 0100     		.2byte	0x1
+ 1202 0035 5D       		.byte	0x5d
+ 1203 0036 02000000 		.4byte	.LCFI2
+ 1204 003a 04000000 		.4byte	.LCFI3
+ 1205 003e 0200     		.2byte	0x2
+ 1206 0040 7D       		.byte	0x7d
+ 1207 0041 08       		.sleb128 8
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 37
+
+
+ 1208 0042 04000000 		.4byte	.LCFI3
+ 1209 0046 5C000000 		.4byte	.LFE1
+ 1210 004a 0200     		.2byte	0x2
+ 1211 004c 77       		.byte	0x77
+ 1212 004d 08       		.sleb128 8
+ 1213 004e 00000000 		.4byte	0x0
+ 1214 0052 00000000 		.4byte	0x0
+ 1215              	.LLST2:
+ 1216 0056 00000000 		.4byte	.LFB2
+ 1217 005a 02000000 		.4byte	.LCFI4
+ 1218 005e 0100     		.2byte	0x1
+ 1219 0060 5D       		.byte	0x5d
+ 1220 0061 02000000 		.4byte	.LCFI4
+ 1221 0065 04000000 		.4byte	.LCFI5
+ 1222 0069 0200     		.2byte	0x2
+ 1223 006b 7D       		.byte	0x7d
+ 1224 006c 08       		.sleb128 8
+ 1225 006d 04000000 		.4byte	.LCFI5
+ 1226 0071 06000000 		.4byte	.LCFI6
+ 1227 0075 0200     		.2byte	0x2
+ 1228 0077 7D       		.byte	0x7d
+ 1229 0078 10       		.sleb128 16
+ 1230 0079 06000000 		.4byte	.LCFI6
+ 1231 007d 78010000 		.4byte	.LFE2
+ 1232 0081 0200     		.2byte	0x2
+ 1233 0083 77       		.byte	0x77
+ 1234 0084 10       		.sleb128 16
+ 1235 0085 00000000 		.4byte	0x0
+ 1236 0089 00000000 		.4byte	0x0
+ 1237              	.LLST3:
+ 1238 008d 00000000 		.4byte	.LFB3
+ 1239 0091 02000000 		.4byte	.LCFI7
+ 1240 0095 0100     		.2byte	0x1
+ 1241 0097 5D       		.byte	0x5d
+ 1242 0098 02000000 		.4byte	.LCFI7
+ 1243 009c 04000000 		.4byte	.LCFI8
+ 1244 00a0 0200     		.2byte	0x2
+ 1245 00a2 7D       		.byte	0x7d
+ 1246 00a3 08       		.sleb128 8
+ 1247 00a4 04000000 		.4byte	.LCFI8
+ 1248 00a8 06000000 		.4byte	.LCFI9
+ 1249 00ac 0200     		.2byte	0x2
+ 1250 00ae 7D       		.byte	0x7d
+ 1251 00af 10       		.sleb128 16
+ 1252 00b0 06000000 		.4byte	.LCFI9
+ 1253 00b4 DC000000 		.4byte	.LFE3
+ 1254 00b8 0200     		.2byte	0x2
+ 1255 00ba 77       		.byte	0x77
+ 1256 00bb 10       		.sleb128 16
+ 1257 00bc 00000000 		.4byte	0x0
+ 1258 00c0 00000000 		.4byte	0x0
+ 1259              	.LLST4:
+ 1260 00c4 00000000 		.4byte	.LFB4
+ 1261 00c8 02000000 		.4byte	.LCFI10
+ 1262 00cc 0100     		.2byte	0x1
+ 1263 00ce 5D       		.byte	0x5d
+ 1264 00cf 02000000 		.4byte	.LCFI10
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 38
+
+
+ 1265 00d3 04000000 		.4byte	.LCFI11
+ 1266 00d7 0200     		.2byte	0x2
+ 1267 00d9 7D       		.byte	0x7d
+ 1268 00da 04       		.sleb128 4
+ 1269 00db 04000000 		.4byte	.LCFI11
+ 1270 00df 06000000 		.4byte	.LCFI12
+ 1271 00e3 0200     		.2byte	0x2
+ 1272 00e5 7D       		.byte	0x7d
+ 1273 00e6 18       		.sleb128 24
+ 1274 00e7 06000000 		.4byte	.LCFI12
+ 1275 00eb 4A000000 		.4byte	.LFE4
+ 1276 00ef 0200     		.2byte	0x2
+ 1277 00f1 77       		.byte	0x77
+ 1278 00f2 18       		.sleb128 24
+ 1279 00f3 00000000 		.4byte	0x0
+ 1280 00f7 00000000 		.4byte	0x0
+ 1281              	.LLST5:
+ 1282 00fb 00000000 		.4byte	.LFB5
+ 1283 00ff 02000000 		.4byte	.LCFI13
+ 1284 0103 0100     		.2byte	0x1
+ 1285 0105 5D       		.byte	0x5d
+ 1286 0106 02000000 		.4byte	.LCFI13
+ 1287 010a 04000000 		.4byte	.LCFI14
+ 1288 010e 0200     		.2byte	0x2
+ 1289 0110 7D       		.byte	0x7d
+ 1290 0111 08       		.sleb128 8
+ 1291 0112 04000000 		.4byte	.LCFI14
+ 1292 0116 06000000 		.4byte	.LCFI15
+ 1293 011a 0200     		.2byte	0x2
+ 1294 011c 7D       		.byte	0x7d
+ 1295 011d 18       		.sleb128 24
+ 1296 011e 06000000 		.4byte	.LCFI15
+ 1297 0122 68000000 		.4byte	.LFE5
+ 1298 0126 0200     		.2byte	0x2
+ 1299 0128 77       		.byte	0x77
+ 1300 0129 18       		.sleb128 24
+ 1301 012a 00000000 		.4byte	0x0
+ 1302 012e 00000000 		.4byte	0x0
+ 1303              	.LLST6:
+ 1304 0132 00000000 		.4byte	.LFB6
+ 1305 0136 02000000 		.4byte	.LCFI16
+ 1306 013a 0100     		.2byte	0x1
+ 1307 013c 5D       		.byte	0x5d
+ 1308 013d 02000000 		.4byte	.LCFI16
+ 1309 0141 04000000 		.4byte	.LCFI17
+ 1310 0145 0200     		.2byte	0x2
+ 1311 0147 7D       		.byte	0x7d
+ 1312 0148 04       		.sleb128 4
+ 1313 0149 04000000 		.4byte	.LCFI17
+ 1314 014d 40000000 		.4byte	.LFE6
+ 1315 0151 0200     		.2byte	0x2
+ 1316 0153 77       		.byte	0x77
+ 1317 0154 04       		.sleb128 4
+ 1318 0155 00000000 		.4byte	0x0
+ 1319 0159 00000000 		.4byte	0x0
+ 1320              	.LLST7:
+ 1321 015d 00000000 		.4byte	.LFB7
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 39
+
+
+ 1322 0161 02000000 		.4byte	.LCFI18
+ 1323 0165 0100     		.2byte	0x1
+ 1324 0167 5D       		.byte	0x5d
+ 1325 0168 02000000 		.4byte	.LCFI18
+ 1326 016c 04000000 		.4byte	.LCFI19
+ 1327 0170 0200     		.2byte	0x2
+ 1328 0172 7D       		.byte	0x7d
+ 1329 0173 04       		.sleb128 4
+ 1330 0174 04000000 		.4byte	.LCFI19
+ 1331 0178 40000000 		.4byte	.LFE7
+ 1332 017c 0200     		.2byte	0x2
+ 1333 017e 77       		.byte	0x77
+ 1334 017f 04       		.sleb128 4
+ 1335 0180 00000000 		.4byte	0x0
+ 1336 0184 00000000 		.4byte	0x0
+ 1337              	.LLST8:
+ 1338 0188 00000000 		.4byte	.LFB8
+ 1339 018c 02000000 		.4byte	.LCFI20
+ 1340 0190 0100     		.2byte	0x1
+ 1341 0192 5D       		.byte	0x5d
+ 1342 0193 02000000 		.4byte	.LCFI20
+ 1343 0197 04000000 		.4byte	.LCFI21
+ 1344 019b 0200     		.2byte	0x2
+ 1345 019d 7D       		.byte	0x7d
+ 1346 019e 08       		.sleb128 8
+ 1347 019f 04000000 		.4byte	.LCFI21
+ 1348 01a3 06000000 		.4byte	.LCFI22
+ 1349 01a7 0200     		.2byte	0x2
+ 1350 01a9 7D       		.byte	0x7d
+ 1351 01aa 18       		.sleb128 24
+ 1352 01ab 06000000 		.4byte	.LCFI22
+ 1353 01af 4C000000 		.4byte	.LFE8
+ 1354 01b3 0200     		.2byte	0x2
+ 1355 01b5 77       		.byte	0x77
+ 1356 01b6 18       		.sleb128 24
+ 1357 01b7 00000000 		.4byte	0x0
+ 1358 01bb 00000000 		.4byte	0x0
+ 1359              	.LLST9:
+ 1360 01bf 00000000 		.4byte	.LFB9
+ 1361 01c3 02000000 		.4byte	.LCFI23
+ 1362 01c7 0100     		.2byte	0x1
+ 1363 01c9 5D       		.byte	0x5d
+ 1364 01ca 02000000 		.4byte	.LCFI23
+ 1365 01ce 04000000 		.4byte	.LCFI24
+ 1366 01d2 0200     		.2byte	0x2
+ 1367 01d4 7D       		.byte	0x7d
+ 1368 01d5 04       		.sleb128 4
+ 1369 01d6 04000000 		.4byte	.LCFI24
+ 1370 01da 06000000 		.4byte	.LCFI25
+ 1371 01de 0200     		.2byte	0x2
+ 1372 01e0 7D       		.byte	0x7d
+ 1373 01e1 10       		.sleb128 16
+ 1374 01e2 06000000 		.4byte	.LCFI25
+ 1375 01e6 5C000000 		.4byte	.LFE9
+ 1376 01ea 0200     		.2byte	0x2
+ 1377 01ec 77       		.byte	0x77
+ 1378 01ed 10       		.sleb128 16
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 40
+
+
+ 1379 01ee 00000000 		.4byte	0x0
+ 1380 01f2 00000000 		.4byte	0x0
+ 1381              	.LLST10:
+ 1382 01f6 00000000 		.4byte	.LFB10
+ 1383 01fa 02000000 		.4byte	.LCFI26
+ 1384 01fe 0100     		.2byte	0x1
+ 1385 0200 5D       		.byte	0x5d
+ 1386 0201 02000000 		.4byte	.LCFI26
+ 1387 0205 04000000 		.4byte	.LCFI27
+ 1388 0209 0200     		.2byte	0x2
+ 1389 020b 7D       		.byte	0x7d
+ 1390 020c 04       		.sleb128 4
+ 1391 020d 04000000 		.4byte	.LCFI27
+ 1392 0211 06000000 		.4byte	.LCFI28
+ 1393 0215 0200     		.2byte	0x2
+ 1394 0217 7D       		.byte	0x7d
+ 1395 0218 10       		.sleb128 16
+ 1396 0219 06000000 		.4byte	.LCFI28
+ 1397 021d 5A000000 		.4byte	.LFE10
+ 1398 0221 0200     		.2byte	0x2
+ 1399 0223 77       		.byte	0x77
+ 1400 0224 10       		.sleb128 16
+ 1401 0225 00000000 		.4byte	0x0
+ 1402 0229 00000000 		.4byte	0x0
+ 1403              	.LLST11:
+ 1404 022d 00000000 		.4byte	.LFB11
+ 1405 0231 02000000 		.4byte	.LCFI29
+ 1406 0235 0100     		.2byte	0x1
+ 1407 0237 5D       		.byte	0x5d
+ 1408 0238 02000000 		.4byte	.LCFI29
+ 1409 023c 04000000 		.4byte	.LCFI30
+ 1410 0240 0200     		.2byte	0x2
+ 1411 0242 7D       		.byte	0x7d
+ 1412 0243 04       		.sleb128 4
+ 1413 0244 04000000 		.4byte	.LCFI30
+ 1414 0248 06000000 		.4byte	.LCFI31
+ 1415 024c 0200     		.2byte	0x2
+ 1416 024e 7D       		.byte	0x7d
+ 1417 024f 10       		.sleb128 16
+ 1418 0250 06000000 		.4byte	.LCFI31
+ 1419 0254 20000000 		.4byte	.LFE11
+ 1420 0258 0200     		.2byte	0x2
+ 1421 025a 77       		.byte	0x77
+ 1422 025b 10       		.sleb128 16
+ 1423 025c 00000000 		.4byte	0x0
+ 1424 0260 00000000 		.4byte	0x0
+ 1425              	.LLST12:
+ 1426 0264 00000000 		.4byte	.LFB12
+ 1427 0268 02000000 		.4byte	.LCFI32
+ 1428 026c 0100     		.2byte	0x1
+ 1429 026e 5D       		.byte	0x5d
+ 1430 026f 02000000 		.4byte	.LCFI32
+ 1431 0273 04000000 		.4byte	.LCFI33
+ 1432 0277 0200     		.2byte	0x2
+ 1433 0279 7D       		.byte	0x7d
+ 1434 027a 08       		.sleb128 8
+ 1435 027b 04000000 		.4byte	.LCFI33
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 41
+
+
+ 1436 027f 06000000 		.4byte	.LCFI34
+ 1437 0283 0200     		.2byte	0x2
+ 1438 0285 7D       		.byte	0x7d
+ 1439 0286 18       		.sleb128 24
+ 1440 0287 06000000 		.4byte	.LCFI34
+ 1441 028b 82000000 		.4byte	.LFE12
+ 1442 028f 0200     		.2byte	0x2
+ 1443 0291 77       		.byte	0x77
+ 1444 0292 18       		.sleb128 24
+ 1445 0293 00000000 		.4byte	0x0
+ 1446 0297 00000000 		.4byte	0x0
+ 1447              	.LLST13:
+ 1448 029b 00000000 		.4byte	.LFB13
+ 1449 029f 02000000 		.4byte	.LCFI35
+ 1450 02a3 0100     		.2byte	0x1
+ 1451 02a5 5D       		.byte	0x5d
+ 1452 02a6 02000000 		.4byte	.LCFI35
+ 1453 02aa 04000000 		.4byte	.LCFI36
+ 1454 02ae 0200     		.2byte	0x2
+ 1455 02b0 7D       		.byte	0x7d
+ 1456 02b1 04       		.sleb128 4
+ 1457 02b2 04000000 		.4byte	.LCFI36
+ 1458 02b6 06000000 		.4byte	.LCFI37
+ 1459 02ba 0200     		.2byte	0x2
+ 1460 02bc 7D       		.byte	0x7d
+ 1461 02bd 10       		.sleb128 16
+ 1462 02be 06000000 		.4byte	.LCFI37
+ 1463 02c2 20000000 		.4byte	.LFE13
+ 1464 02c6 0200     		.2byte	0x2
+ 1465 02c8 77       		.byte	0x77
+ 1466 02c9 10       		.sleb128 16
+ 1467 02ca 00000000 		.4byte	0x0
+ 1468 02ce 00000000 		.4byte	0x0
+ 1469              	.LLST14:
+ 1470 02d2 00000000 		.4byte	.LFB14
+ 1471 02d6 02000000 		.4byte	.LCFI38
+ 1472 02da 0100     		.2byte	0x1
+ 1473 02dc 5D       		.byte	0x5d
+ 1474 02dd 02000000 		.4byte	.LCFI38
+ 1475 02e1 04000000 		.4byte	.LCFI39
+ 1476 02e5 0200     		.2byte	0x2
+ 1477 02e7 7D       		.byte	0x7d
+ 1478 02e8 04       		.sleb128 4
+ 1479 02e9 04000000 		.4byte	.LCFI39
+ 1480 02ed 06000000 		.4byte	.LCFI40
+ 1481 02f1 0200     		.2byte	0x2
+ 1482 02f3 7D       		.byte	0x7d
+ 1483 02f4 18       		.sleb128 24
+ 1484 02f5 06000000 		.4byte	.LCFI40
+ 1485 02f9 52000000 		.4byte	.LFE14
+ 1486 02fd 0200     		.2byte	0x2
+ 1487 02ff 77       		.byte	0x77
+ 1488 0300 18       		.sleb128 24
+ 1489 0301 00000000 		.4byte	0x0
+ 1490 0305 00000000 		.4byte	0x0
+ 1491              	.LLST15:
+ 1492 0309 00000000 		.4byte	.LFB15
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 42
+
+
+ 1493 030d 02000000 		.4byte	.LCFI41
+ 1494 0311 0100     		.2byte	0x1
+ 1495 0313 5D       		.byte	0x5d
+ 1496 0314 02000000 		.4byte	.LCFI41
+ 1497 0318 04000000 		.4byte	.LCFI42
+ 1498 031c 0200     		.2byte	0x2
+ 1499 031e 7D       		.byte	0x7d
+ 1500 031f 04       		.sleb128 4
+ 1501 0320 04000000 		.4byte	.LCFI42
+ 1502 0324 06000000 		.4byte	.LCFI43
+ 1503 0328 0200     		.2byte	0x2
+ 1504 032a 7D       		.byte	0x7d
+ 1505 032b 18       		.sleb128 24
+ 1506 032c 06000000 		.4byte	.LCFI43
+ 1507 0330 58000000 		.4byte	.LFE15
+ 1508 0334 0200     		.2byte	0x2
+ 1509 0336 77       		.byte	0x77
+ 1510 0337 18       		.sleb128 24
+ 1511 0338 00000000 		.4byte	0x0
+ 1512 033c 00000000 		.4byte	0x0
+ 1513              	.LLST16:
+ 1514 0340 00000000 		.4byte	.LFB16
+ 1515 0344 02000000 		.4byte	.LCFI44
+ 1516 0348 0100     		.2byte	0x1
+ 1517 034a 5D       		.byte	0x5d
+ 1518 034b 02000000 		.4byte	.LCFI44
+ 1519 034f 04000000 		.4byte	.LCFI45
+ 1520 0353 0200     		.2byte	0x2
+ 1521 0355 7D       		.byte	0x7d
+ 1522 0356 0C       		.sleb128 12
+ 1523 0357 04000000 		.4byte	.LCFI45
+ 1524 035b 06000000 		.4byte	.LCFI46
+ 1525 035f 0200     		.2byte	0x2
+ 1526 0361 7D       		.byte	0x7d
+ 1527 0362 20       		.sleb128 32
+ 1528 0363 06000000 		.4byte	.LCFI46
+ 1529 0367 5C000000 		.4byte	.LFE16
+ 1530 036b 0200     		.2byte	0x2
+ 1531 036d 77       		.byte	0x77
+ 1532 036e 20       		.sleb128 32
+ 1533 036f 00000000 		.4byte	0x0
+ 1534 0373 00000000 		.4byte	0x0
+ 1535              		.file 2 ".\\Generated_Source\\PSoC5\\/cytypes.h"
+ 1536              		.section	.debug_info
+ 1537 0000 27040000 		.4byte	0x427
+ 1538 0004 0200     		.2byte	0x2
+ 1539 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1540 000a 04       		.byte	0x4
+ 1541 000b 01       		.uleb128 0x1
+ 1542 000c 24020000 		.4byte	.LASF52
+ 1543 0010 01       		.byte	0x1
+ 1544 0011 2A000000 		.4byte	.LASF53
+ 1545 0015 A1020000 		.4byte	.LASF54
+ 1546 0019 00000000 		.4byte	0x0
+ 1547 001d 00000000 		.4byte	0x0
+ 1548 0021 00000000 		.4byte	.Ldebug_ranges0+0x0
+ 1549 0025 00000000 		.4byte	.Ldebug_line0
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 43
+
+
+ 1550 0029 02       		.uleb128 0x2
+ 1551 002a 01       		.byte	0x1
+ 1552 002b 06       		.byte	0x6
+ 1553 002c 8A020000 		.4byte	.LASF0
+ 1554 0030 02       		.uleb128 0x2
+ 1555 0031 01       		.byte	0x1
+ 1556 0032 08       		.byte	0x8
+ 1557 0033 DF000000 		.4byte	.LASF1
+ 1558 0037 02       		.uleb128 0x2
+ 1559 0038 02       		.byte	0x2
+ 1560 0039 05       		.byte	0x5
+ 1561 003a 44020000 		.4byte	.LASF2
+ 1562 003e 02       		.uleb128 0x2
+ 1563 003f 02       		.byte	0x2
+ 1564 0040 07       		.byte	0x7
+ 1565 0041 7D000000 		.4byte	.LASF3
+ 1566 0045 03       		.uleb128 0x3
+ 1567 0046 04       		.byte	0x4
+ 1568 0047 05       		.byte	0x5
+ 1569 0048 696E7400 		.ascii	"int\000"
+ 1570 004c 02       		.uleb128 0x2
+ 1571 004d 04       		.byte	0x4
+ 1572 004e 07       		.byte	0x7
+ 1573 004f 8F010000 		.4byte	.LASF4
+ 1574 0053 02       		.uleb128 0x2
+ 1575 0054 08       		.byte	0x8
+ 1576 0055 05       		.byte	0x5
+ 1577 0056 00000000 		.4byte	.LASF5
+ 1578 005a 02       		.uleb128 0x2
+ 1579 005b 08       		.byte	0x8
+ 1580 005c 07       		.byte	0x7
+ 1581 005d C1010000 		.4byte	.LASF6
+ 1582 0061 02       		.uleb128 0x2
+ 1583 0062 04       		.byte	0x4
+ 1584 0063 05       		.byte	0x5
+ 1585 0064 5F020000 		.4byte	.LASF7
+ 1586 0068 04       		.uleb128 0x4
+ 1587 0069 04       		.byte	0x4
+ 1588 006a 07       		.byte	0x7
+ 1589 006b 02       		.uleb128 0x2
+ 1590 006c 04       		.byte	0x4
+ 1591 006d 07       		.byte	0x7
+ 1592 006e 02010000 		.4byte	.LASF8
+ 1593 0072 02       		.uleb128 0x2
+ 1594 0073 01       		.byte	0x1
+ 1595 0074 08       		.byte	0x8
+ 1596 0075 37020000 		.4byte	.LASF9
+ 1597 0079 05       		.uleb128 0x5
+ 1598 007a 4E020000 		.4byte	.LASF10
+ 1599 007e 02       		.byte	0x2
+ 1600 007f 4C       		.byte	0x4c
+ 1601 0080 30000000 		.4byte	0x30
+ 1602 0084 05       		.uleb128 0x5
+ 1603 0085 5C010000 		.4byte	.LASF11
+ 1604 0089 02       		.byte	0x2
+ 1605 008a 4D       		.byte	0x4d
+ 1606 008b 3E000000 		.4byte	0x3e
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 44
+
+
+ 1607 008f 05       		.uleb128 0x5
+ 1608 0090 63010000 		.4byte	.LASF12
+ 1609 0094 02       		.byte	0x2
+ 1610 0095 4F       		.byte	0x4f
+ 1611 0096 29000000 		.4byte	0x29
+ 1612 009a 05       		.uleb128 0x5
+ 1613 009b FC000000 		.4byte	.LASF13
+ 1614 009f 02       		.byte	0x2
+ 1615 00a0 50       		.byte	0x50
+ 1616 00a1 37000000 		.4byte	0x37
+ 1617 00a5 05       		.uleb128 0x5
+ 1618 00a6 14010000 		.4byte	.LASF14
+ 1619 00aa 02       		.byte	0x2
+ 1620 00ab 51       		.byte	0x51
+ 1621 00ac 61000000 		.4byte	0x61
+ 1622 00b0 05       		.uleb128 0x5
+ 1623 00b1 F7020000 		.4byte	.LASF15
+ 1624 00b5 02       		.byte	0x2
+ 1625 00b6 52       		.byte	0x52
+ 1626 00b7 BB000000 		.4byte	0xbb
+ 1627 00bb 02       		.uleb128 0x2
+ 1628 00bc 04       		.byte	0x4
+ 1629 00bd 04       		.byte	0x4
+ 1630 00be BC000000 		.4byte	.LASF16
+ 1631 00c2 02       		.uleb128 0x2
+ 1632 00c3 08       		.byte	0x8
+ 1633 00c4 04       		.byte	0x4
+ 1634 00c5 4D010000 		.4byte	.LASF17
+ 1635 00c9 06       		.uleb128 0x6
+ 1636 00ca 01       		.byte	0x1
+ 1637 00cb D8010000 		.4byte	.LASF18
+ 1638 00cf 01       		.byte	0x1
+ 1639 00d0 4B       		.byte	0x4b
+ 1640 00d1 01       		.byte	0x1
+ 1641 00d2 00000000 		.4byte	.LFB0
+ 1642 00d6 2A000000 		.4byte	.LFE0
+ 1643 00da 00000000 		.4byte	.LLST0
+ 1644 00de 06       		.uleb128 0x6
+ 1645 00df 01       		.byte	0x1
+ 1646 00e0 AF010000 		.4byte	.LASF19
+ 1647 00e4 01       		.byte	0x1
+ 1648 00e5 6B       		.byte	0x6b
+ 1649 00e6 01       		.byte	0x1
+ 1650 00e7 00000000 		.4byte	.LFB1
+ 1651 00eb 5C000000 		.4byte	.LFE1
+ 1652 00ef 2B000000 		.4byte	.LLST1
+ 1653 00f3 07       		.uleb128 0x7
+ 1654 00f4 01       		.byte	0x1
+ 1655 00f5 C2000000 		.4byte	.LASF22
+ 1656 00f9 01       		.byte	0x1
+ 1657 00fa 90       		.byte	0x90
+ 1658 00fb 01       		.byte	0x1
+ 1659 00fc 00000000 		.4byte	.LFB2
+ 1660 0100 78010000 		.4byte	.LFE2
+ 1661 0104 56000000 		.4byte	.LLST2
+ 1662 0108 29010000 		.4byte	0x129
+ 1663 010c 08       		.uleb128 0x8
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 45
+
+
+ 1664 010d 30020000 		.4byte	.LASF20
+ 1665 0111 01       		.byte	0x1
+ 1666 0112 92       		.byte	0x92
+ 1667 0113 79000000 		.4byte	0x79
+ 1668 0117 02       		.byte	0x2
+ 1669 0118 91       		.byte	0x91
+ 1670 0119 76       		.sleb128 -10
+ 1671 011a 08       		.uleb128 0x8
+ 1672 011b 3C010000 		.4byte	.LASF21
+ 1673 011f 01       		.byte	0x1
+ 1674 0120 93       		.byte	0x93
+ 1675 0121 79000000 		.4byte	0x79
+ 1676 0125 02       		.byte	0x2
+ 1677 0126 91       		.byte	0x91
+ 1678 0127 77       		.sleb128 -9
+ 1679 0128 00       		.byte	0x0
+ 1680 0129 07       		.uleb128 0x7
+ 1681 012a 01       		.byte	0x1
+ 1682 012b 54020000 		.4byte	.LASF23
+ 1683 012f 01       		.byte	0x1
+ 1684 0130 FE       		.byte	0xfe
+ 1685 0131 01       		.byte	0x1
+ 1686 0132 00000000 		.4byte	.LFB3
+ 1687 0136 DC000000 		.4byte	.LFE3
+ 1688 013a 8D000000 		.4byte	.LLST3
+ 1689 013e 52010000 		.4byte	0x152
+ 1690 0142 09       		.uleb128 0x9
+ 1691 0143 3C010000 		.4byte	.LASF21
+ 1692 0147 01       		.byte	0x1
+ 1693 0148 0001     		.2byte	0x100
+ 1694 014a 79000000 		.4byte	0x79
+ 1695 014e 02       		.byte	0x2
+ 1696 014f 91       		.byte	0x91
+ 1697 0150 77       		.sleb128 -9
+ 1698 0151 00       		.byte	0x0
+ 1699 0152 0A       		.uleb128 0xa
+ 1700 0153 01       		.byte	0x1
+ 1701 0154 ED000000 		.4byte	.LASF24
+ 1702 0158 01       		.byte	0x1
+ 1703 0159 3201     		.2byte	0x132
+ 1704 015b 01       		.byte	0x1
+ 1705 015c 00000000 		.4byte	.LFB4
+ 1706 0160 4A000000 		.4byte	.LFE4
+ 1707 0164 C4000000 		.4byte	.LLST4
+ 1708 0168 8B010000 		.4byte	0x18b
+ 1709 016c 0B       		.uleb128 0xb
+ 1710 016d 97000000 		.4byte	.LASF26
+ 1711 0171 01       		.byte	0x1
+ 1712 0172 3201     		.2byte	0x132
+ 1713 0174 79000000 		.4byte	0x79
+ 1714 0178 02       		.byte	0x2
+ 1715 0179 91       		.byte	0x91
+ 1716 017a 6F       		.sleb128 -17
+ 1717 017b 09       		.uleb128 0x9
+ 1718 017c 30020000 		.4byte	.LASF20
+ 1719 0180 01       		.byte	0x1
+ 1720 0181 3401     		.2byte	0x134
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 46
+
+
+ 1721 0183 79000000 		.4byte	0x79
+ 1722 0187 02       		.byte	0x2
+ 1723 0188 91       		.byte	0x91
+ 1724 0189 77       		.sleb128 -9
+ 1725 018a 00       		.byte	0x0
+ 1726 018b 0A       		.uleb128 0xa
+ 1727 018c 01       		.byte	0x1
+ 1728 018d 28010000 		.4byte	.LASF25
+ 1729 0191 01       		.byte	0x1
+ 1730 0192 6501     		.2byte	0x165
+ 1731 0194 01       		.byte	0x1
+ 1732 0195 00000000 		.4byte	.LFB5
+ 1733 0199 68000000 		.4byte	.LFE5
+ 1734 019d FB000000 		.4byte	.LLST5
+ 1735 01a1 C4010000 		.4byte	0x1c4
+ 1736 01a5 0B       		.uleb128 0xb
+ 1737 01a6 96020000 		.4byte	.LASF27
+ 1738 01aa 01       		.byte	0x1
+ 1739 01ab 6501     		.2byte	0x165
+ 1740 01ad 79000000 		.4byte	0x79
+ 1741 01b1 02       		.byte	0x2
+ 1742 01b2 91       		.byte	0x91
+ 1743 01b3 6F       		.sleb128 -17
+ 1744 01b4 09       		.uleb128 0x9
+ 1745 01b5 30020000 		.4byte	.LASF20
+ 1746 01b9 01       		.byte	0x1
+ 1747 01ba 6701     		.2byte	0x167
+ 1748 01bc 79000000 		.4byte	0x79
+ 1749 01c0 02       		.byte	0x2
+ 1750 01c1 91       		.byte	0x91
+ 1751 01c2 77       		.sleb128 -9
+ 1752 01c3 00       		.byte	0x0
+ 1753 01c4 0C       		.uleb128 0xc
+ 1754 01c5 01       		.byte	0x1
+ 1755 01c6 9C010000 		.4byte	.LASF28
+ 1756 01ca 01       		.byte	0x1
+ 1757 01cb AE01     		.2byte	0x1ae
+ 1758 01cd 01       		.byte	0x1
+ 1759 01ce 00000000 		.4byte	.LFB6
+ 1760 01d2 40000000 		.4byte	.LFE6
+ 1761 01d6 32010000 		.4byte	.LLST6
+ 1762 01da 0C       		.uleb128 0xc
+ 1763 01db 01       		.byte	0x1
+ 1764 01dc E4010000 		.4byte	.LASF29
+ 1765 01e0 01       		.byte	0x1
+ 1766 01e1 D001     		.2byte	0x1d0
+ 1767 01e3 01       		.byte	0x1
+ 1768 01e4 00000000 		.4byte	.LFB7
+ 1769 01e8 40000000 		.4byte	.LFE7
+ 1770 01ec 5D010000 		.4byte	.LLST7
+ 1771 01f0 0D       		.uleb128 0xd
+ 1772 01f1 01       		.byte	0x1
+ 1773 01f2 FF020000 		.4byte	.LASF32
+ 1774 01f6 01       		.byte	0x1
+ 1775 01f7 F001     		.2byte	0x1f0
+ 1776 01f9 01       		.byte	0x1
+ 1777 01fa 79000000 		.4byte	0x79
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 47
+
+
+ 1778 01fe 00000000 		.4byte	.LFB8
+ 1779 0202 4C000000 		.4byte	.LFE8
+ 1780 0206 88010000 		.4byte	.LLST8
+ 1781 020a 2D020000 		.4byte	0x22d
+ 1782 020e 0B       		.uleb128 0xb
+ 1783 020f 3C020000 		.4byte	.LASF30
+ 1784 0213 01       		.byte	0x1
+ 1785 0214 F001     		.2byte	0x1f0
+ 1786 0216 79000000 		.4byte	0x79
+ 1787 021a 02       		.byte	0x2
+ 1788 021b 91       		.byte	0x91
+ 1789 021c 6F       		.sleb128 -17
+ 1790 021d 09       		.uleb128 0x9
+ 1791 021e 90000000 		.4byte	.LASF31
+ 1792 0222 01       		.byte	0x1
+ 1793 0223 F201     		.2byte	0x1f2
+ 1794 0225 79000000 		.4byte	0x79
+ 1795 0229 02       		.byte	0x2
+ 1796 022a 91       		.byte	0x91
+ 1797 022b 77       		.sleb128 -9
+ 1798 022c 00       		.byte	0x0
+ 1799 022d 0D       		.uleb128 0xd
+ 1800 022e 01       		.byte	0x1
+ 1801 022f 09020000 		.4byte	.LASF33
+ 1802 0233 01       		.byte	0x1
+ 1803 0234 1B02     		.2byte	0x21b
+ 1804 0236 01       		.byte	0x1
+ 1805 0237 8F000000 		.4byte	0x8f
+ 1806 023b 00000000 		.4byte	.LFB9
+ 1807 023f 5C000000 		.4byte	.LFE9
+ 1808 0243 BF010000 		.4byte	.LLST9
+ 1809 0247 5B020000 		.4byte	0x25b
+ 1810 024b 0E       		.uleb128 0xe
+ 1811 024c 72657300 		.ascii	"res\000"
+ 1812 0250 01       		.byte	0x1
+ 1813 0251 2002     		.2byte	0x220
+ 1814 0253 84000000 		.4byte	0x84
+ 1815 0257 02       		.byte	0x2
+ 1816 0258 91       		.byte	0x91
+ 1817 0259 76       		.sleb128 -10
+ 1818 025a 00       		.byte	0x0
+ 1819 025b 0D       		.uleb128 0xd
+ 1820 025c 01       		.byte	0x1
+ 1821 025d 9D000000 		.4byte	.LASF34
+ 1822 0261 01       		.byte	0x1
+ 1823 0262 5002     		.2byte	0x250
+ 1824 0264 01       		.byte	0x1
+ 1825 0265 9A000000 		.4byte	0x9a
+ 1826 0269 00000000 		.4byte	.LFB10
+ 1827 026d 5A000000 		.4byte	.LFE10
+ 1828 0271 F6010000 		.4byte	.LLST10
+ 1829 0275 89020000 		.4byte	0x289
+ 1830 0279 0E       		.uleb128 0xe
+ 1831 027a 72657300 		.ascii	"res\000"
+ 1832 027e 01       		.byte	0x1
+ 1833 027f 5202     		.2byte	0x252
+ 1834 0281 84000000 		.4byte	0x84
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 48
+
+
+ 1835 0285 02       		.byte	0x2
+ 1836 0286 91       		.byte	0x91
+ 1837 0287 76       		.sleb128 -10
+ 1838 0288 00       		.byte	0x0
+ 1839 0289 0A       		.uleb128 0xa
+ 1840 028a 01       		.byte	0x1
+ 1841 028b CF000000 		.4byte	.LASF35
+ 1842 028f 01       		.byte	0x1
+ 1843 0290 7E02     		.2byte	0x27e
+ 1844 0292 01       		.byte	0x1
+ 1845 0293 00000000 		.4byte	.LFB11
+ 1846 0297 20000000 		.4byte	.LFE11
+ 1847 029b 2D020000 		.4byte	.LLST11
+ 1848 029f B3020000 		.4byte	0x2b3
+ 1849 02a3 0B       		.uleb128 0xb
+ 1850 02a4 23000000 		.4byte	.LASF36
+ 1851 02a8 01       		.byte	0x1
+ 1852 02a9 7E02     		.2byte	0x27e
+ 1853 02ab 9A000000 		.4byte	0x9a
+ 1854 02af 02       		.byte	0x2
+ 1855 02b0 91       		.byte	0x91
+ 1856 02b1 76       		.sleb128 -10
+ 1857 02b2 00       		.byte	0x0
+ 1858 02b3 0F       		.uleb128 0xf
+ 1859 02b4 0E000000 		.4byte	.LASF55
+ 1860 02b8 01       		.byte	0x1
+ 1861 02b9 9802     		.2byte	0x298
+ 1862 02bb 01       		.byte	0x1
+ 1863 02bc 00000000 		.4byte	.LFB12
+ 1864 02c0 82000000 		.4byte	.LFE12
+ 1865 02c4 64020000 		.4byte	.LLST12
+ 1866 02c8 EB020000 		.4byte	0x2eb
+ 1867 02cc 0B       		.uleb128 0xb
+ 1868 02cd 96020000 		.4byte	.LASF27
+ 1869 02d1 01       		.byte	0x1
+ 1870 02d2 9802     		.2byte	0x298
+ 1871 02d4 79000000 		.4byte	0x79
+ 1872 02d8 02       		.byte	0x2
+ 1873 02d9 91       		.byte	0x91
+ 1874 02da 6F       		.sleb128 -17
+ 1875 02db 09       		.uleb128 0x9
+ 1876 02dc BA010000 		.4byte	.LASF37
+ 1877 02e0 01       		.byte	0x1
+ 1878 02e1 9A02     		.2byte	0x29a
+ 1879 02e3 A5000000 		.4byte	0xa5
+ 1880 02e7 02       		.byte	0x2
+ 1881 02e8 91       		.byte	0x91
+ 1882 02e9 74       		.sleb128 -12
+ 1883 02ea 00       		.byte	0x0
+ 1884 02eb 0A       		.uleb128 0xa
+ 1885 02ec 01       		.byte	0x1
+ 1886 02ed 1A010000 		.4byte	.LASF38
+ 1887 02f1 01       		.byte	0x1
+ 1888 02f2 E402     		.2byte	0x2e4
+ 1889 02f4 01       		.byte	0x1
+ 1890 02f5 00000000 		.4byte	.LFB13
+ 1891 02f9 20000000 		.4byte	.LFE13
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 49
+
+
+ 1892 02fd 9B020000 		.4byte	.LLST13
+ 1893 0301 15030000 		.4byte	0x315
+ 1894 0305 0B       		.uleb128 0xb
+ 1895 0306 54010000 		.4byte	.LASF39
+ 1896 030a 01       		.byte	0x1
+ 1897 030b E402     		.2byte	0x2e4
+ 1898 030d 9A000000 		.4byte	0x9a
+ 1899 0311 02       		.byte	0x2
+ 1900 0312 91       		.byte	0x91
+ 1901 0313 76       		.sleb128 -10
+ 1902 0314 00       		.byte	0x0
+ 1903 0315 0D       		.uleb128 0xd
+ 1904 0316 01       		.byte	0x1
+ 1905 0317 79010000 		.4byte	.LASF40
+ 1906 031b 01       		.byte	0x1
+ 1907 031c FC02     		.2byte	0x2fc
+ 1908 031e 01       		.byte	0x1
+ 1909 031f 9A000000 		.4byte	0x9a
+ 1910 0323 00000000 		.4byte	.LFB14
+ 1911 0327 52000000 		.4byte	.LFE14
+ 1912 032b D2020000 		.4byte	.LLST14
+ 1913 032f 52030000 		.4byte	0x352
+ 1914 0333 0B       		.uleb128 0xb
+ 1915 0334 1A020000 		.4byte	.LASF41
+ 1916 0338 01       		.byte	0x1
+ 1917 0339 FC02     		.2byte	0x2fc
+ 1918 033b 9A000000 		.4byte	0x9a
+ 1919 033f 02       		.byte	0x2
+ 1920 0340 91       		.byte	0x91
+ 1921 0341 6E       		.sleb128 -18
+ 1922 0342 09       		.uleb128 0x9
+ 1923 0343 02020000 		.4byte	.LASF42
+ 1924 0347 01       		.byte	0x1
+ 1925 0348 FF02     		.2byte	0x2ff
+ 1926 034a 9A000000 		.4byte	0x9a
+ 1927 034e 02       		.byte	0x2
+ 1928 034f 91       		.byte	0x91
+ 1929 0350 76       		.sleb128 -10
+ 1930 0351 00       		.byte	0x0
+ 1931 0352 0D       		.uleb128 0xd
+ 1932 0353 01       		.byte	0x1
+ 1933 0354 4B000000 		.4byte	.LASF43
+ 1934 0358 01       		.byte	0x1
+ 1935 0359 1C03     		.2byte	0x31c
+ 1936 035b 01       		.byte	0x1
+ 1937 035c A5000000 		.4byte	0xa5
+ 1938 0360 00000000 		.4byte	.LFB15
+ 1939 0364 58000000 		.4byte	.LFE15
+ 1940 0368 09030000 		.4byte	.LLST15
+ 1941 036c 8F030000 		.4byte	0x38f
+ 1942 0370 0B       		.uleb128 0xb
+ 1943 0371 1A020000 		.4byte	.LASF41
+ 1944 0375 01       		.byte	0x1
+ 1945 0376 1C03     		.2byte	0x31c
+ 1946 0378 9A000000 		.4byte	0x9a
+ 1947 037c 02       		.byte	0x2
+ 1948 037d 91       		.byte	0x91
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 50
+
+
+ 1949 037e 6E       		.sleb128 -18
+ 1950 037f 09       		.uleb128 0x9
+ 1951 0380 76000000 		.4byte	.LASF44
+ 1952 0384 01       		.byte	0x1
+ 1953 0385 1F03     		.2byte	0x31f
+ 1954 0387 A5000000 		.4byte	0xa5
+ 1955 038b 02       		.byte	0x2
+ 1956 038c 91       		.byte	0x91
+ 1957 038d 74       		.sleb128 -12
+ 1958 038e 00       		.byte	0x0
+ 1959 038f 0D       		.uleb128 0xd
+ 1960 0390 01       		.byte	0x1
+ 1961 0391 61000000 		.4byte	.LASF45
+ 1962 0395 01       		.byte	0x1
+ 1963 0396 3F03     		.2byte	0x33f
+ 1964 0398 01       		.byte	0x1
+ 1965 0399 B0000000 		.4byte	0xb0
+ 1966 039d 00000000 		.4byte	.LFB16
+ 1967 03a1 5C000000 		.4byte	.LFE16
+ 1968 03a5 40030000 		.4byte	.LLST16
+ 1969 03a9 CC030000 		.4byte	0x3cc
+ 1970 03ad 0B       		.uleb128 0xb
+ 1971 03ae 1A020000 		.4byte	.LASF41
+ 1972 03b2 01       		.byte	0x1
+ 1973 03b3 3F03     		.2byte	0x33f
+ 1974 03b5 9A000000 		.4byte	0x9a
+ 1975 03b9 02       		.byte	0x2
+ 1976 03ba 91       		.byte	0x91
+ 1977 03bb 66       		.sleb128 -26
+ 1978 03bc 09       		.uleb128 0x9
+ 1979 03bd 1D000000 		.4byte	.LASF46
+ 1980 03c1 01       		.byte	0x1
+ 1981 03c2 4103     		.2byte	0x341
+ 1982 03c4 B0000000 		.4byte	0xb0
+ 1983 03c8 02       		.byte	0x2
+ 1984 03c9 91       		.byte	0x91
+ 1985 03ca 6C       		.sleb128 -20
+ 1986 03cb 00       		.byte	0x0
+ 1987 03cc 08       		.uleb128 0x8
+ 1988 03cd 68010000 		.4byte	.LASF47
+ 1989 03d1 01       		.byte	0x1
+ 1990 03d2 2D       		.byte	0x2d
+ 1991 03d3 79000000 		.4byte	0x79
+ 1992 03d7 05       		.byte	0x5
+ 1993 03d8 03       		.byte	0x3
+ 1994 03d9 01000000 		.4byte	MAD_2_resolution
+ 1995 03dd 10       		.uleb128 0x10
+ 1996 03de 68020000 		.4byte	.LASF48
+ 1997 03e2 01       		.byte	0x1
+ 1998 03e3 23       		.byte	0x23
+ 1999 03e4 79000000 		.4byte	0x79
+ 2000 03e8 01       		.byte	0x1
+ 2001 03e9 05       		.byte	0x5
+ 2002 03ea 03       		.byte	0x3
+ 2003 03eb 00000000 		.4byte	MAD_2_initVar
+ 2004 03ef 10       		.uleb128 0x10
+ 2005 03f0 AF000000 		.4byte	.LASF49
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 51
+
+
+ 2006 03f4 01       		.byte	0x1
+ 2007 03f5 24       		.byte	0x24
+ 2008 03f6 01040000 		.4byte	0x401
+ 2009 03fa 01       		.byte	0x1
+ 2010 03fb 05       		.byte	0x5
+ 2011 03fc 03       		.byte	0x3
+ 2012 03fd 00000000 		.4byte	MAD_2_offset
+ 2013 0401 11       		.uleb128 0x11
+ 2014 0402 9A000000 		.4byte	0x9a
+ 2015 0406 10       		.uleb128 0x10
+ 2016 0407 76020000 		.4byte	.LASF50
+ 2017 040b 01       		.byte	0x1
+ 2018 040c 25       		.byte	0x25
+ 2019 040d 01040000 		.4byte	0x401
+ 2020 0411 01       		.byte	0x1
+ 2021 0412 05       		.byte	0x5
+ 2022 0413 03       		.byte	0x3
+ 2023 0414 00000000 		.4byte	MAD_2_countsPerVolt
+ 2024 0418 10       		.uleb128 0x10
+ 2025 0419 F6010000 		.4byte	.LASF51
+ 2026 041d 01       		.byte	0x1
+ 2027 041e 26       		.byte	0x26
+ 2028 041f 01040000 		.4byte	0x401
+ 2029 0423 01       		.byte	0x1
+ 2030 0424 05       		.byte	0x5
+ 2031 0425 03       		.byte	0x3
+ 2032 0426 00000000 		.4byte	MAD_2_shift
+ 2033 042a 00       		.byte	0x0
+ 2034              		.section	.debug_abbrev
+ 2035 0000 01       		.uleb128 0x1
+ 2036 0001 11       		.uleb128 0x11
+ 2037 0002 01       		.byte	0x1
+ 2038 0003 25       		.uleb128 0x25
+ 2039 0004 0E       		.uleb128 0xe
+ 2040 0005 13       		.uleb128 0x13
+ 2041 0006 0B       		.uleb128 0xb
+ 2042 0007 03       		.uleb128 0x3
+ 2043 0008 0E       		.uleb128 0xe
+ 2044 0009 1B       		.uleb128 0x1b
+ 2045 000a 0E       		.uleb128 0xe
+ 2046 000b 11       		.uleb128 0x11
+ 2047 000c 01       		.uleb128 0x1
+ 2048 000d 52       		.uleb128 0x52
+ 2049 000e 01       		.uleb128 0x1
+ 2050 000f 55       		.uleb128 0x55
+ 2051 0010 06       		.uleb128 0x6
+ 2052 0011 10       		.uleb128 0x10
+ 2053 0012 06       		.uleb128 0x6
+ 2054 0013 00       		.byte	0x0
+ 2055 0014 00       		.byte	0x0
+ 2056 0015 02       		.uleb128 0x2
+ 2057 0016 24       		.uleb128 0x24
+ 2058 0017 00       		.byte	0x0
+ 2059 0018 0B       		.uleb128 0xb
+ 2060 0019 0B       		.uleb128 0xb
+ 2061 001a 3E       		.uleb128 0x3e
+ 2062 001b 0B       		.uleb128 0xb
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 52
+
+
+ 2063 001c 03       		.uleb128 0x3
+ 2064 001d 0E       		.uleb128 0xe
+ 2065 001e 00       		.byte	0x0
+ 2066 001f 00       		.byte	0x0
+ 2067 0020 03       		.uleb128 0x3
+ 2068 0021 24       		.uleb128 0x24
+ 2069 0022 00       		.byte	0x0
+ 2070 0023 0B       		.uleb128 0xb
+ 2071 0024 0B       		.uleb128 0xb
+ 2072 0025 3E       		.uleb128 0x3e
+ 2073 0026 0B       		.uleb128 0xb
+ 2074 0027 03       		.uleb128 0x3
+ 2075 0028 08       		.uleb128 0x8
+ 2076 0029 00       		.byte	0x0
+ 2077 002a 00       		.byte	0x0
+ 2078 002b 04       		.uleb128 0x4
+ 2079 002c 24       		.uleb128 0x24
+ 2080 002d 00       		.byte	0x0
+ 2081 002e 0B       		.uleb128 0xb
+ 2082 002f 0B       		.uleb128 0xb
+ 2083 0030 3E       		.uleb128 0x3e
+ 2084 0031 0B       		.uleb128 0xb
+ 2085 0032 00       		.byte	0x0
+ 2086 0033 00       		.byte	0x0
+ 2087 0034 05       		.uleb128 0x5
+ 2088 0035 16       		.uleb128 0x16
+ 2089 0036 00       		.byte	0x0
+ 2090 0037 03       		.uleb128 0x3
+ 2091 0038 0E       		.uleb128 0xe
+ 2092 0039 3A       		.uleb128 0x3a
+ 2093 003a 0B       		.uleb128 0xb
+ 2094 003b 3B       		.uleb128 0x3b
+ 2095 003c 0B       		.uleb128 0xb
+ 2096 003d 49       		.uleb128 0x49
+ 2097 003e 13       		.uleb128 0x13
+ 2098 003f 00       		.byte	0x0
+ 2099 0040 00       		.byte	0x0
+ 2100 0041 06       		.uleb128 0x6
+ 2101 0042 2E       		.uleb128 0x2e
+ 2102 0043 00       		.byte	0x0
+ 2103 0044 3F       		.uleb128 0x3f
+ 2104 0045 0C       		.uleb128 0xc
+ 2105 0046 03       		.uleb128 0x3
+ 2106 0047 0E       		.uleb128 0xe
+ 2107 0048 3A       		.uleb128 0x3a
+ 2108 0049 0B       		.uleb128 0xb
+ 2109 004a 3B       		.uleb128 0x3b
+ 2110 004b 0B       		.uleb128 0xb
+ 2111 004c 27       		.uleb128 0x27
+ 2112 004d 0C       		.uleb128 0xc
+ 2113 004e 11       		.uleb128 0x11
+ 2114 004f 01       		.uleb128 0x1
+ 2115 0050 12       		.uleb128 0x12
+ 2116 0051 01       		.uleb128 0x1
+ 2117 0052 40       		.uleb128 0x40
+ 2118 0053 06       		.uleb128 0x6
+ 2119 0054 00       		.byte	0x0
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 53
+
+
+ 2120 0055 00       		.byte	0x0
+ 2121 0056 07       		.uleb128 0x7
+ 2122 0057 2E       		.uleb128 0x2e
+ 2123 0058 01       		.byte	0x1
+ 2124 0059 3F       		.uleb128 0x3f
+ 2125 005a 0C       		.uleb128 0xc
+ 2126 005b 03       		.uleb128 0x3
+ 2127 005c 0E       		.uleb128 0xe
+ 2128 005d 3A       		.uleb128 0x3a
+ 2129 005e 0B       		.uleb128 0xb
+ 2130 005f 3B       		.uleb128 0x3b
+ 2131 0060 0B       		.uleb128 0xb
+ 2132 0061 27       		.uleb128 0x27
+ 2133 0062 0C       		.uleb128 0xc
+ 2134 0063 11       		.uleb128 0x11
+ 2135 0064 01       		.uleb128 0x1
+ 2136 0065 12       		.uleb128 0x12
+ 2137 0066 01       		.uleb128 0x1
+ 2138 0067 40       		.uleb128 0x40
+ 2139 0068 06       		.uleb128 0x6
+ 2140 0069 01       		.uleb128 0x1
+ 2141 006a 13       		.uleb128 0x13
+ 2142 006b 00       		.byte	0x0
+ 2143 006c 00       		.byte	0x0
+ 2144 006d 08       		.uleb128 0x8
+ 2145 006e 34       		.uleb128 0x34
+ 2146 006f 00       		.byte	0x0
+ 2147 0070 03       		.uleb128 0x3
+ 2148 0071 0E       		.uleb128 0xe
+ 2149 0072 3A       		.uleb128 0x3a
+ 2150 0073 0B       		.uleb128 0xb
+ 2151 0074 3B       		.uleb128 0x3b
+ 2152 0075 0B       		.uleb128 0xb
+ 2153 0076 49       		.uleb128 0x49
+ 2154 0077 13       		.uleb128 0x13
+ 2155 0078 02       		.uleb128 0x2
+ 2156 0079 0A       		.uleb128 0xa
+ 2157 007a 00       		.byte	0x0
+ 2158 007b 00       		.byte	0x0
+ 2159 007c 09       		.uleb128 0x9
+ 2160 007d 34       		.uleb128 0x34
+ 2161 007e 00       		.byte	0x0
+ 2162 007f 03       		.uleb128 0x3
+ 2163 0080 0E       		.uleb128 0xe
+ 2164 0081 3A       		.uleb128 0x3a
+ 2165 0082 0B       		.uleb128 0xb
+ 2166 0083 3B       		.uleb128 0x3b
+ 2167 0084 05       		.uleb128 0x5
+ 2168 0085 49       		.uleb128 0x49
+ 2169 0086 13       		.uleb128 0x13
+ 2170 0087 02       		.uleb128 0x2
+ 2171 0088 0A       		.uleb128 0xa
+ 2172 0089 00       		.byte	0x0
+ 2173 008a 00       		.byte	0x0
+ 2174 008b 0A       		.uleb128 0xa
+ 2175 008c 2E       		.uleb128 0x2e
+ 2176 008d 01       		.byte	0x1
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 54
+
+
+ 2177 008e 3F       		.uleb128 0x3f
+ 2178 008f 0C       		.uleb128 0xc
+ 2179 0090 03       		.uleb128 0x3
+ 2180 0091 0E       		.uleb128 0xe
+ 2181 0092 3A       		.uleb128 0x3a
+ 2182 0093 0B       		.uleb128 0xb
+ 2183 0094 3B       		.uleb128 0x3b
+ 2184 0095 05       		.uleb128 0x5
+ 2185 0096 27       		.uleb128 0x27
+ 2186 0097 0C       		.uleb128 0xc
+ 2187 0098 11       		.uleb128 0x11
+ 2188 0099 01       		.uleb128 0x1
+ 2189 009a 12       		.uleb128 0x12
+ 2190 009b 01       		.uleb128 0x1
+ 2191 009c 40       		.uleb128 0x40
+ 2192 009d 06       		.uleb128 0x6
+ 2193 009e 01       		.uleb128 0x1
+ 2194 009f 13       		.uleb128 0x13
+ 2195 00a0 00       		.byte	0x0
+ 2196 00a1 00       		.byte	0x0
+ 2197 00a2 0B       		.uleb128 0xb
+ 2198 00a3 05       		.uleb128 0x5
+ 2199 00a4 00       		.byte	0x0
+ 2200 00a5 03       		.uleb128 0x3
+ 2201 00a6 0E       		.uleb128 0xe
+ 2202 00a7 3A       		.uleb128 0x3a
+ 2203 00a8 0B       		.uleb128 0xb
+ 2204 00a9 3B       		.uleb128 0x3b
+ 2205 00aa 05       		.uleb128 0x5
+ 2206 00ab 49       		.uleb128 0x49
+ 2207 00ac 13       		.uleb128 0x13
+ 2208 00ad 02       		.uleb128 0x2
+ 2209 00ae 0A       		.uleb128 0xa
+ 2210 00af 00       		.byte	0x0
+ 2211 00b0 00       		.byte	0x0
+ 2212 00b1 0C       		.uleb128 0xc
+ 2213 00b2 2E       		.uleb128 0x2e
+ 2214 00b3 00       		.byte	0x0
+ 2215 00b4 3F       		.uleb128 0x3f
+ 2216 00b5 0C       		.uleb128 0xc
+ 2217 00b6 03       		.uleb128 0x3
+ 2218 00b7 0E       		.uleb128 0xe
+ 2219 00b8 3A       		.uleb128 0x3a
+ 2220 00b9 0B       		.uleb128 0xb
+ 2221 00ba 3B       		.uleb128 0x3b
+ 2222 00bb 05       		.uleb128 0x5
+ 2223 00bc 27       		.uleb128 0x27
+ 2224 00bd 0C       		.uleb128 0xc
+ 2225 00be 11       		.uleb128 0x11
+ 2226 00bf 01       		.uleb128 0x1
+ 2227 00c0 12       		.uleb128 0x12
+ 2228 00c1 01       		.uleb128 0x1
+ 2229 00c2 40       		.uleb128 0x40
+ 2230 00c3 06       		.uleb128 0x6
+ 2231 00c4 00       		.byte	0x0
+ 2232 00c5 00       		.byte	0x0
+ 2233 00c6 0D       		.uleb128 0xd
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 55
+
+
+ 2234 00c7 2E       		.uleb128 0x2e
+ 2235 00c8 01       		.byte	0x1
+ 2236 00c9 3F       		.uleb128 0x3f
+ 2237 00ca 0C       		.uleb128 0xc
+ 2238 00cb 03       		.uleb128 0x3
+ 2239 00cc 0E       		.uleb128 0xe
+ 2240 00cd 3A       		.uleb128 0x3a
+ 2241 00ce 0B       		.uleb128 0xb
+ 2242 00cf 3B       		.uleb128 0x3b
+ 2243 00d0 05       		.uleb128 0x5
+ 2244 00d1 27       		.uleb128 0x27
+ 2245 00d2 0C       		.uleb128 0xc
+ 2246 00d3 49       		.uleb128 0x49
+ 2247 00d4 13       		.uleb128 0x13
+ 2248 00d5 11       		.uleb128 0x11
+ 2249 00d6 01       		.uleb128 0x1
+ 2250 00d7 12       		.uleb128 0x12
+ 2251 00d8 01       		.uleb128 0x1
+ 2252 00d9 40       		.uleb128 0x40
+ 2253 00da 06       		.uleb128 0x6
+ 2254 00db 01       		.uleb128 0x1
+ 2255 00dc 13       		.uleb128 0x13
+ 2256 00dd 00       		.byte	0x0
+ 2257 00de 00       		.byte	0x0
+ 2258 00df 0E       		.uleb128 0xe
+ 2259 00e0 34       		.uleb128 0x34
+ 2260 00e1 00       		.byte	0x0
+ 2261 00e2 03       		.uleb128 0x3
+ 2262 00e3 08       		.uleb128 0x8
+ 2263 00e4 3A       		.uleb128 0x3a
+ 2264 00e5 0B       		.uleb128 0xb
+ 2265 00e6 3B       		.uleb128 0x3b
+ 2266 00e7 05       		.uleb128 0x5
+ 2267 00e8 49       		.uleb128 0x49
+ 2268 00e9 13       		.uleb128 0x13
+ 2269 00ea 02       		.uleb128 0x2
+ 2270 00eb 0A       		.uleb128 0xa
+ 2271 00ec 00       		.byte	0x0
+ 2272 00ed 00       		.byte	0x0
+ 2273 00ee 0F       		.uleb128 0xf
+ 2274 00ef 2E       		.uleb128 0x2e
+ 2275 00f0 01       		.byte	0x1
+ 2276 00f1 03       		.uleb128 0x3
+ 2277 00f2 0E       		.uleb128 0xe
+ 2278 00f3 3A       		.uleb128 0x3a
+ 2279 00f4 0B       		.uleb128 0xb
+ 2280 00f5 3B       		.uleb128 0x3b
+ 2281 00f6 05       		.uleb128 0x5
+ 2282 00f7 27       		.uleb128 0x27
+ 2283 00f8 0C       		.uleb128 0xc
+ 2284 00f9 11       		.uleb128 0x11
+ 2285 00fa 01       		.uleb128 0x1
+ 2286 00fb 12       		.uleb128 0x12
+ 2287 00fc 01       		.uleb128 0x1
+ 2288 00fd 40       		.uleb128 0x40
+ 2289 00fe 06       		.uleb128 0x6
+ 2290 00ff 01       		.uleb128 0x1
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 56
+
+
+ 2291 0100 13       		.uleb128 0x13
+ 2292 0101 00       		.byte	0x0
+ 2293 0102 00       		.byte	0x0
+ 2294 0103 10       		.uleb128 0x10
+ 2295 0104 34       		.uleb128 0x34
+ 2296 0105 00       		.byte	0x0
+ 2297 0106 03       		.uleb128 0x3
+ 2298 0107 0E       		.uleb128 0xe
+ 2299 0108 3A       		.uleb128 0x3a
+ 2300 0109 0B       		.uleb128 0xb
+ 2301 010a 3B       		.uleb128 0x3b
+ 2302 010b 0B       		.uleb128 0xb
+ 2303 010c 49       		.uleb128 0x49
+ 2304 010d 13       		.uleb128 0x13
+ 2305 010e 3F       		.uleb128 0x3f
+ 2306 010f 0C       		.uleb128 0xc
+ 2307 0110 02       		.uleb128 0x2
+ 2308 0111 0A       		.uleb128 0xa
+ 2309 0112 00       		.byte	0x0
+ 2310 0113 00       		.byte	0x0
+ 2311 0114 11       		.uleb128 0x11
+ 2312 0115 35       		.uleb128 0x35
+ 2313 0116 00       		.byte	0x0
+ 2314 0117 49       		.uleb128 0x49
+ 2315 0118 13       		.uleb128 0x13
+ 2316 0119 00       		.byte	0x0
+ 2317 011a 00       		.byte	0x0
+ 2318 011b 00       		.byte	0x0
+ 2319              		.section	.debug_pubnames,"",%progbits
+ 2320 0000 A8010000 		.4byte	0x1a8
+ 2321 0004 0200     		.2byte	0x2
+ 2322 0006 00000000 		.4byte	.Ldebug_info0
+ 2323 000a 2B040000 		.4byte	0x42b
+ 2324 000e C9000000 		.4byte	0xc9
+ 2325 0012 4D41445F 		.ascii	"MAD_2_Start\000"
+ 2325      325F5374 
+ 2325      61727400 
+ 2326 001e DE000000 		.4byte	0xde
+ 2327 0022 4D41445F 		.ascii	"MAD_2_Init\000"
+ 2327      325F496E 
+ 2327      697400
+ 2328 002d F3000000 		.4byte	0xf3
+ 2329 0031 4D41445F 		.ascii	"MAD_2_Enable\000"
+ 2329      325F456E 
+ 2329      61626C65 
+ 2329      00
+ 2330 003e 29010000 		.4byte	0x129
+ 2331 0042 4D41445F 		.ascii	"MAD_2_Stop\000"
+ 2331      325F5374 
+ 2331      6F7000
+ 2332 004d 52010000 		.4byte	0x152
+ 2333 0051 4D41445F 		.ascii	"MAD_2_SetPower\000"
+ 2333      325F5365 
+ 2333      74506F77 
+ 2333      657200
+ 2334 0060 8B010000 		.4byte	0x18b
+ 2335 0064 4D41445F 		.ascii	"MAD_2_SetResolution\000"
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 57
+
+
+ 2335      325F5365 
+ 2335      74526573 
+ 2335      6F6C7574 
+ 2335      696F6E00 
+ 2336 0078 C4010000 		.4byte	0x1c4
+ 2337 007c 4D41445F 		.ascii	"MAD_2_StartConvert\000"
+ 2337      325F5374 
+ 2337      61727443 
+ 2337      6F6E7665 
+ 2337      727400
+ 2338 008f DA010000 		.4byte	0x1da
+ 2339 0093 4D41445F 		.ascii	"MAD_2_StopConvert\000"
+ 2339      325F5374 
+ 2339      6F70436F 
+ 2339      6E766572 
+ 2339      7400
+ 2340 00a5 F0010000 		.4byte	0x1f0
+ 2341 00a9 4D41445F 		.ascii	"MAD_2_IsEndConversion\000"
+ 2341      325F4973 
+ 2341      456E6443 
+ 2341      6F6E7665 
+ 2341      7273696F 
+ 2342 00bf 2D020000 		.4byte	0x22d
+ 2343 00c3 4D41445F 		.ascii	"MAD_2_GetResult8\000"
+ 2343      325F4765 
+ 2343      74526573 
+ 2343      756C7438 
+ 2343      00
+ 2344 00d4 5B020000 		.4byte	0x25b
+ 2345 00d8 4D41445F 		.ascii	"MAD_2_GetResult16\000"
+ 2345      325F4765 
+ 2345      74526573 
+ 2345      756C7431 
+ 2345      3600
+ 2346 00ea 89020000 		.4byte	0x289
+ 2347 00ee 4D41445F 		.ascii	"MAD_2_SetOffset\000"
+ 2347      325F5365 
+ 2347      744F6666 
+ 2347      73657400 
+ 2348 00fe EB020000 		.4byte	0x2eb
+ 2349 0102 4D41445F 		.ascii	"MAD_2_SetGain\000"
+ 2349      325F5365 
+ 2349      74476169 
+ 2349      6E00
+ 2350 0110 15030000 		.4byte	0x315
+ 2351 0114 4D41445F 		.ascii	"MAD_2_CountsTo_mVolts\000"
+ 2351      325F436F 
+ 2351      756E7473 
+ 2351      546F5F6D 
+ 2351      566F6C74 
+ 2352 012a 52030000 		.4byte	0x352
+ 2353 012e 4D41445F 		.ascii	"MAD_2_CountsTo_uVolts\000"
+ 2353      325F436F 
+ 2353      756E7473 
+ 2353      546F5F75 
+ 2353      566F6C74 
+ 2354 0144 8F030000 		.4byte	0x38f
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 58
+
+
+ 2355 0148 4D41445F 		.ascii	"MAD_2_CountsTo_Volts\000"
+ 2355      325F436F 
+ 2355      756E7473 
+ 2355      546F5F56 
+ 2355      6F6C7473 
+ 2356 015d DD030000 		.4byte	0x3dd
+ 2357 0161 4D41445F 		.ascii	"MAD_2_initVar\000"
+ 2357      325F696E 
+ 2357      69745661 
+ 2357      7200
+ 2358 016f EF030000 		.4byte	0x3ef
+ 2359 0173 4D41445F 		.ascii	"MAD_2_offset\000"
+ 2359      325F6F66 
+ 2359      66736574 
+ 2359      00
+ 2360 0180 06040000 		.4byte	0x406
+ 2361 0184 4D41445F 		.ascii	"MAD_2_countsPerVolt\000"
+ 2361      325F636F 
+ 2361      756E7473 
+ 2361      50657256 
+ 2361      6F6C7400 
+ 2362 0198 18040000 		.4byte	0x418
+ 2363 019c 4D41445F 		.ascii	"MAD_2_shift\000"
+ 2363      325F7368 
+ 2363      69667400 
+ 2364 01a8 00000000 		.4byte	0x0
+ 2365              		.section	.debug_aranges,"",%progbits
+ 2366 0000 9C000000 		.4byte	0x9c
+ 2367 0004 0200     		.2byte	0x2
+ 2368 0006 00000000 		.4byte	.Ldebug_info0
+ 2369 000a 04       		.byte	0x4
+ 2370 000b 00       		.byte	0x0
+ 2371 000c 0000     		.2byte	0x0
+ 2372 000e 0000     		.2byte	0x0
+ 2373 0010 00000000 		.4byte	.LFB0
+ 2374 0014 2A000000 		.4byte	.LFE0-.LFB0
+ 2375 0018 00000000 		.4byte	.LFB1
+ 2376 001c 5C000000 		.4byte	.LFE1-.LFB1
+ 2377 0020 00000000 		.4byte	.LFB2
+ 2378 0024 78010000 		.4byte	.LFE2-.LFB2
+ 2379 0028 00000000 		.4byte	.LFB3
+ 2380 002c DC000000 		.4byte	.LFE3-.LFB3
+ 2381 0030 00000000 		.4byte	.LFB4
+ 2382 0034 4A000000 		.4byte	.LFE4-.LFB4
+ 2383 0038 00000000 		.4byte	.LFB5
+ 2384 003c 68000000 		.4byte	.LFE5-.LFB5
+ 2385 0040 00000000 		.4byte	.LFB6
+ 2386 0044 40000000 		.4byte	.LFE6-.LFB6
+ 2387 0048 00000000 		.4byte	.LFB7
+ 2388 004c 40000000 		.4byte	.LFE7-.LFB7
+ 2389 0050 00000000 		.4byte	.LFB8
+ 2390 0054 4C000000 		.4byte	.LFE8-.LFB8
+ 2391 0058 00000000 		.4byte	.LFB9
+ 2392 005c 5C000000 		.4byte	.LFE9-.LFB9
+ 2393 0060 00000000 		.4byte	.LFB10
+ 2394 0064 5A000000 		.4byte	.LFE10-.LFB10
+ 2395 0068 00000000 		.4byte	.LFB11
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 59
+
+
+ 2396 006c 20000000 		.4byte	.LFE11-.LFB11
+ 2397 0070 00000000 		.4byte	.LFB12
+ 2398 0074 82000000 		.4byte	.LFE12-.LFB12
+ 2399 0078 00000000 		.4byte	.LFB13
+ 2400 007c 20000000 		.4byte	.LFE13-.LFB13
+ 2401 0080 00000000 		.4byte	.LFB14
+ 2402 0084 52000000 		.4byte	.LFE14-.LFB14
+ 2403 0088 00000000 		.4byte	.LFB15
+ 2404 008c 58000000 		.4byte	.LFE15-.LFB15
+ 2405 0090 00000000 		.4byte	.LFB16
+ 2406 0094 5C000000 		.4byte	.LFE16-.LFB16
+ 2407 0098 00000000 		.4byte	0x0
+ 2408 009c 00000000 		.4byte	0x0
+ 2409              		.section	.debug_ranges,"",%progbits
+ 2410              	.Ldebug_ranges0:
+ 2411 0000 00000000 		.4byte	.Ltext0
+ 2412 0004 00000000 		.4byte	.Letext0
+ 2413 0008 00000000 		.4byte	.LFB0
+ 2414 000c 2A000000 		.4byte	.LFE0
+ 2415 0010 00000000 		.4byte	.LFB1
+ 2416 0014 5C000000 		.4byte	.LFE1
+ 2417 0018 00000000 		.4byte	.LFB2
+ 2418 001c 78010000 		.4byte	.LFE2
+ 2419 0020 00000000 		.4byte	.LFB3
+ 2420 0024 DC000000 		.4byte	.LFE3
+ 2421 0028 00000000 		.4byte	.LFB4
+ 2422 002c 4A000000 		.4byte	.LFE4
+ 2423 0030 00000000 		.4byte	.LFB5
+ 2424 0034 68000000 		.4byte	.LFE5
+ 2425 0038 00000000 		.4byte	.LFB6
+ 2426 003c 40000000 		.4byte	.LFE6
+ 2427 0040 00000000 		.4byte	.LFB7
+ 2428 0044 40000000 		.4byte	.LFE7
+ 2429 0048 00000000 		.4byte	.LFB8
+ 2430 004c 4C000000 		.4byte	.LFE8
+ 2431 0050 00000000 		.4byte	.LFB9
+ 2432 0054 5C000000 		.4byte	.LFE9
+ 2433 0058 00000000 		.4byte	.LFB10
+ 2434 005c 5A000000 		.4byte	.LFE10
+ 2435 0060 00000000 		.4byte	.LFB11
+ 2436 0064 20000000 		.4byte	.LFE11
+ 2437 0068 00000000 		.4byte	.LFB12
+ 2438 006c 82000000 		.4byte	.LFE12
+ 2439 0070 00000000 		.4byte	.LFB13
+ 2440 0074 20000000 		.4byte	.LFE13
+ 2441 0078 00000000 		.4byte	.LFB14
+ 2442 007c 52000000 		.4byte	.LFE14
+ 2443 0080 00000000 		.4byte	.LFB15
+ 2444 0084 58000000 		.4byte	.LFE15
+ 2445 0088 00000000 		.4byte	.LFB16
+ 2446 008c 5C000000 		.4byte	.LFE16
+ 2447 0090 00000000 		.4byte	0x0
+ 2448 0094 00000000 		.4byte	0x0
+ 2449              		.section	.debug_str,"MS",%progbits,1
+ 2450              	.LASF5:
+ 2451 0000 6C6F6E67 		.ascii	"long long int\000"
+ 2451      206C6F6E 
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 60
+
+
+ 2451      6720696E 
+ 2451      7400
+ 2452              	.LASF55:
+ 2453 000e 4D41445F 		.ascii	"MAD_2_CalcGain\000"
+ 2453      325F4361 
+ 2453      6C634761 
+ 2453      696E00
+ 2454              	.LASF46:
+ 2455 001d 766F6C74 		.ascii	"volts\000"
+ 2455      7300
+ 2456              	.LASF36:
+ 2457 0023 6F666673 		.ascii	"offset\000"
+ 2457      657400
+ 2458              	.LASF53:
+ 2459 002a 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\MAD_2.c\000"
+ 2459      6E657261 
+ 2459      7465645F 
+ 2459      536F7572 
+ 2459      63655C50 
+ 2460              	.LASF43:
+ 2461 004b 4D41445F 		.ascii	"MAD_2_CountsTo_uVolts\000"
+ 2461      325F436F 
+ 2461      756E7473 
+ 2461      546F5F75 
+ 2461      566F6C74 
+ 2462              	.LASF45:
+ 2463 0061 4D41445F 		.ascii	"MAD_2_CountsTo_Volts\000"
+ 2463      325F436F 
+ 2463      756E7473 
+ 2463      546F5F56 
+ 2463      6F6C7473 
+ 2464              	.LASF44:
+ 2465 0076 75566F6C 		.ascii	"uVolts\000"
+ 2465      747300
+ 2466              	.LASF3:
+ 2467 007d 73686F72 		.ascii	"short unsigned int\000"
+ 2467      7420756E 
+ 2467      7369676E 
+ 2467      65642069 
+ 2467      6E7400
+ 2468              	.LASF31:
+ 2469 0090 73746174 		.ascii	"status\000"
+ 2469      757300
+ 2470              	.LASF26:
+ 2471 0097 706F7765 		.ascii	"power\000"
+ 2471      7200
+ 2472              	.LASF34:
+ 2473 009d 4D41445F 		.ascii	"MAD_2_GetResult16\000"
+ 2473      325F4765 
+ 2473      74526573 
+ 2473      756C7431 
+ 2473      3600
+ 2474              	.LASF49:
+ 2475 00af 4D41445F 		.ascii	"MAD_2_offset\000"
+ 2475      325F6F66 
+ 2475      66736574 
+ 2475      00
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 61
+
+
+ 2476              	.LASF16:
+ 2477 00bc 666C6F61 		.ascii	"float\000"
+ 2477      7400
+ 2478              	.LASF22:
+ 2479 00c2 4D41445F 		.ascii	"MAD_2_Enable\000"
+ 2479      325F456E 
+ 2479      61626C65 
+ 2479      00
+ 2480              	.LASF35:
+ 2481 00cf 4D41445F 		.ascii	"MAD_2_SetOffset\000"
+ 2481      325F5365 
+ 2481      744F6666 
+ 2481      73657400 
+ 2482              	.LASF1:
+ 2483 00df 756E7369 		.ascii	"unsigned char\000"
+ 2483      676E6564 
+ 2483      20636861 
+ 2483      7200
+ 2484              	.LASF24:
+ 2485 00ed 4D41445F 		.ascii	"MAD_2_SetPower\000"
+ 2485      325F5365 
+ 2485      74506F77 
+ 2485      657200
+ 2486              	.LASF13:
+ 2487 00fc 696E7431 		.ascii	"int16\000"
+ 2487      3600
+ 2488              	.LASF8:
+ 2489 0102 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2489      20756E73 
+ 2489      69676E65 
+ 2489      6420696E 
+ 2489      7400
+ 2490              	.LASF14:
+ 2491 0114 696E7433 		.ascii	"int32\000"
+ 2491      3200
+ 2492              	.LASF38:
+ 2493 011a 4D41445F 		.ascii	"MAD_2_SetGain\000"
+ 2493      325F5365 
+ 2493      74476169 
+ 2493      6E00
+ 2494              	.LASF25:
+ 2495 0128 4D41445F 		.ascii	"MAD_2_SetResolution\000"
+ 2495      325F5365 
+ 2495      74526573 
+ 2495      6F6C7574 
+ 2495      696F6E00 
+ 2496              	.LASF21:
+ 2497 013c 656E6162 		.ascii	"enableInterrupts\000"
+ 2497      6C65496E 
+ 2497      74657272 
+ 2497      75707473 
+ 2497      00
+ 2498              	.LASF17:
+ 2499 014d 646F7562 		.ascii	"double\000"
+ 2499      6C6500
+ 2500              	.LASF39:
+ 2501 0154 61646347 		.ascii	"adcGain\000"
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 62
+
+
+ 2501      61696E00 
+ 2502              	.LASF11:
+ 2503 015c 75696E74 		.ascii	"uint16\000"
+ 2503      313600
+ 2504              	.LASF12:
+ 2505 0163 696E7438 		.ascii	"int8\000"
+ 2505      00
+ 2506              	.LASF47:
+ 2507 0168 4D41445F 		.ascii	"MAD_2_resolution\000"
+ 2507      325F7265 
+ 2507      736F6C75 
+ 2507      74696F6E 
+ 2507      00
+ 2508              	.LASF40:
+ 2509 0179 4D41445F 		.ascii	"MAD_2_CountsTo_mVolts\000"
+ 2509      325F436F 
+ 2509      756E7473 
+ 2509      546F5F6D 
+ 2509      566F6C74 
+ 2510              	.LASF4:
+ 2511 018f 756E7369 		.ascii	"unsigned int\000"
+ 2511      676E6564 
+ 2511      20696E74 
+ 2511      00
+ 2512              	.LASF28:
+ 2513 019c 4D41445F 		.ascii	"MAD_2_StartConvert\000"
+ 2513      325F5374 
+ 2513      61727443 
+ 2513      6F6E7665 
+ 2513      727400
+ 2514              	.LASF19:
+ 2515 01af 4D41445F 		.ascii	"MAD_2_Init\000"
+ 2515      325F496E 
+ 2515      697400
+ 2516              	.LASF37:
+ 2517 01ba 636F756E 		.ascii	"counts\000"
+ 2517      747300
+ 2518              	.LASF6:
+ 2519 01c1 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2519      206C6F6E 
+ 2519      6720756E 
+ 2519      7369676E 
+ 2519      65642069 
+ 2520              	.LASF18:
+ 2521 01d8 4D41445F 		.ascii	"MAD_2_Start\000"
+ 2521      325F5374 
+ 2521      61727400 
+ 2522              	.LASF29:
+ 2523 01e4 4D41445F 		.ascii	"MAD_2_StopConvert\000"
+ 2523      325F5374 
+ 2523      6F70436F 
+ 2523      6E766572 
+ 2523      7400
+ 2524              	.LASF51:
+ 2525 01f6 4D41445F 		.ascii	"MAD_2_shift\000"
+ 2525      325F7368 
+ 2525      69667400 
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 63
+
+
+ 2526              	.LASF42:
+ 2527 0202 6D566F6C 		.ascii	"mVolts\000"
+ 2527      747300
+ 2528              	.LASF33:
+ 2529 0209 4D41445F 		.ascii	"MAD_2_GetResult8\000"
+ 2529      325F4765 
+ 2529      74526573 
+ 2529      756C7438 
+ 2529      00
+ 2530              	.LASF41:
+ 2531 021a 61646343 		.ascii	"adcCounts\000"
+ 2531      6F756E74 
+ 2531      7300
+ 2532              	.LASF52:
+ 2533 0224 474E5520 		.ascii	"GNU C 4.4.1\000"
+ 2533      4320342E 
+ 2533      342E3100 
+ 2534              	.LASF20:
+ 2535 0230 746D7052 		.ascii	"tmpReg\000"
+ 2535      656700
+ 2536              	.LASF9:
+ 2537 0237 63686172 		.ascii	"char\000"
+ 2537      00
+ 2538              	.LASF30:
+ 2539 023c 7265744D 		.ascii	"retMode\000"
+ 2539      6F646500 
+ 2540              	.LASF2:
+ 2541 0244 73686F72 		.ascii	"short int\000"
+ 2541      7420696E 
+ 2541      7400
+ 2542              	.LASF10:
+ 2543 024e 75696E74 		.ascii	"uint8\000"
+ 2543      3800
+ 2544              	.LASF23:
+ 2545 0254 4D41445F 		.ascii	"MAD_2_Stop\000"
+ 2545      325F5374 
+ 2545      6F7000
+ 2546              	.LASF7:
+ 2547 025f 6C6F6E67 		.ascii	"long int\000"
+ 2547      20696E74 
+ 2547      00
+ 2548              	.LASF48:
+ 2549 0268 4D41445F 		.ascii	"MAD_2_initVar\000"
+ 2549      325F696E 
+ 2549      69745661 
+ 2549      7200
+ 2550              	.LASF50:
+ 2551 0276 4D41445F 		.ascii	"MAD_2_countsPerVolt\000"
+ 2551      325F636F 
+ 2551      756E7473 
+ 2551      50657256 
+ 2551      6F6C7400 
+ 2552              	.LASF0:
+ 2553 028a 7369676E 		.ascii	"signed char\000"
+ 2553      65642063 
+ 2553      68617200 
+ 2554              	.LASF27:
+ARM GAS  C:\Users\ISAACS~1\AppData\Local\Temp\ccH0I3B0.s 			page 64
+
+
+ 2555 0296 7265736F 		.ascii	"resolution\000"
+ 2555      6C757469 
+ 2555      6F6E00
+ 2556              	.LASF54:
+ 2557 02a1 433A5C55 		.ascii	"C:\\Users\\Isaac Souza\\Dropbox\\SharedWorkspace\\P"
+ 2557      73657273 
+ 2557      5C497361 
+ 2557      61632053 
+ 2557      6F757A61 
+ 2558 02cf 536F4320 		.ascii	"SoC Creator Projects\\Testes\\STRDS.cydsn\000"
+ 2558      43726561 
+ 2558      746F7220 
+ 2558      50726F6A 
+ 2558      65637473 
+ 2559              	.LASF15:
+ 2560 02f7 666C6F61 		.ascii	"float32\000"
+ 2560      74333200 
+ 2561              	.LASF32:
+ 2562 02ff 4D41445F 		.ascii	"MAD_2_IsEndConversion\000"
+ 2562      325F4973 
+ 2562      456E6443 
+ 2562      6F6E7665 
+ 2562      7273696F 
+ 2563              		.ident	"GCC: (Sourcery G++ Lite 2010q1-188) 4.4.1"
