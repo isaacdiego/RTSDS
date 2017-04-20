@@ -5,14 +5,13 @@
 #define BAUDRATE 9600
 #define BAUD_PRESCALLER (((F_CPU / (BAUDRATE * 16UL))) - 1)
 
-//Definição de funções
+//Function definition
 void init_USART(void);
 unsigned char receive(void);
 void send( unsigned char data);
 
-
-
 int main (void){
+  //Initiates some variables
   int pin = 7;
   unsigned long duration, T = 100, ta, t1;  
   unsigned char byte_envio,byte_recebimento;
@@ -20,23 +19,19 @@ int main (void){
   init_USART();
   pinMode(pin, INPUT);
   
-  //ta = millis();
   while(1){
+    //Counts the amount of time the pulse stays on HIGH
     duration = pulseIn(pin, HIGH)/1000;
-    //t1 = millis();
-    //T = t1 - ta;
-    //ta = t1;
     
+    //Saturates the counted value, in case it exceeds the highest configured value for the cycle
     if (duration/T > 1)
       duration = 100;
+    
+    //Translates the long value into a char to send to the main component
     byte_envio = (floor(((float)duration/T) * 255));
     
-    //Envio pela porta serial
+    //Sends throught the serial port
     send (byte_envio);
-    //Implementar rotina para reenvio no caso de erro
-    //Necessidade de aguardar um certo tempo para se ter a confirmação
-    //byte_recebimento = receive ();
-    
   }
   
   return 0;
