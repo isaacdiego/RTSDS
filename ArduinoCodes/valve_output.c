@@ -14,50 +14,42 @@ void USART_send( unsigned char data);
 
 
 int main (void){
-  //Configura os parametros para a comunicação serial
+  //Set up the parameter for serial communication
   USART_init();
   
-  //Declaração de variáveis	
+  //Variables creation	
   float percentual_abertura;
   unsigned char byte_envio,byte_recebimento;
-
- //Habilita o ADC e seta o prescale do seu contador como 64*
+ 
+  //Enable the ADC and set the prescale of its counter to 64
   ADCSRA |= _BV(ADEN) | (1<<ADPS0) | (1<<ADPS1);
 
-  //Configura o ADC para ler da entrada ADC0 com referencia externa
+  //Set up the ADC to read the ADC0 input with external reference
   ADMUX |= 0b00000000;
   ADMUX &= 0b11110000;
   
-  //Pino 13 como saida
+  //Sets the pin 13 as an output
   pinMode(13, OUTPUT);
   
+  //Main Loop
   while(1){  
-    //Inicia a conversao A/D e aguarda a finalização
+    //Starts the A/D conversion and waits for it to finish
     ADCSRA |= _BV(ADSC);
     while(!(ADCSRA & _BV(ADIF)));
     
-    //Calculo do percentual_abertura para a valvula com base no valor do ADC
-    //percentual_abertura = (float)((ADC - 512)/512.0);
+    //Calculates the variable percentual_abertura, which corresponds to the opening percentage of the valve based on the ADC obtained value
     percentual_abertura = (float)(ADC/512.0);
     if(percentual_abertura <= 1.0 || percentual_abertura >= 0){
-      //percentual_abertura = 0.5;
       digitalWrite(13, HIGH);
     }else {
       digitalWrite(13, LOW);
     }
       
-    
-    //Adequando valor para envio
+    //Translates the output value as an character to send via USART connection
     byte_envio = (unsigned char) floor(percentual_abertura * 255.0);
-    //byte_envio = (unsigned char) 128;
     
-    //Envio pela porta serial
+    //Sends the output value via the USART/serial port
     USART_send(byte_envio);
-    
-    
-    //Implementar rotina para reenvio no caso de erro
-    //Necessidade de aguardar um certo tempo para se ter a confirmação
-    //byte_recebimento = receive ();
 
   }
   
