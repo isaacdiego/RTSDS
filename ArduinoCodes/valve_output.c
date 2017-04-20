@@ -5,13 +5,10 @@
 #define BAUDRATE 9600
 #define BAUD_PRESCALLER (((F_CPU / (BAUDRATE * 16UL))) - 1)
 
-//Definição de funções
+//Function definition
 void USART_init(void);
 unsigned char USART_receive(void);
 void USART_send( unsigned char data);
-
-
-
 
 int main (void){
   //Set up the parameter for serial communication
